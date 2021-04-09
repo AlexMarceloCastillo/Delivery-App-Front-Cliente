@@ -1,27 +1,40 @@
-# DeliveryAppFrontCliente
+# Delivery App Front Cliente
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.1.4.
+Este repositorio contiene el frontend del cliente. El lenguaje de programación utilizado es TypeScript.
 
-## Development server
+## Requisitos 
+* Node.js
+* Angular v11
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Instalación
 
-## Code scaffolding
+Utilizar _npm_ para realizar las instalaciones de las dependencias
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+```bash
+npm install
+```
+## Uso 
+Abrir una nueva terminal dentro de la carpeta y escribrir el siguiente comando
+```bash
+ng serve -o
+```
+Para iniciar el servidor.
 
-## Build
+En caso de _deploy_ escribir en la consola : 
+```bash
+ng build
+```
+Revisar la carpeta 'dist' creada donde se encontrará el proyecto compilado.
+## Tecnologías
+* [Angular CLI](https://cli.angular.io/)
+* [Firebase](https://firebase.google.com/?hl=es)
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+## Autores 
+* [Alexander Castillo](https://github.com/AlexMarceloCastillo)
+* [Valentín Legizamon](https://github.com/valeguizamon)
+* [Daniel Tapia](https://github.com/danieltapia2019)
+* [Franco Morales](https://github.com/Franco-Morales)
 
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+### Links 
+* [App Backend](https://github.com/Franco-Morales/Delivery-App-Back)
+* [App Frontend Admin](https://github.com/valeguizamon/Delivery-App-Front-Admin)
