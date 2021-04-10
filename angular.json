@@ -123,6 +123,10 @@
               "devServerTarget": "Delivery-App-Front-Cliente:serve:production"
             }
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {}
         }
       }
     }

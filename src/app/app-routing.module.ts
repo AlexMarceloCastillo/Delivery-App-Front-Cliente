@@ -1,5 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+
+//Guards
+import { AuthGuard } from '@guards/auth.guard';
+
+//Components
 import { LoginComponent } from './auth/login/login.component';
 import { PerfilComponent } from './auth/perfil/perfil.component';
 import { RegistroComponent } from './auth/registro/registro.component';
@@ -14,13 +19,13 @@ import { PedidoComponent } from './pages/pedido/pedido.component';
 const routes: Routes = [
 
   { path: 'inicio', component: InicioComponent },
-  { path: 'carrito', component: CarritoComponent },
-  { path: 'pedido', component: PedidoComponent },
-  { path: 'lista-pedido', component: ListaPedidoComponent },
+  { path: 'carrito', component: CarritoComponent,canActivate:[AuthGuard] },
+  { path: 'pedido', component: PedidoComponent,canActivate:[AuthGuard] },
+  { path: 'lista-pedido', component: ListaPedidoComponent,canActivate:[AuthGuard] },
   { path: 'menu', component: MenuComponent },
   { path: 'login', component: LoginComponent },
   { path: 'registro', component: RegistroComponent },
-  { path: 'perfil/:id', component: PerfilComponent },
+  { path: 'perfil/:id', component: PerfilComponent,canActivate:[AuthGuard] },
   { path: 'closed', component: ClosedComponent },
   { path: '', redirectTo:'inicio', pathMatch:'full'},
   { path: '**', component: P404Component },

@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "delivery-app2021": {
+      "hosting": {
+        "Delivery-App-Front-Cliente": [
+          "delivery-app2021"
+        ]
+      }
+    }
+  }
+}

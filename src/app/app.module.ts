@@ -1,6 +1,13 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { AppRoutingModule } from './app-routing.module';
 
+//FireBaseModules
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { environment } from 'src/environments/environment';
+//Toast
+//Components
 import { AppComponent } from './app.component';
 import { InicioComponent } from './pages/inicio/inicio.component';
 import { CarritoComponent } from './pages/carrito/carrito.component';
@@ -16,7 +23,9 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { PerfilComponent } from './auth/perfil/perfil.component';
 import { LoginComponent } from './auth/login/login.component';
 import { RegistroComponent } from './auth/registro/registro.component';
-import { AppRoutingModule } from './app-routing.module';
+import { AuthService } from '@auth/auth.service';
+import { AuthGuard } from '@guards/auth.guard';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -38,9 +47,12 @@ import { AppRoutingModule } from './app-routing.module';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireAuthModule,
+    ToastrModule.forRoot(),
   ],
-  providers: [],
+  providers: [AuthService,AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
