@@ -1,0 +1,70 @@
+nav#sidebar {
+  div.wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    height: 100vh;
+    width: 250px;
+
+    transform: translateX(-250px);
+    transition: transform 0.4s;
+
+    div.sidebar-heading {
+      height: 56px;
+      padding: 8px 16px;
+      font-size: 1.2rem;
+    }
+
+    div.img-wrap {
+      img {
+        display: block;
+        max-height: 50%;
+        max-width: 50%;
+        margin: 10% 25%;
+      }
+    }
+
+    div.list-group.list-group-flush {
+      div.dropdown>button {
+        margin-left: 7px;
+      }
+    }
+  }
+
+  &.active div.wrapper {
+    transform: translateX(0);
+  }
+
+  div.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(2px);
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  &.active div.overlay {
+    visibility: visible;
+    opacity: 1;
+  }
+}
+
+@media (max-width: 768px) {}
+
+// Large devices (desktops, 992px and up)
+@media (min-width: 992px) {
+  nav#sidebar div.wrapper>div.sidebar-heading {
+    height: 82px;
+  }
+}
+
+// Extra large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) {}
+
+// Video url(https://www.youtube.com/watch?v=yH7gkUNwDJY)

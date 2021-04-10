@@ -13,7 +13,7 @@ import { PedidoComponent } from './pages/pedido/pedido.component';
 
 const routes: Routes = [
 
-  { path: '', component: InicioComponent },
+  { path: 'inicio', component: InicioComponent },
   { path: 'carrito', component: CarritoComponent },
   { path: 'pedido', component: PedidoComponent },
   { path: 'lista-pedido', component: ListaPedidoComponent },
@@ -22,6 +22,7 @@ const routes: Routes = [
   { path: 'registro', component: RegistroComponent },
   { path: 'perfil/:id', component: PerfilComponent },
   { path: 'closed', component: ClosedComponent },
+  { path: '', redirectTo:'inicio', pathMatch:'full'},
   { path: '**', component: P404Component },
 
 ];
