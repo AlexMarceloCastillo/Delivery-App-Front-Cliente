@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 
-import { TogglerService } from 'src/app/services/toggler/toggler.service';
+import { TogglerService } from '@services/toggler/toggler.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -22,7 +22,7 @@ export class SidebarComponent implements OnInit {
     });
   }
 
-  public get toggleStatus() : TogglerService {
+  public get toggleStatus(): TogglerService {
     return this.togglerSvc;
   }
 

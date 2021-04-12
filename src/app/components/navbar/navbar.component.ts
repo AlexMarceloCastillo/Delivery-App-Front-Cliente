@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { TogglerService } from 'src/app/services/toggler/toggler.service';
+import { TogglerService } from '@services/toggler/toggler.service';
 
 @Component({
   selector: 'app-navbar',

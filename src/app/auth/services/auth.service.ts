@@ -100,9 +100,9 @@ export class AuthService {
       })
     )
   }
-  //Redireccionar a la home
+  //Redireccionar al inicio
   private redirect(): void{
-    this.router.navigate(['/home']);
+    this.router.navigate(['/inicio']);
   }
   //Guardar el cliente en una coleccion de Firestore
   private updateClienteData(cliente: any,username: string){
@@ -166,22 +166,26 @@ export class AuthService {
 
   //Errores de firebase
   public getError(ind: string,titulo: string){
+
     const code=['auth/user-not-found',
     'auth/invalid-email',
     'auth/wrong-password',
     'auth/email-already-in-use',
     'auth/too-many-requests',
     'auth/requires-recent-login'];
+
     const message=['Usuario no encontrado',
     'Email invalido',
     'La contraseña es incorrecta',
     'El email ya esta en uso',
     'El acceso a esta cuenta ha sido temporalmente deshabilitado',
     'Para realizar esta operacion necesita estar logueado recientemente'];
+
     const index = code.indexOf(ind);
     const mss = message[index];
+
     this.toastrSvc.error(mss,titulo,{
       positionClass: 'toast-center-center',
-    })
+    });
   }
 }

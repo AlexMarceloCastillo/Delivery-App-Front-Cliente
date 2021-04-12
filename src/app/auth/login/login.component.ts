@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+
+import { AuthService } from "@auth/auth.service";
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -7,9 +10,52 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  public hide:boolean = true;
+  public loginForm: FormGroup;
 
-  ngOnInit(): void {
+  constructor(private formBuilder: FormBuilder,private authSvc: AuthService) { 
+    this.buildLoginForm();
   }
 
+
+  ngOnInit(): void { }
+
+
+  private buildLoginForm(): void {
+    this.loginForm = this.formBuilder.group({
+      email: ['',[Validators.required, Validators.email]],
+      pwd: ['',[Validators.required,Validators.minLength(8),Validators.maxLength(16)]], //password
+      remember: [true]
+    });
+  }
+
+  onSaveLogin(e: Event): void {
+    e.preventDefault();
+    if(this.loginForm.valid){
+      const {email,pwd} = this.loginForm.value;
+      this.authSvc.login(email,pwd)
+      this.loginForm.reset();
+    } else {
+      this.loginForm.markAllAsTouched();
+    }
+  }
+
+  public GoogleLogin(): void{
+    this.authSvc.loginGoogle();
+  }
+
+
+  public toggleType(e: Event): void {
+    e.preventDefault();
+    this.hide = !this.hide;
+  }
+
+  // Solo para mostrar errores
+  public get email(): any {
+    // console.log(this.loginForm.get('email').pristine);
+    return this.loginForm.get('email');
+  }
+  public get pwd(): any {
+    return this.loginForm.get('pwd');
+  }
 }
