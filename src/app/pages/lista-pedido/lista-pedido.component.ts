@@ -7,9 +7,31 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListaPedidoComponent implements OnInit {
 
-  constructor() { }
+  public userId: string = 'DUa0zPcgCjZwzoruJOhhQlNGtLy1';
+  public orders = [{
+      id: "1234",
+      estado: "Listo"
+    },
+    {
+      id: "9254",
+      estado: "Listo"
+    },
+    {
+      id: "7234",
+      estado: "cocina"
+    }
+  ];
 
-  ngOnInit(): void {
+
+  constructor() {}
+
+  ngOnInit(): void {}
+
+
+  imprimir(id: string, e: Event): void {
+    e.preventDefault();
+    e.stopPropagation();
+
+    alert(`Imprimiendo factura ${id}`);
   }
-
 }
