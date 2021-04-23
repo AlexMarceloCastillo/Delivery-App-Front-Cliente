@@ -16,6 +16,9 @@ import { NavbarComponent } from '@components/navbar/navbar.component';
 import { FooterComponent } from '@components/footer/footer.component';
 import { CarouselComponent } from '@components/carousel/carousel.component';
 import { SidebarComponent } from '@components/sidebar/sidebar.component';
+import { OlmapComponent } from './components/openlayer/olmap/olmap.component';
+import { OlmarkerComponent } from './components/openlayer/olmarker/olmarker.component';
+import { OlradioComponent } from './components/openlayer/olradio/olradio.component';
 
 //Pages
 import { AppComponent } from './app.component';
@@ -52,7 +55,10 @@ import { AuthGuard } from '@guards/auth.guard';
     SidebarComponent,
     PerfilComponent,
     LoginComponent,
-    RegistroComponent
+    RegistroComponent,
+    OlmapComponent,
+    OlmarkerComponent,
+    OlradioComponent
   ],
   imports: [
     BrowserModule,
