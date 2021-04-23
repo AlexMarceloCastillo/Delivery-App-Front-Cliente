@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm mb-4">
+<nav class="navbar navbar-expand-lg navbar-light bg-mayo shadow-sm mb-4">
     <div id="mobile">
       <button class="navbar-toggler" type="button" (click)="onToggle($event)">
         <span class="navbar-toggler-icon"></span>
@@ -19,8 +19,8 @@
             <a class="nav-link" [routerLink]="[ '/login' ] " routerLinkActive="active">Login</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" [routerLink]="[ '/carrito' ] " routerLinkActive="active">
-              <!-- <i class="bi bi-cart"></i><span class="badge badge-light">{{cartLength}}</span> -->
+            <a class="nav-link cart" [routerLink]="[ '/carrito' ] " routerLinkActive="active">
+              <i class="fas fa-shopping-cart"></i><span class="badge badge-light font-color-o">{{cartLength}}</span>
             </a>
           </li>
         </ul>

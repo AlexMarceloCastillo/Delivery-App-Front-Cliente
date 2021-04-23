@@ -19,9 +19,12 @@ import { PedidoComponent } from './pages/pedido/pedido.component';
 const routes: Routes = [
 
   { path: 'inicio', component: InicioComponent },
-  { path: 'carrito', component: CarritoComponent,canActivate:[AuthGuard] },
-  { path: 'pedido', component: PedidoComponent,canActivate:[AuthGuard] },
-  { path: 'lista-pedido', component: ListaPedidoComponent,canActivate:[AuthGuard] },
+  // { path: 'carrito', component: CarritoComponent,canActivate:[AuthGuard] },
+  { path: 'carrito', component: CarritoComponent },
+  // { path: 'pedido', component: PedidoComponent,canActivate:[AuthGuard] },
+  { path: 'pedido', component: PedidoComponent},
+  { path: 'lista-pedido', component: ListaPedidoComponent },
+  // { path: 'lista-pedido', component: ListaPedidoComponent,canActivate:[AuthGuard] },
   { path: 'menu', component: MenuComponent },
   { path: 'login', component: LoginComponent },
   { path: 'registro', component: RegistroComponent },

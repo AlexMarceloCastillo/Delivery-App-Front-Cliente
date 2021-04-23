@@ -1,5 +1,5 @@
 <nav id="sidebar" [ngClass]="{'active': this.toggleStatus.status$ | async}">
-  <div class="wrapper bg-light shadow">
+  <div class="wrapper bg-flour shadow">
     <div class="sidebar-heading">
       <button type="button" class="close" aria-label="Close" (click)="onToggle()">
         <span aria-hidden="true">&times;</span>
@@ -9,25 +9,24 @@
         <img src="https://www.w3schools.com/howto/img_avatar.png" alt="user default picture" class="rounded-circle" loading="lazy">
     </div>
     <div class="list-group list-group-flush">
-      <a class="list-group-item list-group-item-action bg-light" [routerLink]="[ '/inicio']" >Home</a>
-      <a class="list-group-item list-group-item-action bg-light" [routerLink]="[ '/menu']" >Menu</a>
-      <!-- <a class="list-group-item list-group-item-action bg-light" [routerLink]="[ '/cart']" *ngIf="cliente" >Carrito</a> -->
-      <!-- <a class="list-group-item list-group-item-action bg-light" [routerLink]="[ '/login']" *ngIf="!cliente" >Login</a> -->
-      <!-- <div class="dropdown" *ngIf="cliente">
-        <button class="btn btn-liht dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+      <a class="list-group-item list-group-item-action bg-flour" [routerLink]="[ '/inicio']" >Home</a>
+      <a class="list-group-item list-group-item-action bg-flour" [routerLink]="[ '/menu']" >Menu</a>
+      <a class="list-group-item list-group-item-action bg-flour" [routerLink]="[ '/carrito']" >Carrito</a>
+      <a class="list-group-item list-group-item-action bg-flour" [routerLink]="[ '/login']" *ngIf="!cliente" >Login</a>
+
+      <div class="dropdown" *ngIf="cliente">
+        <button class="btn bg-flour dropdown-toggle" type="button" id="dropMenuPerfil" data-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false">
           {{cliente.nombre}}
         </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <div class="dropdown-menu" aria-labelledby="dropMenuPerfil">
           <a class="dropdown-item" [routerLink]="[ '/perfil/', cliente.uid ] ">Perfil</a>
           <a class="dropdown-item" [routerLink]="[ '/perfil/', cliente.uid, 'mis-pedidos' ] ">Mis pedidos</a>
-          <ng-container *ngIf="cliente.role == 4">
-            <a class="dropdown-item" [routerLink]="['/admin'] ">Panel de administracion</a>
-          </ng-container>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#" (click)="logOut()">Cerrar Sesión</a>
+          <a class="dropdown-item" (click)="logOut()">Cerrar Sesión</a>
         </div>
-      </div> -->
+      </div>
+
     </div>
   </div>
   <div class="overlay"></div>

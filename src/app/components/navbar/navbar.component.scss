@@ -1,6 +1,6 @@
 div#mobile {
     display: flex;
-    align-items: baseline;
+    align-items: center;
     width: 100%;
   
     // justify-content: space-between;
@@ -33,11 +33,23 @@ div#mobile {
         display: flex;
         align-items: baseline;
   
-        li.nav-item>a.nav-link {
+        li.nav-item > a.nav-link {
           font-size: 1.2rem;
-  
-          i.bi-cart {
+        }
+
+        li.nav-item > a.nav-link.cart {
+          position: relative;
+          width: 55px;
+
+          i.fa-shopping-cart {
             font-size: 1.3rem;
+          }
+
+          span.badge-light {
+            background-color: unset;
+            position: absolute;
+            top: 0;
+            right: 0;
           }
         }
       }

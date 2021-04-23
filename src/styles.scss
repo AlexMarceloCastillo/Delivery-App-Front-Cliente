@@ -1,1 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
+
+$mustard: #e19600;
+$mayo: #e4d0b6;
+$orange: #b54d3f;
+$flour: #f9f7f1;
+
+.font-color-o {
+    color: $orange;
+}
+
+.bg-mayo {
+    background-color: $mayo !important;
+}
+
+.bg-flour {
+    background-color: $white !important;
+}
