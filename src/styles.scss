@@ -1,9 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
-
-$mustard: #e19600;
-$mayo: #e4d0b6;
-$orange: #b54d3f;
-$flour: #f9f7f1;
+@import './assets/variables.scss';
 
 .font-color-o {
     color: $orange;
@@ -14,5 +10,5 @@ $flour: #f9f7f1;
 }
 
 .bg-flour {
-    background-color: $white !important;
+    background-color: $flour !important;
 }

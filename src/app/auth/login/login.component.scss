@@ -1,66 +1,67 @@
-div.container {
-    margin: 30% auto;
-  
-    div.col {
-      margin: auto;
-    }
-  
-    div#login-wrap {
-      border: 1px solid rgba(0, 0, 0, 0.01);
-      background-image: url('../../../assets/img/web/hexagon.png');
-      background-position: center;
-      background-size: 15%;
-  
-      div.card {
-        margin: 5% !important;
-  
-        p.error {
-          color: #dc3545; //'Danger' color from Bootstrap
-          padding: 0px 5px;
-          margin: none;
-        }
+div.login-wrap {
+  display: flex;
+  margin: 15% auto;
+  height: fit-content;
 
-        p.valid {
-          color: #28A745; //'Succeful' color from Bootstrap
-        }
-  
-        div.form-group#btn-submit {
-          display: flex;
-          flex-flow: column wrap;
-        }
-  
-        div.card-footer button#btn-google {
-          background-color: #DB4437;
-        }
-      }
+  background: url('../../../assets/img/web/hexagon.png') repeat center;
+  background-size: contain;
+
+  border-radius: 5px;
+
+  div.card {
+    width: 90%;
+    margin: 5%;
+
+    p.error {
+      color: #dc3545; //danger color from Bootstrap
+      padding: 0px 5px;
+      margin: none;
+    }
+
+    div.form-group#btn-submit {
+      display: flex;
+      flex-flow: column wrap;
+    }
+
+    div.card-footer button#btn-google {
+      background-color: #DB4437;
     }
   }
-  
-  @media (min-width: 768px) {
-    div.container {
-      margin: 20% auto;
-    }
-  
-    div.card div.form-group#btn-submit {
-      flex-flow: row wrap !important;
-      justify-content: space-between;
-    }
-  }
-  
-  // Large devices (desktops, 992px and up)
-  @media (min-width: 992px) {
-    div.container {
-      margin: 15% auto;
+}
+
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+  div.login-wrap {
+    margin: 10%;
+
+    div.card {
+      width: 85%;
+      margin: 12.5%;
     }
   }
-  
-  // Extra large devices (large desktops, 1200px and up)
-  @media (min-width: 1200px) {
-    div.container {
-      margin: 7% auto;
-  
-      div#login-wrap div.card {
-        margin: 10% !important;
-      }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+  div.login-wrap {
+    /* border: 1px solid red; */
+    width: 50vw;
+    height: 60vh;
+    margin: 5% auto;
+    position: relative;
+
+    div.card {
+      width: 45%;
+      margin: 0;
+      top: 0;
+      left: 0;
     }
   }
+}
