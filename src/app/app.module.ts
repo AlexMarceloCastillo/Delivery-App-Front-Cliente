@@ -10,6 +10,7 @@ import { environment } from 'src/environments/environment';
 
 //Toast
 import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 //Components
 import { NavbarComponent } from '@components/navbar/navbar.component';
@@ -72,6 +73,7 @@ import { ComidaDetalleComponent } from './pages/comida-detalle/comida-detalle.co
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
     ToastrModule.forRoot(),
+    BrowserAnimationsModule,
     ReactiveFormsModule
   ],
   providers: [AuthService,AuthGuard],
