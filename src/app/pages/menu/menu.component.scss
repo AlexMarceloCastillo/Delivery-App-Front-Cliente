@@ -1,29 +1,101 @@
-div.card {
-    div.card-body>button.btn {
-      width: 95%;
-      margin: 2.5%;
+@import '../../../assets/variables.scss';
+
+.search-wrapper {
+  background: url('../../../assets/img/web/search_bgd.jpg') no-repeat;
+  background-size: cover;
+  width: 100vw;
+  height: 25vh;
+  margin-bottom: 30px;
+  padding: 0.05px;
+
+  div.search-bar {
+    max-width: 80%;
+    height: 40px;
+
+    margin: 20% auto;
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-content: center;
+
+    input.search {
+      // border: 1px solid red;
+      border: none;
+      border-radius: 32px;
+      width: 100%;
+      padding-left: 5%;
+      background-color: transparentize(#fff, 0.7);
+      backdrop-filter: blur(7px);
+
+      &:focus {
+          outline: none;
+      }
+    }
+
+    button {
+      display: block;
+      width: 32px;
+      height: 32px;
+      position: absolute;
+      align-self: center;
+      right: 4px;
+      background-color: $mustard;
+      border-radius: 50%;
+      border: none;
+      color: white;
     }
   }
-  
-  
-  // Medium devices (tablets, 768px and up)
-  @media (min-width: 768px) {}
-  
-  // Large devices (desktops, 992px and up)
-  @media (min-width: 992px) {
-    div.card {
-      div.card-body.actions {
-        display: flex;
-        button.btn {
-          width: 50% !important;
-        }
+}
+
+// Small devices (landscape phones, 576px and up)
+@media (min-width: 576px) {}
+
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) {
+  .search-wrapper {
+    height: 40vh;
+
+    div.search-bar {
+      margin: 15% auto;
+      height: 50px;
+
+      input.search {
+        padding-left: 2%;
+        font-size: 1.5rem;
       }
     }
   }
-  
-  // Extra large devices (large desktops, 1200px and up)
-  @media (min-width: 1200px) {
-    div.card > div.actions > button {
-      margin: auto 2.5%;
+}
+
+// Large devices (desktops, 992px and up)
+@media (min-width: 992px) {
+  .search-wrapper {
+    height: 40vh;
+
+    div.search-bar {
+      max-width: 65%;
+      height: 60px;
+
+      button {
+        width: 48px;
+        height: 48px;
+        right: 4px;
+      }
     }
   }
+}
+
+// Extra large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) {
+  .search-wrapper {
+    height: 50vh;
+
+    div.search-bar {
+      height: 70px;
+
+      button {
+        right: 10px;
+      }
+    }
+  }
+}

@@ -3,9 +3,11 @@ import { RouterModule, Routes } from '@angular/router';
 
 //Guards
 import { AuthGuard } from '@guards/auth.guard';
+import { ComidaDetalleComponent } from '@pages/comida-detalle/comida-detalle.component';
 
-//Components
+//Pages
 import { LoginComponent } from './auth/login/login.component';
+import { OlvidoContComponent } from './auth/olvido-cont/olvido-cont.component';
 import { PerfilComponent } from './auth/perfil/perfil.component';
 import { RegistroComponent } from './auth/registro/registro.component';
 import { CarritoComponent } from './pages/carrito/carrito.component';
@@ -26,9 +28,11 @@ const routes: Routes = [
   { path: 'lista-pedido', component: ListaPedidoComponent },
   // { path: 'lista-pedido', component: ListaPedidoComponent,canActivate:[AuthGuard] },
   { path: 'menu', component: MenuComponent },
+  { path: 'comida/:id', component: ComidaDetalleComponent },
   { path: 'login', component: LoginComponent },
   { path: 'registro', component: RegistroComponent },
-  { path: 'perfil/:id', component: PerfilComponent,canActivate:[AuthGuard] },
+  { path: 'perfil/:id', component: PerfilComponent },
+  { path: 'olvido-clave/:id', component: OlvidoContComponent },
   { path: 'closed', component: ClosedComponent },
   { path: '', redirectTo:'inicio', pathMatch:'full'},
   { path: '**', component: P404Component },

@@ -38,6 +38,9 @@ import { RegistroComponent } from './auth/registro/registro.component';
 // Guards
 import { AuthService } from '@auth/auth.service';
 import { AuthGuard } from '@guards/auth.guard';
+import { OlvidoContComponent } from './auth/olvido-cont/olvido-cont.component';
+import { CardComponent } from './components/card/card.component';
+import { ComidaDetalleComponent } from './pages/comida-detalle/comida-detalle.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +61,10 @@ import { AuthGuard } from '@guards/auth.guard';
     RegistroComponent,
     OlmapComponent,
     OlmarkerComponent,
-    OlradioComponent
+    OlradioComponent,
+    OlvidoContComponent,
+    CardComponent,
+    ComidaDetalleComponent
   ],
   imports: [
     BrowserModule,

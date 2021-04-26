@@ -1,25 +1,60 @@
 <section class="land">
-  <div class="wrap-land-content shadow-sm">
-    <h1>Delivery de comidas</h1>
-    <h4>Encuentra tu comida rápida favorita en tan solo unos clicks</h4>
-    <button class="btn btn-outline-dark my-4">Ver menu de platos</button>
+  <div class="img-back"></div>
+  <div class="wrap-land-content">
+    <h1 class="text-center">Delivery de comidas</h1>
+    <h4 class="text-center">Encuentra tu comida rápida favorita en tan solo unos clicks</h4>
+    <a [routerLink]="[ '/menu' ]" class="btn btn-outline-light my-4">Ver menu de platos</a>
   </div>
 </section>
 <div class="container">
+  <section id="delivery-work" class="my-5">
+    <div class="row">
+      <div class="col-12 mb-5">
+        <h1 class="text-center">¿Cómo funciona?</h1>
+      </div>
+      <div class="col-sm-12 col-md-4">
+        
+        <div class="card text-center">
+          <img src="../../../assets/img/web/order-food.png" class="card-img-top" alt="Ordenar comida">
+          <div class="card-body">
+            <h5 class="card-title ">Busca</h5>
+            <p class="card-text">Seleciona de nuestro menú tus comidas favoritas</p>
+          </div>
+        </div>
+  
+      </div>
+      <div class="col-sm-12 col-md-4">
+        <div class="card text-center">
+          <img src="../../../assets/img/web/tracking.png" class="card-img-top" alt="Ordenar comida">
+          <div class="card-body">
+            <h5 class="card-title">Ordena</h5>
+            <p class="card-text">Compra mediante MercadoPago o pago en el Local</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-4">
+        <div class="card text-center">
+          <img src="../../../assets/img/web/food-delivery.png" class="card-img-top" alt="Ordenar comida">
+          <div class="card-body">
+            <h5 class="card-title">Entrega</h5>
+            <p class="card-text">Recive el pedido en tu casa</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
   <div class="row">
-    <div class="col"></div>
-  </div>
-  <div class="row">
-    <div class="col"></div>
-  </div>
-  <div class="row">
-    <div class="col"></div>
+    <section id="ubicacion">
+      <div class="col-12 mb-5">
+        <h1 class="text-center">¿Dónde estamos?</h1>
+      </div>
+      <div class="col-12">
+        <ol-map lat="-32.9022174" lon="-68.7979539" zoom="{{zoom}}">
+          <ol-radio lat="-32.9022174" lon="-68.7979539" radio="2500"></ol-radio>
+          <ol-marker lat="-32.9022174" lon="-68.7979539" iconsrc="https://pics.freeicons.io/uploads/icons/png/3762277491606004682-512.png">
+          </ol-marker>
+        </ol-map>
+      </div>
+    </section>
   </div>
 </div>
-
-
-<!-- <ol-map lat="-32.9022174" lon="-68.7979539" zoom="{{zoom}}">
-  <ol-radio lat="-32.9022174" lon="-68.7979539" radio="2500"></ol-radio>
-  <ol-marker lat="-32.9022174" lon="-68.7979539" iconsrc="https://pics.freeicons.io/uploads/icons/png/3762277491606004682-512.png">
-  </ol-marker>
-</ol-map> -->
