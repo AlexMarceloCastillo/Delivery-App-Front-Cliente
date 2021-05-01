@@ -42,6 +42,8 @@ import { AuthGuard } from '@guards/auth.guard';
 import { OlvidoContComponent } from './auth/olvido-cont/olvido-cont.component';
 import { CardComponent } from './components/card/card.component';
 import { ComidaDetalleComponent } from './pages/comida-detalle/comida-detalle.component';
+import { HttpClientModule } from '@angular/common/http';
+import { FormUserComponent } from './components/form-user/form-user.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +67,8 @@ import { ComidaDetalleComponent } from './pages/comida-detalle/comida-detalle.co
     OlradioComponent,
     OlvidoContComponent,
     CardComponent,
-    ComidaDetalleComponent
+    ComidaDetalleComponent,
+    FormUserComponent
   ],
   imports: [
     BrowserModule,
@@ -74,7 +77,8 @@ import { ComidaDetalleComponent } from './pages/comida-detalle/comida-detalle.co
     AngularFireAuthModule,
     ToastrModule.forRoot(),
     BrowserAnimationsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [AuthService,AuthGuard],
   bootstrap: [AppComponent]

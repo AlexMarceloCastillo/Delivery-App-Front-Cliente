@@ -11,6 +11,7 @@ import { map, switchMap } from 'rxjs/operators';
 
 import { ToastrService } from 'ngx-toastr';
 import { Cliente } from '@models/cliente.interface';
+import { Domicilio } from '@models/domicilio.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,7 @@ export class AuthService {
 
   public openDelivery: boolean = false;
 
-  constructor(public afsAuth: AngularFireAuth,private afs: AngularFirestore,public router: Router,public toastrSvc: ToastrService) {
+  constructor(public afsAuth: AngularFireAuth,public afs: AngularFirestore,public router: Router,public toastrSvc: ToastrService) {
     this.isOpen();
    }
 
@@ -27,13 +28,8 @@ export class AuthService {
   async login(email: string, pwd: string): Promise<Cliente>{
     try{
       const { user } = await this.afsAuth.signInWithEmailAndPassword(email,pwd);
-      this.toastrSvc.success('Logueado Correctamente','',{
-        positionClass: 'toast-center-center',
-        timeOut: 800
-      })
-      setTimeout(()=>{
-        this.redirect();
-      },1000);
+      this.successLogin('Logueado Correctamente!')
+      this.setStatus(true)
       return user;
     } catch(error) {
       this.getError(error.code,'Error al loguearse')
@@ -44,16 +40,14 @@ export class AuthService {
   async loginGoogle(): Promise<Cliente>{
     try{
       const {user} = await this.afsAuth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
-      if(!this.getDataClient()){
-        this.updateClienteData(user,user.displayName)
-      }
-      this.toastrSvc.success('Logueado Correctamente','',{
-        positionClass: 'toast-center-center',
-        timeOut: 800
+      this.getDataClient().subscribe(e=>{
+        if(!e){
+          this.saveClientData(user,user.displayName,null)
+        }else{
+          this.setStatus(true)
+        }
       })
-      setTimeout(()=>{
-        this.redirect()
-      },1000);
+      this.successLogin('Logueado Correctamente!')
       return user;
     }catch(error){
       this.getError(error.code,'Error al loguearse con Google')
@@ -61,27 +55,24 @@ export class AuthService {
   }
 
   //Register
-  async register(email: string, pwd: string,username: string): Promise<Cliente>{
+  async register(email: string, pwd: string,username: string,domicilio: Domicilio): Promise<Cliente>{
     try{
-      const {user} = await this.afsAuth.createUserWithEmailAndPassword(email,pwd);
-      this.updateClienteData(user,username);
-      this.toastrSvc.success('Registrado Correctamente','',{
-        positionClass: 'toast-center-center',
-        timeOut: 800
-      })
-      setTimeout(()=>{
-        this.redirect()
-      },1000)
+      const {user} = await this.afsAuth.createUserWithEmailAndPassword(email,pwd)
+      this.saveClientData(user,username,domicilio);
+      this.successLogin('Registrado Correctamente !')
       return user;
     }
     catch(error){
       this.getError(error.code,'Error al registrarse')
+      console.log(error)
     }
   }
 
   //LogOut
-  logOut(){
-    this.afsAuth.signOut().then(()=> this.redirect()).catch((e)=> console.log(e));
+  async logOut(){
+    this.setStatus(false)
+    this.successLogin('Sesion Cerrada con Exito')
+    await this.afsAuth.signOut().catch((e)=> console.log(e));
   }
 
   //Obtener estado de login
@@ -95,47 +86,63 @@ export class AuthService {
         if(data){
           return this.afs.doc<Cliente>(`/clients/${data.uid}`).valueChanges();
         }
-        //Si no existe es nulo
         return of(null)
       })
     )
   }
   //Redireccionar al inicio
-  private redirect(): void{
-    this.router.navigate(['/inicio']);
+  private successLogin(title:string): void{
+    this.toastrSvc.success(title,'',{
+      positionClass: 'toast-center-center',
+      timeOut: 800
+    })
+    setTimeout(()=>{
+    this.router.navigate(['/inicio'])
+    },1000)
   }
   //Guardar el cliente en una coleccion de Firestore
-  private updateClienteData(cliente: any,username: string){
+  private saveClientData(cliente: Cliente,username: string,domicilio: Domicilio){
     //Referencia de usuario a guardar
-    const userRef: AngularFirestoreDocument<Cliente> = this.afs.doc(`clients/${cliente.uid}`);
-    const data: Cliente = {
-      uid: cliente.uid,
-      email: cliente.email,
-      nombre: username,
-      photoURL: cliente.photoURL,
-      estado: 0
-    }
-    return userRef.set(data, {merge: true});
+      const userRef: AngularFirestoreDocument<Cliente> = this.afs.doc(`clients/${cliente.uid}`);
+      const data: Cliente = {
+        uid: cliente.uid,
+        email:cliente.email,
+        nombre: username,
+        photoURL: cliente.photoURL,
+        estado: 1,
+        domicilio: domicilio,
+        role: 0,
+        online: true
+      }
+      return userRef.set(data,{merge:true})
   }
   //Actualizar datos de usuario en Firestore
   public updateProfile(cliente: Cliente){
-    const userRef: AngularFirestoreDocument<Cliente> = this.afs.doc(`clients/${cliente.uid}`)
+    try {
 
-    const data: any = {
-      email: cliente.email,
-      nombre: cliente.nombre,
-      photoURL: cliente.photoURL,
-      domicilio: cliente.domicilio,
-      estado: 1
+      const userRef: AngularFirestoreDocument<Cliente> = this.afs.doc(`clients/${cliente.uid}`)
+      userRef.update(cliente)
+        .then( () => {
+            this.toastrSvc.success('','Datos Actualizados con Exito',{
+            positionClass: 'toast-center-center',
+            timeOut: 800})
+          }
+        )
+    } catch (error) {
+      console.log(error)
     }
-    userRef.update(data)
-      .then( () => {
-          this.toastrSvc.success('','Datos Actualizados con Exito',{
-          positionClass: 'toast-center-center',
-          timeOut: 800})
+  }
+  setStatus(online: boolean){
+    this.isAuth()
+    .subscribe(user =>{
+      if(user){
+        const userRef: AngularFirestoreDocument<Cliente> = this.afs.doc(`clients/${user.uid}`)
+        const data: any = {
+          online: online
         }
-      )
-      .catch( (err) => console.error(err) );
+        userRef.update(data)
+      }
+    })
   }
 
   isOpen(){
@@ -154,10 +161,6 @@ export class AuthService {
     })
 
     if(hour[0] == null){
-      this.isAuth().subscribe((user)=>{
-        if(user)
-          this.logOut();
-      });
       this.openDelivery = false;
     }else{
       this.openDelivery = true;

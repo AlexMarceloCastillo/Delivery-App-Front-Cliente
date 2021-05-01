@@ -1,0 +1,27 @@
+:host ::ng-deep app-form-user div.container {
+  margin-top: 2.5%;
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+  :host ::ng-deep app-form-user div.card-form{
+    width: 80%;
+  }
+  :host ::ng-deep app-form-user #formUser{
+    display: flex;
+  }
+  :host ::ng-deep app-form-user div.user{
+    float: left;
+    width: 50%;
+  }
+  :host ::ng-deep app-form-user div.house{
+    float: right;
+    width: 50%;
+  }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {}

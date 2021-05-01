@@ -15,7 +15,7 @@ import { Cliente } from '@models/cliente.interface';
   styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent implements OnInit, OnDestroy {
-  
+
   public cliente: Cliente;
   private clienteSuscription: Subscription;
 
@@ -29,7 +29,8 @@ export class SidebarComponent implements OnInit, OnDestroy {
         this.togglerSvc.toggle(false);
       }
     });
-    this.clienteSuscription = this.authSvc.getDataClient().subscribe((data)=>this.cliente = data);
+    this.authSvc.getDataClient().subscribe(e => this.cliente = e)
+    //this.clienteSuscription = this.authSvc.getDataClient().subscribe((data)=>{console.log(data);this.cliente = data});
   }
 
   ngOnDestroy(): void {

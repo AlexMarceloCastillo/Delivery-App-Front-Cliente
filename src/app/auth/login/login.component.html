@@ -27,7 +27,7 @@
               </p>
             </ng-container>
             <ng-template #validEmail>
-              <p [ngClass]="{'valid': email.valid,'invisible': email.pristine}">
+              <p [ngClass]="{'text-success': email.valid,'invisible': email.pristine}">
                 Email Valido
               </p>
             </ng-template>
@@ -46,7 +46,7 @@
                   Tu contraseña debe ser entre 8-16 caracteres de longitud alfanumeríco.
                 </small>
               </div>
-              
+
             </div>
             <!-- respuesta de validacion del pwd -->
             <ng-container class="form-group col-12" *ngIf="pwd.errors && pwd.touched; else validPwd">
@@ -61,7 +61,7 @@
               </p>
             </ng-container>
             <ng-template #validPwd>
-              <p [ngClass]="{'valid': pwd.valid, 'invisible': pwd.pristine}">
+              <p [ngClass]="{'text-success': pwd.valid, 'invisible': pwd.pristine}">
                 Contraseña valida
               </p>
             </ng-template>

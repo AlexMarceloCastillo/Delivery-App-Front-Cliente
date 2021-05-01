@@ -1,0 +1,18 @@
+[
+  {
+     "id":1,
+     "denominacion":"Buena Nueva"
+   },
+   {
+     "id":2,
+     "denominacion":"Dorrego"
+   },
+   {
+     "id":3,
+     "denominacion":"San José"
+   },
+   {
+     "id":4,
+     "denominacion":"Villa Nueva"
+   }
+]
