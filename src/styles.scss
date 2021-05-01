@@ -1,15 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
-@import './assets/variables.scss';
+@import './assets/scss/theme.scss';
 @import './assets/scss/toast.scss';
 
-.font-color-o {
-    color: $orange;
-}
-
-.bg-mayo {
-    background-color: $mayo !important;
-}
-
-.bg-flour {
-    background-color: $flour !important;
-}
+@import "../node_modules/bootstrap/scss/bootstrap.scss";

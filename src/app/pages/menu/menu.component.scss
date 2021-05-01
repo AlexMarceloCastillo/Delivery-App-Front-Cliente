@@ -1,5 +1,3 @@
-@import '../../../assets/variables.scss';
-
 .search-wrapper {
   background: url('../../../assets/img/web/search_bgd.jpg') no-repeat;
   background-size: cover;
@@ -39,7 +37,6 @@
       position: absolute;
       align-self: center;
       right: 4px;
-      background-color: $mustard;
       border-radius: 50%;
       border: none;
       color: white;
