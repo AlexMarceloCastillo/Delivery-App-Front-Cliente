@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
-import { AuthService } from "@auth/auth.service";
+import { AuthService } from "../services/auth.service";
 
 import { HttpClient } from '@angular/common/http';
 

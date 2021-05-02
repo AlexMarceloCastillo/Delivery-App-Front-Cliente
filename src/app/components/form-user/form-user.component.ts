@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { OnChanges, Component, Input, ViewEncapsulation, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from '@auth/auth.service';
+import { AuthService } from '@auth/services/auth.service';
 import { Domicilio } from '@models/domicilio.interface';
 import { Cliente } from '@models/cliente.interface';
 import guaymallen from '@assets/json/guaymallen.json';

@@ -5,7 +5,7 @@
     "baseUrl": "./",
     "paths": {
       "@models/*": ["src/app/models/*"],
-      "@auth/*": ["src/app/auth/services/*"],
+      "@auth/*": ["src/app/auth/*"],
       "@services/*": ["src/app/services/*"],
       "@pages/*": ["src/app/pages/*"],
       "@components/*": ["src/app/components/*"],

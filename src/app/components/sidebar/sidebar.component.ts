@@ -3,7 +3,7 @@ import { NavigationEnd, Router } from '@angular/router';
 
 import { Subscription } from 'rxjs';
 
-import { AuthService } from '@auth/auth.service';
+import { AuthService } from '@auth/services/auth.service';
 import { TogglerService } from '@services/toggler/toggler.service';
 
 import { Cliente } from '@models/cliente.interface';

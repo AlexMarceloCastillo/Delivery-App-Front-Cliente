@@ -2,11 +2,13 @@ import { Component, OnInit } from '@angular/core';
 
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
-import { AuthService } from "@auth/auth.service";
+import { AuthService } from "../services/auth.service";
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
+  providers: [AuthService]
 })
 export class LoginComponent implements OnInit {
 
@@ -44,15 +46,8 @@ export class LoginComponent implements OnInit {
     this.authSvc.loginGoogle();
   }
 
-
-  public toggleType(e: Event): void {
-    e.preventDefault();
-    this.hide = !this.hide;
-  }
-
   // Solo para mostrar errores
   public get email(): any {
-    // console.log(this.loginForm.get('email').pristine);
     return this.loginForm.get('email');
   }
   public get pwd(): any {

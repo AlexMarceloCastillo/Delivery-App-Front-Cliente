@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { Subscription } from 'rxjs';
 
-import { AuthService } from '@auth/auth.service';
+import { AuthService } from '@auth/services/auth.service';
 import { TogglerService } from '@services/toggler/toggler.service';
 import { CarritoService } from '@services/carrito/carrito.service';
 

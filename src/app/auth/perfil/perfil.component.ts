@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '@auth/auth.service';
+import { AuthService } from '../services/auth.service';
 import { Cliente } from '@models/cliente.interface';
 import { Observable } from 'rxjs';
 import { AngularFireStorage } from '@angular/fire/storage';

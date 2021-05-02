@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
 import { ItemCarrito } from "@models/itemCarrito.interface";
-import { AuthService } from "@auth/auth.service";
+import { AuthService } from "@auth/services/auth.service";
 
 @Injectable({
   providedIn: 'root'
