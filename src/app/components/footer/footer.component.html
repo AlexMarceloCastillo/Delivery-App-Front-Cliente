@@ -1,40 +1,51 @@
-<footer class="pt-5 mt-5 shadow bg-mayo">
+<footer class="pt-5 mt-5 shadow bg-burger text-light">
   <div class="container">
     <div class="row">
-      <div class="col-12 col-md-6">
-        <h3>The Good Taste</h3>
-        <!-- <img src="" alt=""> -->
-        <p>img logo</p>
-      </div>
-      <div class="col-12 col-md-6 text-left mb-5">
 
-        <nav>
-          <h4>Site Map</h4>
+      <div class="col-12 col-md-5 mb-5">
+        <div class="logo-wrap">
+          <h2 class="mb-4">El Buen Sabor</h2>
+          <img src="../../../assets/img/web/Delibery The Good Taste.png" alt="El Buen Sabor Logo" id="logo">
+        </div>
+      </div>
+      <div class="col-12 col-md-4 mb-5">
+        <nav class="navbar-dark">
+          <h3>Mapa del Sitio</h3>
           <ul class="nav flex-column">
             <li class="nav-item">
-              <a [routerLink]="[ '/inicio' ]" class="nav-link">Home</a>
+              <a [routerLink]="[ '/inicio' ]" class="nav-link text-mayo">Home</a>
             </li>
             <li class="nav-item">
-              <a [routerLink]="[ '/menu' ]" class="nav-link">Menu</a>
+              <a [routerLink]="[ '/menu' ]" class="nav-link text-mayo">Menu</a>
             </li>
             <li class="nav-item">
-              <a [routerLink]="[ '/carrito' ]" class="nav-link">Carrito</a>
+              <a [routerLink]="[ '/carrito' ]" class="nav-link text-mayo">Carrito</a>
             </li>
             <li class="nav-item">
-              <a [routerLink]="[ '/login' ]" class="nav-link">Inicio de Sesión</a>
+              <a [routerLink]="[ '/login' ]" class="nav-link text-mayo">Inicio de Sesión</a>
             </li>
             <li class="nav-item">
-              <a [routerLink]="[ '/register' ]" class="nav-link">Registro</a>
+              <a [routerLink]="[ '/register' ]" class="nav-link text-mayo">Registro</a>
             </li>
           </ul>
         </nav>
-
       </div>
+      <div class="col-12 col-md-3">
+        <nav class="navbar-dark">
+          <h3>Legal</h3>
+          <ul class="nav flex-column">
+            <li class="nav-item">
+              <a [routerLink]="[ 'legal' ]" class="nav-link text-mayo">Terminos de uso</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+
     </div>
-    <hr>
+    <hr class="bg-mayo">
     <div class="row">
       <div class="col-12 my-2">
-        <h5 class="text-center"><i class="far fa-copyright"></i> The Good Taste</h5>
+        <h5 class="text-center"><i class="far fa-copyright"></i> El Buen Sabor</h5>
       </div>
     </div>
   </div>

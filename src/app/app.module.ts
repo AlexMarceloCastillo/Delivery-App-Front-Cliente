@@ -13,7 +13,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from 'src/environments/environment';
 //Toast
-import { ToastrModule } from 'ngx-toastr';
+// import { ToastrModule } from 'ngx-toastr';
 //Auth Module 
 import { AuthModule } from "./auth/auth.module";
 
@@ -39,6 +39,7 @@ import { MenuComponent } from '@pages/menu/menu.component';
 import { P404Component } from '@pages/p404/p404.component';
 import { ComidaDetalleComponent } from '@pages/comida-detalle/comida-detalle.component';
 import { ClosedComponent } from '@pages/closed/closed.component';
+import { LegalComponent } from '@pages/legal/legal.component';
 
 
 @NgModule({
@@ -59,7 +60,8 @@ import { ClosedComponent } from '@pages/closed/closed.component';
     OlmarkerComponent,
     OlradioComponent,
     CardComponent,
-    ComidaDetalleComponent
+    ComidaDetalleComponent,
+    LegalComponent
   ],
   imports: [
     SharedModule,

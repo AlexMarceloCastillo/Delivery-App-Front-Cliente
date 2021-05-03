@@ -1,0 +1,13 @@
+div.logo-wrap, nav {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo-wrap {
+  img#logo {
+    width: 45%;
+    border-radius: 10px;
+  }
+}

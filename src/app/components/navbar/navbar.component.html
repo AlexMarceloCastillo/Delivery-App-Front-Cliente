@@ -16,13 +16,33 @@
             <a class="nav-link" [routerLink]="['/menu']" routerLinkActive="active">Menu</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" [routerLink]="['/auth/login']" routerLinkActive="active">Login</a>
+            <a class="nav-link" [routerLink]="['/inicio']" fragment="ubicacion" >Ubicación</a>
           </li>
           <li class="nav-item">
             <a class="nav-link cart" [routerLink]="['/carrito']" routerLinkActive="active">
-              <i class="fas fa-shopping-cart"></i><span class="badge badge-light font-color-o">{{cartLength}}</span>
+              <i class="fas fa-shopping-cart"></i><span class="badge text-ketchup">{{cartLength}}</span>
             </a>
           </li>
+
+          <a class="btn btn-burger ml-3" role="button" [routerLink]="['/auth/login']" routerLinkActive="active" *ngIf="!cliente">Inicio de Sesión</a>
+          <a class="btn btn-outline-burger m-3" role="button" [routerLink]="['/auth/register']" routerLinkActive="active" *ngIf="!cliente">Registrarse</a>
+
+          <li class="nav-item dropdown" *ngIf="cliente">
+            <a class="nav-link dropdown-toggle" id="perfilDropdown" role="button" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              <img *ngIf="cliente.photoURL == null" src="https://www.w3schools.com/howto/img_avatar.png"
+                alt="user default picture" width="50" height="50" class="rounded-circle" loading="lazy">
+              <img *ngIf="cliente.photoURL != null" src={{cliente.photoURL}} alt="user profile picture" width="50"
+                height="50" class="rounded-circle" loading="lazy">
+            </a>
+            <div class="dropdown-menu" aria-labelledby="perfilDropdown">
+              <a class="dropdown-item" [routerLink]="[ '/perfil/', cliente.uid ] ">Perfil</a>
+              <a class="dropdown-item" [routerLink]="[ '/perfil/', cliente.uid, 'lista-pedidos' ] ">Mis pedidos</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" (click)="onLogout($event)">Cerrar Sesión</a>
+            </div>
+          </li>
+
         </ul>
       </div>
     </div>

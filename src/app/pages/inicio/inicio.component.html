@@ -1,46 +1,33 @@
-<section class="land">
+<!-- <section class="land">
   <div class="img-back"></div>
-  <div class="wrap-land-content">
+  
+</section> -->
+<div class="container-fluid">
+  <section id="land">
     <h1 class="text-center">Delivery de comidas</h1>
-    <h4 class="text-center">Encuentra tu comida rápida favorita en tan solo unos clicks</h4>
-    <a [routerLink]="[ '/menu' ]" class="btn btn-outline-light my-4">Ver menu de platos</a>
-  </div>
-</section>
+    <h4 class="text-center lead mt-2">Encuentra tu plato favorita en tan solo unos clicks</h4>
+    <hr>
+    <a [routerLink]="[ '/menu' ]" class="btn btn-lettuce my-4">Ver menu de platos</a>
+  </section>
+</div>
 <div class="container">
   <section id="delivery-work" class="my-5">
     <div class="row">
       <div class="col-12 mb-5">
         <h1 class="text-center">¿Cómo funciona?</h1>
       </div>
-      <div class="col-sm-12 col-md-4">
-        
-        <div class="card text-center">
-          <img src="../../../assets/img/web/order-food.png" class="card-img-top" alt="Ordenar comida">
+
+      <div class="col-sm-12 col-md-4" *ngFor="let card of cardsInfo">
+        <div class="card text-center shadow">
+          <img [src]="card.imgPath" class="card-img-top" alt="card.alt">
           <div class="card-body">
-            <h5 class="card-title ">Busca</h5>
-            <p class="card-text">Seleciona de nuestro menú tus comidas favoritas</p>
-          </div>
-        </div>
-  
-      </div>
-      <div class="col-sm-12 col-md-4">
-        <div class="card text-center">
-          <img src="../../../assets/img/web/tracking.png" class="card-img-top" alt="Ordenar comida">
-          <div class="card-body">
-            <h5 class="card-title">Ordena</h5>
-            <p class="card-text">Compra mediante MercadoPago o pago en el Local</p>
+            <h5 class="card-title ">{{card.title}}</h5>
+            <hr>
+            <p class="card-text">{{card.subTitle}}</p>
           </div>
         </div>
       </div>
-      <div class="col-sm-12 col-md-4">
-        <div class="card text-center">
-          <img src="../../../assets/img/web/food-delivery.png" class="card-img-top" alt="Ordenar comida">
-          <div class="card-body">
-            <h5 class="card-title">Entrega</h5>
-            <p class="card-text">Recive el pedido en tu casa</p>
-          </div>
-        </div>
-      </div>
+
     </div>
   </section>
   <div class="row">

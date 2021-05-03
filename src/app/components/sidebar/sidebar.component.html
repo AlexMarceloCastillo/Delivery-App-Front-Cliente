@@ -1,5 +1,5 @@
 <nav id="sidebar" [ngClass]="{'active': this.toggleStatus.status$ | async}">
-  <div class="wrapper bg-flour shadow">
+  <div class="wrapper bg-mayo shadow">
     <div class="sidebar-heading">
       <button type="button" class="close" aria-label="Close" (click)="onToggle()">
         <span aria-hidden="true">&times;</span>
@@ -10,24 +10,24 @@
         <img *ngIf="cliente.photoURL == null" src="https://www.w3schools.com/howto/img_avatar.png" alt="user default picture" class="rounded-circle" loading="lazy">
     </div>
     <div class="list-group list-group-flush">
-      <a class="list-group-item list-group-item-action bg-flour" [routerLink]="[ '/inicio']" >Home</a>
-      <a class="list-group-item list-group-item-action bg-flour" [routerLink]="[ '/menu']" >Menu</a>
-      <a class="list-group-item list-group-item-action bg-flour" [routerLink]="[ '/carrito']" >Carrito</a>
-      <a class="list-group-item list-group-item-action bg-flour" [routerLink]="[ '/login']" *ngIf="!cliente" >Login</a>
+      <a class="list-group-item list-group-item-action bg-mayo" [routerLink]="[ '/inicio']" >Home</a>
+      <a class="list-group-item list-group-item-action bg-mayo" [routerLink]="[ '/menu']" >Menu</a>
+      <a class="list-group-item list-group-item-action bg-mayo" [routerLink]="[ '/carrito']" >Carrito</a>
+      <a class="list-group-item list-group-item-action bg-mayo" [routerLink]="[ '/login']" *ngIf="!cliente" >Login</a>
+      <a class="list-group-item list-group-item-action bg-mayo" [routerLink]="['/inicio']" fragment="ubicacion" *ngIf="!cliente" >Ubicación</a>
 
       <div class="dropdown" *ngIf="cliente">
-        <button class="btn bg-flour dropdown-toggle" type="button" id="dropMenuPerfil" data-toggle="dropdown"
+        <button class="btn bg-mayo dropdown-toggle" type="button" id="dropMenuPerfil" data-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false">
           {{cliente.nombre}}
         </button>
         <div class="dropdown-menu" aria-labelledby="dropMenuPerfil">
-          <a class="dropdown-item" [routerLink]="[ '/perfil/', cliente.uid ] ">Perfil</a>
-          <a class="dropdown-item" [routerLink]="[ '/perfil/', cliente.uid, 'mis-pedidos' ] ">Mis pedidos</a>
+          <a class="dropdown-item" [routerLink]="[ '/perfil', cliente.uid ] ">Perfil</a>
+          <a class="dropdown-item" [routerLink]="[ '/perfil', cliente.uid, 'lista-pedido' ] ">Mis pedidos</a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" (click)="onLogout()">Cerrar Sesión</a>
         </div>
       </div>
-
     </div>
   </div>
   <div class="overlay"></div>

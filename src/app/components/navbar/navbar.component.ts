@@ -47,7 +47,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.togglerSvc.toggle(!this.togglerSvc.statusSubject.getValue());
   }
 
-  public onLogout(): void {
+  public onLogout(e:Event): void {
+    e.preventDefault();
     this.authSvc.logOut();
   }
 }
