@@ -22,8 +22,8 @@
           {{cliente.nombre}}
         </button>
         <div class="dropdown-menu" aria-labelledby="dropMenuPerfil">
-          <a class="dropdown-item" [routerLink]="[ '/perfil', cliente.uid ] ">Perfil</a>
-          <a class="dropdown-item" [routerLink]="[ '/perfil', cliente.uid, 'lista-pedido' ] ">Mis pedidos</a>
+          <a class="dropdown-item" [routerLink]="[ '/auth/perfil/', cliente.uid ]">Perfil</a>
+          <a class="dropdown-item" [routerLink]="[ cliente.uid, 'pedidos' ]">Mis pedidos</a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" (click)="onLogout()">Cerrar Sesión</a>
         </div>

@@ -15,7 +15,7 @@
             <th>{{order.id}}</th>
             <td>{{order.estado}}</td>
             <td>
-              <a [routerLink]="[ '/perfil', userId, 'pedido', order.id ]">ver</a>
+              <a [routerLink]="[order.id]">ver</a>
             </td>
             <td>
               <button class="btn btn-primary" (click)="imprimir(order.id, $event)">Imprimir</button>

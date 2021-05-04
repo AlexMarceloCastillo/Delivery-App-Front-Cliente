@@ -25,8 +25,8 @@ const routerOptions: ExtraOptions = {
 const routes: Routes = [
   { path: 'inicio', component: InicioComponent },
   { path: 'carrito', component: CarritoComponent, canActivate:[AuthGuard] },
-  { path: 'perfil/:uid/pedido/:pid', component: PedidoComponent, canActivate:[AuthGuard]},
-  { path: 'perfil/:uid/lista-pedido', component: ListaPedidoComponent, canActivate:[AuthGuard] },
+  { path: ':uid/pedidos/:pid', component: PedidoComponent, canActivate:[AuthGuard]},
+  { path: ':uid/pedidos', component: ListaPedidoComponent, canActivate:[AuthGuard] },
   { path: 'menu', component: MenuComponent },
   { path: 'comida/:id', component: ComidaDetalleComponent },
   { path: 'closed', component: ClosedComponent },
