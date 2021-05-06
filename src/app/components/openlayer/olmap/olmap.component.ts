@@ -53,12 +53,9 @@ export class OlmapComponent implements AfterViewInit {
       }),
       controls: defaultControls({attribution: false, zoom: false}).extend([])
     });
-  }
-
-  private setSize() {
 
   }
-
+  
   public setMarker(vector: VectorLayer) {
     this.map.addLayer(vector);
   }

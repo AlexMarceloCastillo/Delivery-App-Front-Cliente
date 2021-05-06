@@ -1,0 +1,105 @@
+.desktop{
+  display: none;
+}
+.card-body{
+  text-align: center;
+}
+.breadcrumb{
+  width: 100%;
+  background-color: inherit;
+  display: list-item;
+}
+.container li a{
+  font-size: 18px;
+  color: black;
+}
+.container li a i{
+  color: black;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.text-success i{
+  border-radius: 100%;
+  border: 1px green solid;
+  padding: 1%;
+}
+.info-pago{
+  text-align: center;
+  width: auto;
+  margin: auto;
+  background-color: red;
+}
+span{
+  cursor: pointer;
+}
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+  .mobile-tablet{
+    display: none;
+  }
+  .container{
+    background: url('../../../assets/img/web/food-detail-background.jpg') no-repeat;
+    background-size: cover;
+  }
+  .desktop{
+    display: block;
+  }
+  .info{
+    margin-top: 2.5%;
+    text-align: center;
+    border: 1px black solid;
+  }
+  .container img{
+    width: 100%;
+    height: 100%;
+  }
+  .breadcrumb{
+    display: flex;
+  }
+  .container li a{
+    font-size: 16px;
+    color: black;
+  }
+  .container li a i{
+    color: black;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  /* CONTAINER DESKTOP */
+  .mobile-tablet{
+    display: none;
+  }
+  .desktop{
+    display: block;
+  }
+  .container{
+    justify-content: center;
+  }
+  .detalle{
+    width: 100%;
+    margin: auto;
+    display: flex;
+  }
+  .info{
+    float: right;
+    width: 50%;
+    margin-left: 5%;
+    padding-left: 1%;
+    margin-top: inherit;
+    text-align: justify;
+    border: 0 white solid;
+  }
+  .detalle .img{
+    float: left;
+    width: 45%;
+  }
+
+
+}
