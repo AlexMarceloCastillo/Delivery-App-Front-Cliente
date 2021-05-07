@@ -19,9 +19,7 @@ export class LoginComponent implements OnInit {
     this.buildLoginForm();
   }
 
-
-  ngOnInit(): void { }
-
+  ngOnInit(): void {}
 
   private buildLoginForm(): void {
     this.loginForm = this.formBuilder.group({

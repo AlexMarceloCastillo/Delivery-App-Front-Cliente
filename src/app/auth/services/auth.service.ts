@@ -4,7 +4,6 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import firebase from 'firebase/app';
 
-
 import { Router } from '@angular/router';
 import { of } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
@@ -23,6 +22,11 @@ export class AuthService {
   constructor(public afsAuth: AngularFireAuth,public afs: AngularFirestore,public router: Router,public toastrSvc: ToastrService) {
     this.isOpen();
    }
+
+  //Email de verificacion
+  async sendVerificationEmail():Promise<void>{
+    return (await this.afsAuth.currentUser).sendEmailVerification();
+  }
 
   //Login
   async login(email: string, pwd: string): Promise<Cliente>{
@@ -60,6 +64,8 @@ export class AuthService {
       const {user} = await this.afsAuth.createUserWithEmailAndPassword(email,pwd)
       this.saveClientData(user,username,domicilio);
       this.successLogin('Registrado Correctamente !')
+      this.sendVerificationEmail();
+      this.router.navigate(['/verification']);
       return user;
     }
     catch(error){

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { Router } from '@angular/router'
 
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
@@ -23,7 +23,7 @@ export class RegistroComponent implements OnInit {
   private lonHome = null;
   private domicilio: Domicilio;
 
-  constructor(private formBuilder: FormBuilder,private authSvc: AuthService, private httpClient: HttpClient) {
+  constructor(private formBuilder: FormBuilder,private authSvc: AuthService, private httpClient: HttpClient, private router: Router) {
     this.buildRegiserForm()
   }
 
@@ -54,6 +54,7 @@ export class RegistroComponent implements OnInit {
       };
       this.authSvc.register(email,pwd,username,this.domicilio)
       this.registerForm.reset();
+      this.router.navigate(['/verification'])
     } else {
       this.registerForm.markAllAsTouched();
     }

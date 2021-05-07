@@ -15,6 +15,7 @@ import { AuthService } from './services/auth.service';
 import { AuthGuard } from '@guards/auth.guard';
 
 import { SharedModule } from '../shared/shared.module';
+import { SendEmailComponent } from './send-email/send-email.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { SharedModule } from '../shared/shared.module';
     LoginComponent,
     RegistroComponent,
     OlvidoContComponent,
-    FormUserComponent
+    FormUserComponent,
+    SendEmailComponent
   ],
   imports: [
     CommonModule,
