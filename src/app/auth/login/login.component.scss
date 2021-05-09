@@ -34,6 +34,12 @@ div.login-wrap {
       background-color: $google;
       color: whitesmoke;
       width: 75%;
+      margin: auto;
+      display: inline-flex;
+      justify-content: space-evenly;
+      i.fa-google {
+        align-self: center;
+      }
     }
   }
 }

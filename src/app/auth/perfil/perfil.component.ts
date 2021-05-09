@@ -17,6 +17,7 @@ export class PerfilComponent implements OnInit {
     nombre: "",
     email: "",
     photoURL: '',
+    telefono: 0,
     domicilio: {
       calle: '',
       localidad: '',
@@ -33,28 +34,30 @@ export class PerfilComponent implements OnInit {
   public urlImage: Observable<string>;
   public uploadPercent: Observable<number>;
 
+  public config: any = {isRegister: false};
+
   constructor(private authSvc: AuthService,private storage: AngularFireStorage) {
     this.clienteObs = this.authSvc.getDataClient();
-    this.authSvc.getDataClient().subscribe(data => {
+    this.authSvc.getDataClient().subscribe( data => {
       if(data){
         this.cliente.uid = data.uid;
         this.cliente.nombre = data.nombre;
         this.cliente.email = data.email;
         this.cliente.photoURL = data.photoURL;
+        this.cliente.telefono = data.telefono;
         if(data.domicilio){
           this.cliente.domicilio = data.domicilio
         }
       }
     })
     // Si esta logueado por google no necesita contraseña
-    this.authSvc.isAuth().subscribe((user)=>{
-      if(user){
-        if(user.providerData[0].providerId == 'google.com'){
-          this.isLoggedGoogle = true;
-        }
-      }
-    })
-
+    // this.authSvc.isAuth().subscribe((user)=>{
+    //   if(user){
+    //     if(user.providerData[0].providerId == 'google.com'){
+    //       this.isLoggedGoogle = true;
+    //     }
+    //   }
+    // });
   }
 
   ngOnInit(): void {

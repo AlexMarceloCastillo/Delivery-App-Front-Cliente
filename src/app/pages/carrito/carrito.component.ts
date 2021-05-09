@@ -34,7 +34,7 @@ export class CarritoComponent implements OnInit {
    * @param id: Id de un elemento
    * @param e: Event
    */
-  public deleteItemCart(id: any,e:Event) {
+  public deleteItemCart(id: any, e:Event): void{
     e.preventDefault();
     this.carritoSvc.deleteItem(id);
   }
@@ -44,7 +44,7 @@ export class CarritoComponent implements OnInit {
    * @param item: ItemCart
    * @param e: Event
    */
-  public plus(item:ItemCarrito,e:Event): void{
+  public plus(item:ItemCarrito, e:Event): void{
     e.preventDefault();
     e.stopPropagation();
     this.carritoSvc.addItem(item);
@@ -55,7 +55,7 @@ export class CarritoComponent implements OnInit {
    * @param item: ItemCart
    * @param e: Event
    */
-  public minus(item:ItemCarrito,e:Event): void{
+  public minus(item:ItemCarrito, e:Event): void{
     e.preventDefault();
     e.stopPropagation();
     this.carritoSvc.removeItem(item);

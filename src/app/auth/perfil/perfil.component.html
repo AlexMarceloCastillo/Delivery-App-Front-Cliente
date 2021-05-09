@@ -1,24 +1,42 @@
-<div class="container rounded bg-white mt-5">
-  <div class="user">
-      <div class="user-info">
-        <div class="user-info-sidebar d-flex flex-column align-items-center text-center p-3 py-5 mt-2">
-          <h5 class="font-weight-bold">{{cliente.nombre}}</h5>
-          <label for="avatar" *ngIf="cliente.photoURL != null"><i class="fas fa-file-image"></i><img class="user-img" src={{cliente.photoURL}} width="90"></label>
-          <label for="avatar" *ngIf="cliente.photoURL == null"><i class="fas fa-file-image"></i><img class="user-img" src="https://www.w3schools.com/howto/img_avatar.png" width="90"></label>
-          <input class="input-img" id="avatar" accept="image/*" (change)="onFile($event)" type="file" name="avatar" value="">
-          <span class="text-black-50" *ngIf="cliente.domicilio.localidad != ''">{{cliente.email}}</span>
-          <span>Mendoza</span>
-          <span *ngIf="cliente.domicilio.localidad != ''">{{cliente.domicilio.localidad}}</span>
-          <span *ngIf="cliente.domicilio.localidad != ''">{{cliente.domicilio.calle}},{{cliente.domicilio.numero}}</span>
+<div class="container">
+  <div class="row">
+    <div class="col-12 col-md-4">
+      <div class="card mt-5" id="user-display-data">
+        <!-- Picure -->
+        <div class="card-body">
+          <div class="wrapp-avatar bg-cheese">
+            <ng-container *ngIf="cliente.photoURL; else noPicture">
+              <img [src]="cliente.photoURL" alt="Imagen de Perfil" class="user-img">
+            </ng-container>
+            <ng-template #noPicture>
+              <img src="https://www.w3schools.com/howto/img_avatar.png" alt="Imagen de Perfil" class="user-img">
+            </ng-template>
+            <button type="button" class="btn btn-mayo" (click)="imgInput.click()">
+              <i class="fas fa-camera"></i>
+            </button>
+            <input type="file" accept="image/*" name="avatar" #imgInput>
+          </div>
+          <!-- User Data -->
+          <div class="card-body text-center">
+            <h3 class="card-title">{{cliente.nombre}}<i class="fas fa-check-circle"></i></h3>
+            <h6 class="card-subtitle mb-2 text-muted">{{cliente.email}}</h6>
+          </div>
+          <hr>
+          <div class="card-body text-left">
+            <p class="card-text">
+              {{cliente.domicilio.localidad}}, {{cliente.domicilio.calle}}, {{cliente.domicilio.numero}}.
+            </p>
+          </div>
         </div>
       </div>
-      <div class="user-edit">
-        <app-form-user
-        [clienteObs] = "clienteObs"
-        [isRegister]="false"
-        [isLoggedGoogle]="isLoggedGoogle"
-        [titulo]="'Editar'"
-        ></app-form-user>
+    </div>
+    <div class="col-12 col-md-8">
+      <div class="card mt-5">
+
       </div>
+    </div>
   </div>
 </div>
+<pre>
+  {{cliente|json}}
+</pre>

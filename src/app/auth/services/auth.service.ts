@@ -22,7 +22,7 @@ export class AuthService {
 
   constructor(public afsAuth: AngularFireAuth,public afs: AngularFirestore,public router: Router,public toastrSvc: ToastrService) {
     this.isOpen();
-   }
+  }
 
   //Login
   async login(email: string, pwd: string): Promise<Cliente>{
@@ -39,46 +39,56 @@ export class AuthService {
   //GoogleLogin
   async loginGoogle(): Promise<Cliente>{
     try{
-      const {user} = await this.afsAuth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
-      this.getDataClient().subscribe(e=>{
+      const { user } = await this.afsAuth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+      
+      this.getDataClient().subscribe( e =>{
         if(!e){
-          this.saveClientData(user,user.displayName,null)
+          this.saveClientData(user,user.displayName,user.phoneNumber,null);
         }else{
-          this.setStatus(true)
+          this.setStatus(true);
         }
       })
-      this.successLogin('Logueado Correctamente!')
+      this.successLogin('Logueado Correctamente!');
       return user;
     }catch(error){
-      this.getError(error.code,'Error al loguearse con Google')
+      this.getError(error.code,'Error al loguearse con Google');
     }
   }
 
   //Register
-  async register(email: string, pwd: string,username: string,domicilio: Domicilio): Promise<Cliente>{
-    try{
-      const {user} = await this.afsAuth.createUserWithEmailAndPassword(email,pwd)
-      this.saveClientData(user,username,domicilio);
-      this.successLogin('Registrado Correctamente !')
+  async register(clienteRegisterForm: any, domicilio: Domicilio) {
+    let { email, pwd } = clienteRegisterForm;
+    let { telefono, username } = clienteRegisterForm;
+    
+    try {
+      const { user } = await this.afsAuth.createUserWithEmailAndPassword( email, pwd);
+      
+      this.saveClientData(user, username, telefono, domicilio);
+      this.successLogin('Registrado Correctamente !');
       return user;
     }
     catch(error){
-      this.getError(error.code,'Error al registrarse')
-      console.log(error)
+      this.getError(error.code,'Error al registrarse');
+      console.log(error);
     }
   }
 
   //LogOut
-  async logOut(){
-    this.setStatus(false)
-    this.successLogin('Sesion Cerrada con Exito')
-    await this.afsAuth.signOut().catch((e)=> console.log(e));
+  async logOut() {
+    this.setStatus(false);
+    this.successLogin('Sesion Cerrada con Exito');
+    try {
+      await this.afsAuth.signOut();
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   //Obtener estado de login
-  isAuth(){
+  isAuth(): any{
     return this.afsAuth.authState.pipe(map(auth => auth));
   }
+
   //Obtener datos de usuario
   getDataClient(){
     return this.afsAuth.authState.pipe(
@@ -88,61 +98,68 @@ export class AuthService {
         }
         return of(null)
       })
-    )
+    );
   }
+
   //Redireccionar al inicio
   private successLogin(title:string): void{
     this.toastrSvc.success(title,'',{
-      positionClass: 'toast-center-center',
+      positionClass: 'toast-top-right',
       timeOut: 800
-    })
+    });
+
     setTimeout(()=>{
-    this.router.navigate(['/inicio'])
-    },1000)
+      this.router.navigate(['/inicio'])
+    },1000);
   }
+
   //Guardar el cliente en una coleccion de Firestore
-  private saveClientData(cliente: Cliente,username: string,domicilio: Domicilio){
+  private saveClientData(cliente: Cliente, username: string, telefono: any, domicilio: Domicilio) {
+    console.log(cliente);
+    
     //Referencia de usuario a guardar
       const userRef: AngularFirestoreDocument<Cliente> = this.afs.doc(`clients/${cliente.uid}`);
       const data: Cliente = {
         uid: cliente.uid,
         email:cliente.email,
         nombre: username,
+        telefono: telefono,
         photoURL: cliente.photoURL,
         estado: 1,
         domicilio: domicilio,
         role: 0,
         online: true
       }
-      return userRef.set(data,{merge:true})
+      return userRef.set(data,{merge:true});
   }
+
   //Actualizar datos de usuario en Firestore
   public updateProfile(cliente: Cliente){
-    try {
-
-      const userRef: AngularFirestoreDocument<Cliente> = this.afs.doc(`clients/${cliente.uid}`)
-      userRef.update(cliente)
-        .then( () => {
-            this.toastrSvc.success('','Datos Actualizados con Exito',{
-            positionClass: 'toast-center-center',
-            timeOut: 800})
-          }
-        )
-    } catch (error) {
-      console.log(error)
-    }
+    const userRef: AngularFirestoreDocument<Cliente> = this.afs.doc(`clients/${cliente.uid}`);
+    userRef.update(cliente)
+      .then( () => {
+          this.toastrSvc.success('','Datos Actualizados con Exito',{
+          positionClass: 'toast-top-right',
+          timeOut: 800});
+        }
+      ).catch( error => {
+          this.toastrSvc.error('Error',`${error}`,{
+            positionClass: 'toast-bottom-right',
+            timeOut: 800
+          });
+        }
+      );
   }
+
   setStatus(online: boolean){
     this.isAuth()
     .subscribe(user =>{
       if(user){
-        const userRef: AngularFirestoreDocument<Cliente> = this.afs.doc(`clients/${user.uid}`)
-        const data: any = {
-          online: online
-        }
-        userRef.update(data)
+        const userRef: AngularFirestoreDocument<Cliente> = this.afs.doc(`clients/${user.uid}`);
+        const data: any = { online };
+        userRef.update(data);
       }
-    })
+    });
   }
 
   isOpen(){
@@ -188,7 +205,7 @@ export class AuthService {
     const mss = message[index];
 
     this.toastrSvc.error(mss,titulo,{
-      positionClass: 'toast-center-center',
+      positionClass: 'toast-buttom-right',
     });
   }
 }

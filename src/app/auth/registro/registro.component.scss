@@ -1,5 +1,40 @@
-:host ::ng-deep app-form-user div.container {
-  margin-top: 2.5%;
+$google: #DB4437;
+
+div.card {
+  max-width: 90%;
+  margin: 5% auto;
+
+  p.error {
+    color: #dc3545; //danger color from Bootstrap
+    padding: 0px 5px;
+    margin: 5px auto;
+  }
+  p.text-success {
+    padding: 0px 5px;
+    margin: 5px 0;
+  }
+
+  div.btn-wrap {
+    .btn {
+      width: 90%;
+      margin: 2.5% 5%;
+    }
+
+    button#btn-google {
+      background-color: $google;
+      color: whitesmoke;
+      display: inline-flex;
+      justify-content: space-evenly;
+
+      i.fa-google {
+        align-self: center;
+      }
+    }
+  }
+
+  div#legal {
+    margin-top: 5px;
+  }
 }
 
 /* Small devices (landscape phones, 576px and up) */
@@ -7,21 +42,29 @@
 
 /* Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) {
-  :host ::ng-deep app-form-user div.card-form{
-    width: 80%;
-  }
-  :host ::ng-deep app-form-user #formUser{
-    display: flex;
-  }
-  :host ::ng-deep app-form-user div.user{
-    float: left;
-    width: 50%;
-  }
-  :host ::ng-deep app-form-user div.house{
-    float: right;
-    width: 50%;
+  div.card {
+    max-width: 80%;
+
+    div.btn-wrap {
+      display: flex;
+      justify-content: space-between;
+      margin: 2.5% 0;
+      .btn {
+        width: 45%;
+        margin: unset;
+      }
+
+      button#btn-google {
+        background-color: $google;
+        color: whitesmoke;
+      }
+    }
   }
 }
 
 /* Large devices (desktops, 992px and up) */
-@media (min-width: 992px) {}
+@media (min-width: 992px) {
+  div.card {
+    max-width: 60%;
+  }
+}

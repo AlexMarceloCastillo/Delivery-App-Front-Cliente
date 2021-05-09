@@ -1,85 +1,50 @@
-//DIV INFORMACION USUARIO
-.user-info{
-  background-color: #e1d7d7;
-  width: 100%;
-}
-.user-info-sidebar{
-  label{
-    position: relative;
+div.card#user-display-data {
+  .card-body {
+    .wrapp-avatar {
+      position: relative;
+  
+      border-radius: 50%;
+      width: 200px;
+      height: 200px;
+      margin: auto;
+  
+      img.user-img{
+        width: 85%;
+        height: 85%;
+        margin: 7.5%;
+        border-radius: 50%;
+      }
+  
+      input[type="file"]{
+        display: none;
+      }
+  
+      button.btn {
+        position: absolute;
+        width: 64px;
+        height: 64px;
+        border-radius: 32px;
+  
+        right: 0px;
+        bottom: 20px;
+  
+        i {
+          font-size: 1.5rem;
+        }
+      }
+    }
+
+    i.fa-check-circle {
+      color: #42A5F5;
+    }
   }
 }
-.user-img{
-  display:block;
-  cursor: pointer;
-  width: 100%;
-  height: 32vh;
-  height: auto;
-  border-radius: 5%;
-  margin: auto;
-}
-.fa-file-image{
-  position: absolute;
-  bottom:0; right:0;
-  font-size: 36px;
-  background-color: white;
-  cursor: pointer;
-}
-//DIV FOMRULARIO app-form-user
-.user-edit{
-  width: 100%;
-}
-.input-img{
-  display: none;
-  visibility: hidden;
-}
-:host ::ng-deep app-form-user div.user {
-     width: 100%;
-}
-:host ::ng-deep app-form-user div.house {
-     width: 100%;
-}
+
 /* Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) {}
 
 /* Medium devices (tablets, 768px and up) */
-@media (min-width: 768px) {
-  :host ::ng-deep app-form-user #formUser{
-    display: flex;
-  }
-  :host ::ng-deep app-form-user div.user{
-    float: left;
-    width: 50%;
-  }
-  :host ::ng-deep app-form-user div.house{
-    float: right;
-    width: 50%;
-  }
-}
-
-/* Large devices (desktops, 992px and up) */
-@media (min-width: 992px) {
-  .user{
-    display: flex;
-    width: 100%;
-  }
-  .user-info{
-    width: 25%;
-    float: left;
-  }
-  .user-edit{
-    width: 75%;
-    float: right;
-  }
-  :host ::ng-deep app-form-user div.card-form{
-       width:100%;
-  }
-  :host ::ng-deep app-form-user div.user {
-       width: 50%;
-  }
-  :host ::ng-deep app-form-user div.house {
-       width: 50%;
-  }
-}
+@media (min-width: 768px) {}
 
 /* Extra large devices (large desktops, 1200px and up) */
 @media (min-width: 1200px) {}
