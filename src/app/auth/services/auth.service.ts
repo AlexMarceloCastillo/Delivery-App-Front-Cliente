@@ -65,7 +65,6 @@ export class AuthService {
       this.saveClientData(user,username,domicilio);
       this.successLogin('Registrado Correctamente !')
       this.sendVerificationEmail();
-      this.router.navigate(['/verification']);
       return user;
     }
     catch(error){
@@ -85,6 +84,7 @@ export class AuthService {
   isAuth(){
     return this.afsAuth.authState.pipe(map(auth => auth));
   }
+
   //Obtener datos de usuario
   getDataClient(){
     return this.afsAuth.authState.pipe(
@@ -96,16 +96,22 @@ export class AuthService {
       })
     )
   }
+
   //Redireccionar al inicio
-  private successLogin(title:string): void{
+  async successLogin(title:string): Promise<void>{
     this.toastrSvc.success(title,'',{
       positionClass: 'toast-center-center',
       timeOut: 800
     })
-    setTimeout(()=>{
-    this.router.navigate(['/inicio'])
-    },1000)
+    const user = await this.afsAuth.currentUser;
+    if(user && user.emailVerified){
+      this.router.navigate(['/inicio'])
+    } else {
+      this.router.navigate(['/verification'])
+    }
+  
   }
+
   //Guardar el cliente en una coleccion de Firestore
   private saveClientData(cliente: Cliente,username: string,domicilio: Domicilio){
     //Referencia de usuario a guardar
