@@ -114,7 +114,7 @@ export class AuthService {
   }
 
   //Guardar el cliente en una coleccion de Firestore
-  private saveClientData(cliente: Cliente, username: string, telefono: any, domicilio: Domicilio) {
+  private saveClientData(cliente: any, username: string, telefono: any, domicilio: Domicilio) {
     console.log(cliente);
     
     //Referencia de usuario a guardar
@@ -128,7 +128,9 @@ export class AuthService {
         estado: 1,
         domicilio: domicilio,
         role: 0,
-        online: true
+        online: true,
+        verfied: cliente.emailVerified,
+        provider: cliente.providerData[0].providerId
       }
       return userRef.set(data,{merge:true});
   }

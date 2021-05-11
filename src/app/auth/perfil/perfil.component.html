@@ -1,42 +1,68 @@
-<div class="container">
-  <div class="row">
-    <div class="col-12 col-md-4">
-      <div class="card mt-5" id="user-display-data">
-        <!-- Picure -->
-        <div class="card-body">
-          <div class="wrapp-avatar bg-cheese">
-            <ng-container *ngIf="cliente.photoURL; else noPicture">
-              <img [src]="cliente.photoURL" alt="Imagen de Perfil" class="user-img">
-            </ng-container>
-            <ng-template #noPicture>
-              <img src="https://www.w3schools.com/howto/img_avatar.png" alt="Imagen de Perfil" class="user-img">
-            </ng-template>
-            <button type="button" class="btn btn-mayo" (click)="imgInput.click()">
-              <i class="fas fa-camera"></i>
-            </button>
-            <input type="file" accept="image/*" name="avatar" #imgInput>
-          </div>
-          <!-- User Data -->
-          <div class="card-body text-center">
-            <h3 class="card-title">{{cliente.nombre}}<i class="fas fa-check-circle"></i></h3>
-            <h6 class="card-subtitle mb-2 text-muted">{{cliente.email}}</h6>
-          </div>
-          <hr>
-          <div class="card-body text-left">
-            <p class="card-text">
-              {{cliente.domicilio.localidad}}, {{cliente.domicilio.calle}}, {{cliente.domicilio.numero}}.
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="col-12 col-md-8">
-      <div class="card mt-5">
+<!-- <pre>
+  {{usuario|json}}
+</pre> -->
+<ng-container *ngIf="usuario; else noDataLoad">
 
+  <div class="container">
+    <div class="row">
+      <div class="col-12 col-md-5 col-lg-4">
+          
+          <div class="card mt-5" id="user-display-data">
+            <!-- Picure -->
+            <div class="card-body">
+              <div class="wrapp-avatar bg-cheese">
+                <ng-container *ngIf="usuario.photoURL; else noPicture">
+                  <img [src]="usuario.photoURL" alt="Imagen de Perfil" class="user-img">
+                </ng-container>
+                <ng-template #noPicture>
+                  <img src="https://www.w3schools.com/howto/img_avatar.png" alt="Imagen de Perfil" class="user-img">
+                </ng-template>
+                <button type="button" class="btn btn-mayo" (click)="imgInput.click()">
+                  <i class="fas fa-camera"></i>
+                </button>
+                <input type="file" accept="image/*" name="avatar" #imgInput (change)="onFile($event)">
+              </div>
+              <!-- User Data -->
+              <div class="card-body text-center">
+                <h3 class="card-title">{{usuario.nombre}}<i class="fas fa-check-circle"></i></h3>
+                <h6 class="card-subtitle mb-2 text-muted">{{usuario.email}}</h6>
+              </div>
+              <div class="progress" style="height: 2px;">
+                <div class="progress-bar bg-lettuce" role="progressbar" [style.width]="(uploadPercent | async) + '%'"></div>
+              </div>
+              <div class="card-body text-left">
+                <p class="card-text" *ngIf="usuario.domicilio; else noLocation">
+                  {{usuario.domicilio.localidad}}, {{usuario.domicilio.calle}}, {{usuario.domicilio.numero}}.
+                </p>
+                <ng-template #noLocation>
+                  <p class="card-text">Sin datos de domicilio.</p>
+                </ng-template>
+              </div>
+            </div>
+            <div class="card-footer bg-transparent text-center">
+                <ng-container *ngIf="usuario.provider==='password'; else googleProvider">
+                  <p>Registro con 'El Buen Sabor'</p>
+                </ng-container>
+                <ng-template #googleProvider>
+                  <p>Registro con Google Sign In</p>
+                </ng-template>
+                
+            </div>
+          </div>
+        
+      </div>
+      <div class="col-12 col-md-7 col-lg-8">
+        <!-- <div class="card mt-5">
+        </div> -->
       </div>
     </div>
   </div>
-</div>
-<pre>
-  {{cliente|json}}
-</pre>
+
+</ng-container>
+<ng-template #noDataLoad>
+  <div class="spinner-wrap">
+    <div class="spinner-border text-lettuce" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+  </div>
+</ng-template>
