@@ -10,4 +10,5 @@ export interface Cliente{
   photoURL ?: string;
   domicilio ?: Domicilio;
   online ?: boolean;
+  provider ?: string;
 }

@@ -1,13 +1,19 @@
-<div class="card">
-    <div class="card-body">
-        <h5 class="card-tittle">
-            Por favor, ingresa tu correo electronico
-        </h5>
-        <div class="form-group">
-            <input type="email" class="form-control" [formControl]="userEmail" required>
-        </div>
-        <div class="form-group">
-            <button class="btn btn-primary"(click)="onReset()">Restaurar contraseña</button>
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-tittle">
+                        Por favor, ingresa tu correo electronico
+                    </h5>
+                    <div class="form-group">
+                        <input type="email" class="form-control" [formControl]="userEmail" required>
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-burger"(click)="onReset()">Restaurar contraseña</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

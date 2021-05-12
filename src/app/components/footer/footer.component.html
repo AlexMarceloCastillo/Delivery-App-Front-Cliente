@@ -35,7 +35,13 @@
           <h3>Legal</h3>
           <ul class="nav flex-column">
             <li class="nav-item">
-              <a [routerLink]="[ 'legal' ]" class="nav-link text-mayo">Terminos de uso</a>
+              <a [routerLink]="[ 'legal' ]" class="nav-link text-mayo" fragment="service">Terminos de Servicio</a>
+            </li>
+            <li class="nav-item">
+              <a [routerLink]="[ 'legal' ]" class="nav-link text-mayo" fragment="privacy">Políticas de Privacidad</a>
+            </li>
+            <li class="nav-item">
+              <a [routerLink]="[ 'legal' ]" class="nav-link text-mayo" fragment="data">Políticas de Datos</a>
             </li>
           </ul>
         </nav>

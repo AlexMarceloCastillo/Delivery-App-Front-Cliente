@@ -1,3 +1,5 @@
+$google: #DB4437;
+
 div.login-wrap {
   display: flex;
   margin: 15% auto;
@@ -12,6 +14,11 @@ div.login-wrap {
     width: 90%;
     margin: 5%;
 
+    hr {
+      width: 80%;
+      margin: auto;
+    }
+
     p.error {
       color: #dc3545; //danger color from Bootstrap
       padding: 0px 5px;
@@ -23,8 +30,16 @@ div.login-wrap {
       flex-flow: column wrap;
     }
 
-    div.card-footer button#btn-google {
-      background-color: #DB4437;
+    button#btn-google {
+      background-color: $google;
+      color: whitesmoke;
+      width: 75%;
+      margin: auto;
+      display: inline-flex;
+      justify-content: space-evenly;
+      i.fa-google {
+        align-self: center;
+      }
     }
   }
 }
@@ -46,22 +61,21 @@ div.login-wrap {
 }
 
 /* Large devices (desktops, 992px and up) */
-@media (min-width: 992px) {}
-
-/* Extra large devices (large desktops, 1200px and up) */
-@media (min-width: 1200px) {
+@media (min-width: 992px) {
   div.login-wrap {
-    /* border: 1px solid red; */
-    width: 50vw;
-    height: 60vh;
+    width: 60vw;
+    height: 65vh;
     margin: 5% auto;
     position: relative;
 
     div.card {
-      width: 45%;
+      width: 47.5%;
       margin: 0;
       top: 0;
       left: 0;
     }
   }
 }
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {}

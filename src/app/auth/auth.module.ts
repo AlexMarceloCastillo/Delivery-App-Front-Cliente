@@ -8,8 +8,6 @@ import { LoginComponent } from './login/login.component';
 import { RegistroComponent } from './registro/registro.component';
 import { OlvidoContComponent } from './olvido-cont/olvido-cont.component';
 
-import { FormUserComponent } from '@components/form-user/form-user.component';
-
 // Guards
 import { AuthService } from './services/auth.service';
 import { AuthGuard } from '@guards/auth.guard';
@@ -24,7 +22,6 @@ import { SendEmailComponent } from './send-email/send-email.component';
     LoginComponent,
     RegistroComponent,
     OlvidoContComponent,
-    FormUserComponent,
     SendEmailComponent
   ],
   imports: [
@@ -36,8 +33,7 @@ import { SendEmailComponent } from './send-email/send-email.component';
     PerfilComponent,
     LoginComponent,
     RegistroComponent,
-    OlvidoContComponent,
-    FormUserComponent
+    OlvidoContComponent
   ],
   providers: [
     AuthService,

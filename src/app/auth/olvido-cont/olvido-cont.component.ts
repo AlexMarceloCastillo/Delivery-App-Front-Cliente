@@ -23,12 +23,11 @@ export class OlvidoContComponent implements OnInit {
   async onReset(){
     try{
       const email = this.userEmail.value;
-    await this.authSvc.resetPassword(email);
-    window.alert('Email enviado, revisa tu correo');
-    this.router.navigate(['/login']);
+      await this.authSvc.resetPassword(email);
+      window.alert('Email enviado, revisa tu correo');
+      this.router.navigate(['/login']);
     } catch (error) {
       console.log('Error', error);
     }
   }
-
 }
