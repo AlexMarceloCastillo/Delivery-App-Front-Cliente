@@ -23,6 +23,15 @@ export class AuthService {
     this.isOpen();
    }
 
+   //Reset de password
+   async resetPassword(email:string):Promise<void>{
+    try{
+      return this.afsAuth.sendPasswordResetEmail(email);
+    }catch(error){
+      this.getError(error.code,'Error')
+    }
+   }
+
   //Email de verificacion
   async sendVerificationEmail():Promise<void>{
     return (await this.afsAuth.currentUser).sendEmailVerification();

@@ -82,7 +82,7 @@
           <div class="form-row">
             <div class="form-group col-12" id="btn-submit">
               <button class="btn btn-primary" [disabled]="loginForm.invalid">Iniciar Sesión</button>
-              <button type="button" class="btn btn-link">¿Olvido su contraseña?</button>
+              <button type="button" class="btn btn-link" [routerLink]="['/olvido-clave']" >¿Olvido su contraseña?</button>
             </div>
           </div>
         </form>

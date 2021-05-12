@@ -15,7 +15,7 @@ const routes: Routes = [
   { path: 'register', component: RegistroComponent },
   { path: 'perfil/:id', component: PerfilComponent, canActivate:[AuthGuard] },
   { path: 'verification', component: SendEmailComponent },
-  { path: 'olvido-clave/:id', component: OlvidoContComponent },
+  { path: 'olvido-clave', component: OlvidoContComponent },
 ];
 
 @NgModule({
