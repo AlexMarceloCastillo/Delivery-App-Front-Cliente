@@ -20,12 +20,11 @@ export class RegistroComponent implements OnInit {
   private domicilio: Domicilio;
   private uid: string;
 
-  public retiroLocal: boolean = false;
+  public retiroLocal: boolean = true;
 
   constructor(private formBuilder: FormBuilder,private authSvc: AuthService, private httpClient: HttpClient) {
     this.buildRegisterForm();
     this.buildDomicilioForm();
-    this.setLatLon();
   }
 
   ngOnInit(): void { }
@@ -52,7 +51,7 @@ export class RegistroComponent implements OnInit {
     this.domicilioForm = this.formBuilder.group({
       calle: ['',[Validators.required,Validators.minLength(5),Validators.maxLength(25)]],
       numero:[0,[Validators.required,Validators.min(1)]],
-      localidad: ['local',[Validators.required,Validators.minLength(5),Validators.maxLength(15)]]
+      localidad: ['',[Validators.required,Validators.minLength(5),Validators.maxLength(15)]]
     });
   }
 
