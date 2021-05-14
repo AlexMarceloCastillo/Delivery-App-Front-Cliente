@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import firebase from 'firebase/app';
 
-import { Router } from '@angular/router';
 import { of } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 
@@ -41,8 +41,8 @@ export class AuthService {
   async login(email: string, pwd: string): Promise<Cliente>{
     try{
       const { user } = await this.afsAuth.signInWithEmailAndPassword(email,pwd);
-      this.successLogin('Logueado Correctamente!')
-      this.setStatus(true)
+      this.successLogin('Logueado Correctamente!');
+      this.setStatus(true);
       return user;
     } catch(error) {
       this.getError(error.code,'Error al loguearse')
@@ -128,13 +128,10 @@ export class AuthService {
     } else {
       this.router.navigate(['/auth/verification']);
     }
-  
   }
 
   //Guardar el cliente en una coleccion de Firestore
   private saveClientData(cliente: any, username: string, telefono: any, domicilio: Domicilio) {
-    console.log(cliente);
-    
     //Referencia de usuario a guardar
       const userRef: AngularFirestoreDocument<Cliente> = this.afs.doc(`clients/${cliente.uid}`);
       const data: Cliente = {

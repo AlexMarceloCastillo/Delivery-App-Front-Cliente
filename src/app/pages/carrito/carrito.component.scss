@@ -1,6 +1,8 @@
 div.wrap-cart {
   div.card {
     border: none;
+    width: 80%;
+    margin: auto;
 
     img {
       width: 500 px;
@@ -31,30 +33,14 @@ div.wrap-cart {
     }
   }
 
-
-
   hr:last-child {
     display: none;
   }
 }
 
-div.sumary {
-  div.form-group {
-    display: flex;
-    justify-content: flex-start;
-    align-items: baseline;
-
-    input.form-control-plaintext,
-    select {
-      margin-left: 5px;
-      border: none;
-    }
-  }
-}
-
 img.img-fluid#emptyCart {
-  max-width: 70% !important;
-  margin: 1% 15%;
+  max-width: 60% !important;
+  margin: 3% 20%;
 }
 
 // // Small devices (landscape phones, 576px and up)
@@ -71,6 +57,7 @@ img.img-fluid#emptyCart {
       display: flex;
       flex-direction: row;
       justify-content: baseline;
+      width: 95%;
 
       div.card-body {
         h5 {

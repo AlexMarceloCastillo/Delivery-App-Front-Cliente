@@ -21,10 +21,10 @@ export class CarritoService {
   public addItem(item: ItemCarrito) {
     let currentCart = this.carritoBS.getValue();
     if(currentCart) {
-      let objIndex = currentCart.findIndex( (obj) => obj.id == item.id );
+      let objIndex = currentCart.findIndex( (obj) => obj._id == item._id );
 
       if(objIndex != -1) {
-        currentCart[objIndex].cant += 1;
+        currentCart[objIndex].cantidad += 1;
       } else {
         currentCart.push(item)
       }
@@ -32,7 +32,6 @@ export class CarritoService {
       currentCart = [];
       currentCart.push(item);
     }
-
     this.persistCart(currentCart);
   }
 
@@ -47,12 +46,12 @@ export class CarritoService {
     let currentCart = this.carritoBS.getValue();
 
     if(currentCart) {
-      let objId = currentCart.findIndex( (obj) => obj.id == item.id);
+      let objId = currentCart.findIndex( (obj) => obj._id == item._id);
 
-      if(currentCart[objId].cant >=2 ) {
-        currentCart[objId].cant-=1;
+      if(currentCart[objId].cantidad >=2 ) {
+        currentCart[objId].cantidad-=1;
       } else {
-        this.deleteItem(item.id);
+        this.deleteItem(item._id);
       }
     }
     this.persistCart(currentCart);
@@ -60,10 +59,10 @@ export class CarritoService {
 
   public deleteItem(itemId: ItemCarrito): void {
     let currentCart = this.carritoBS.getValue();
-    let objIndex = currentCart.findIndex( (obj) => obj.id == itemId );
+    let objIndex = currentCart.findIndex( (obj) => obj._id == itemId );
 
     if(objIndex != -1) {
-      currentCart[objIndex].cant = 1;
+      currentCart[objIndex].cantidad = 1;
       currentCart.splice(objIndex,1);
     }
     this.persistCart(currentCart);

@@ -40,6 +40,7 @@ import { P404Component } from '@pages/p404/p404.component';
 import { ComidaDetalleComponent } from '@pages/comida-detalle/comida-detalle.component';
 import { ClosedComponent } from '@pages/closed/closed.component';
 import { LegalComponent } from '@pages/legal/legal.component';
+import { CheckoutComponent } from './pages/checkout/checkout.component';
 
 
 @NgModule({
@@ -61,7 +62,8 @@ import { LegalComponent } from '@pages/legal/legal.component';
     OlradioComponent,
     CardComponent,
     ComidaDetalleComponent,
-    LegalComponent
+    LegalComponent,
+    CheckoutComponent
   ],
   imports: [
     SharedModule,
