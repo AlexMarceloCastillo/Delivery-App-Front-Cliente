@@ -17,13 +17,15 @@
     align-content: center;
 
     input[type="search"] {
+
       // border: 1px solid red;
       &::-webkit-search-decoration,
       &::-webkit-search-cancel-button,
       &::-webkit-search-results-button,
       &::-webkit-search-results-decoration {
-        -webkit-appearance:none;
+        -webkit-appearance: none;
       }
+
       border: none;
       border-radius: 32px;
       width: 100%;
@@ -32,7 +34,7 @@
       backdrop-filter: blur(7px);
 
       &:focus {
-          outline: none;
+        outline: none;
       }
     }
 
@@ -51,6 +53,21 @@
       line-height: 10px;
       text-align: center;
       vertical-align: bottom;
+    }
+  }
+}
+
+#categorias {
+  .icon-card-category {
+    border-radius: 50px;
+    width: 100px;
+    height: 100px;
+    margin: 5% auto;
+    cursor: pointer;
+    img {
+      width: 50%;
+      height: 50%;
+      margin: 25%;
     }
   }
 }

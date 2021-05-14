@@ -1,7 +1,8 @@
 export interface ItemCarrito {
-    id: any,
+    _id: any,
     img: string,
-    name: string,
-    price: number,
-    cant: number
+    tiempoEstimado?: number,
+    denominacion: string,
+    precioVenta: number,
+    cantidad?: number
 }

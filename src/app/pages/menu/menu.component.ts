@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
-import { CarritoService } from '../../services/carrito/carrito.service';
+import { CarritoService } from '@services/carrito/carrito.service';
+import { ArtmanufactService } from '@services/artManufact/artmanufact.service';
 
-import { ItemCarrito } from '../../models/itemCarrito.interface';
+import { ItemCarrito } from '@models/itemCarrito.interface';
+import { ArtManufacturado } from "@models/artManufact.interface";
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-menu',
@@ -10,61 +13,30 @@ import { ItemCarrito } from '../../models/itemCarrito.interface';
   styleUrls: ['./menu.component.scss']
 })
 export class MenuComponent implements OnInit {
-
-  public foods:any[] = [
+  public artManufact$: Observable<ArtManufacturado[]>;
+  public categories: any[] = [
     {
-      id:'001',
-      name:"food 01",
-      img: "https://place-hold.it/500x300",
-      price:100,
+      imgPath: "../../../assets/img/web/menu/pizza-slice.png",
+      name: "Pizza"
     },
     {
-      id:'002',
-      name:"food 02",
-      img: "https://place-hold.it/500x300",
-      price:250
+      imgPath: "../../../assets/img/web/menu/burger.png",
+      name: "Hamburguesas"
     },
     {
-      id:'003',
-      name:"food 03",
-      img: "https://place-hold.it/500x300",
-      price:300
+      imgPath: "../../../assets/img/web/menu/fried-potatoes.png",
+      name: "Papas"
     },
     {
-      id:'004',
-      name:"food 04",
-      img: "https://place-hold.it/500x300",
-      price:145
+      imgPath: "../../../assets/img/web/menu/beer.png",
+      name: "Bebidas"
     },
-    {
-      id:'005',
-      name:"food 05",
-      img: "https://place-hold.it/500x300",
-      price:400
-    },
-    {
-      id:'006',
-      name:"food 06",
-      img: "https://place-hold.it/500x300",
-      price:350
-    }
   ];
 
-  constructor(private cartSvc: CarritoService) { }
+  constructor(private cartSvc: CarritoService, private artManufactSvc: ArtmanufactService) { }
+
 
   ngOnInit(): void {
-  }
-
-  public addItemCart(item: any, e: Event): void {
-    e.preventDefault();
-    let cartItem: ItemCarrito = {
-      id: item.id,
-      name: item.name,
-      img: item.img,
-      price: item.price,
-      cant: 1
-    }
-    this.cartSvc.addItem(cartItem);
-    e.stopPropagation();
+    this.artManufact$ = this.artManufactSvc.getAll();
   }
 }

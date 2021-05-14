@@ -26,14 +26,10 @@ export class NavbarComponent implements OnInit, OnDestroy {
   
 
   ngOnInit(): void {
-    this.clienteSuscription = this.authSvc.getDataClient().subscribe((data)=>this.cliente = data);
+    this.clienteSuscription = this.authSvc.getDataClient().subscribe( (data) => this.cliente = data);
     this.cartSuscription = this.cartSvc.cart$.subscribe( cart => {
-      try {
-        this.cartLength = cart.reduce((sum,current)=> sum + current.cant,0);
-      } catch (error) {
-        this.cartLength = 0;
-      }
-    });
+        this.cartLength = cart.reduce((sum,current)=> sum + current.cantidad,0);
+    }, error => this.cartLength = 0);
   }
 
   ngOnDestroy(): void {

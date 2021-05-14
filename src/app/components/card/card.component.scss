@@ -1,5 +1,7 @@
 div.card {
-  div.card-body> button.btn,a.btn {
+
+  div.card-body>button.btn,
+  a.btn {
     width: 95%;
     margin: 2.5%;
   }
@@ -14,7 +16,8 @@ div.card {
     div.card-body.actions {
       display: flex;
 
-      button.btn,a.btn {
+      button.btn,
+      a.btn {
         width: 50% !important;
       }
     }
@@ -23,7 +26,10 @@ div.card {
 
 // Extra large devices (large desktops, 1200px and up)
 @media (min-width: 1200px) {
-  div.card>div.actions>button.btn,a.btn {
-    margin: auto 2.5%;
+  div.card {
+    div.actions>button.btn,
+    a.btn {
+      margin: auto 2.5%;
+    }
   }
 }

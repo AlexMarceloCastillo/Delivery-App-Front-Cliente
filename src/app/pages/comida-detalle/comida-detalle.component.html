@@ -8,19 +8,19 @@
           <li><a href="#"><i class="fas fa-chevron-down"></i></a>  </li>
           <li class="breadcrumb-item"><a href="#">SubCategoria</a></li>
           <li><a href="#"><i class="fas fa-chevron-down"></i></a>  </li>
-          <li class="breadcrumb-item"><a href="#">{{food.name}}</a></li>
+          <li class="breadcrumb-item"><a href="#">{{food.denominacion}}</a></li>
         </ol>
       </nav>
-      <h4>{{food.name}}</h4>
-      <h5 class="mt-2">Precio: ${{food.price}},00 ARS</h5>
-      <h6>Precio con descuento por retiro en local (10%): ${{food.price-(food.price*0.1)}},00 ARS</h6>
+      <h4>{{food.denominacion}}</h4>
+      <h5 class="mt-2">Precio: ${{food.precioVenta}},00 ARS</h5>
+      <!-- <h6>Precio con descuento por retiro en local (10%): ${{food.precioVenta-(food.precioVenta*0.1)}},00 ARS</h6> -->
       <p class="text-success"><i class="fas fa-check"></i> Stock Disponible</p>
       <p>Tiempo estimado de preparacion: 1hr</p>
       <p>Formas de pago disponibles:</p>
       <li>Efectivo</li>
       <li>Credito</li>
       <li>Debito</li>
-      <button type="button" class="btn mt-2 mb-2 btn-outline-burger" (click)="addItemCart(food,$event)">Agregar al carrito<i class="fas fa-cart-plus"></i></button>
+      <button type="button" class="btn mt-2 mb-2 btn-outline-burger" (click)="addItemCart(food,$event)" [disabled]="btnDisabled">Agregar al carrito<i class="fas fa-cart-plus"></i></button>
     </div>
   </div>
 
@@ -35,7 +35,7 @@
       <li><a href="#"><i class="fas fa-chevron-right"></i></a>  </li>
       <li><a href="#">SubCategoria</a></li>
       <li><a href="#"><i class="fas fa-chevron-right"></i></a>  </li>
-      <li><a href="#">{{food.name}}</a></li>
+      <li><a href="#">{{food.denominacion}}</a></li>
     </ol>
   </nav>
   <div class="detalle col-md-12">
@@ -43,16 +43,16 @@
       <img src="{{food.img}}" alt="">
     </div>
     <div class="info border-dark border-left">
-      <h4>{{food.name}}</h4>
-      <h5 class="mt-2">Precio: ${{food.price}},00 ARS</h5>
-      <h6>Precio con descuento por retiro en local (10%): ${{food.price-(food.price*0.1)}},00 ARS</h6>
+      <h4>{{food.denominacion}}</h4>
+      <h5 class="mt-2">Precio: ${{food.precioVenta}},00 ARS</h5>
+      <!-- <h6>Precio con descuento por retiro en local (10%): ${{food.precioVenta-(food.precioVenta*0.1)}},00 ARS</h6> -->
       <p class="text-success"><i class="fas fa-check"></i> Stock Disponible</p>
       <p>Tiempo estimado de preparacion: 1hr</p>
       <p>Formas de pago disponibles:</p>
       <li>Efectivo</li>
       <li>Credito</li>
       <li>Debito</li>
-      <button type="button" class="btn mt-2 mb-2 btn-outline-burger" (click)="addItemCart(food,$event)">Agregar al carrito<i class="fas fa-cart-plus"></i></button>
+      <button type="button" class="btn mt-2 mb-2 btn-outline-burger" (click)="addItemCart(food,$event)" [disabled]="btnDisabled">Agregar al carrito<i class="fas fa-cart-plus"></i></button>
     </div>
   </div>
 </div>

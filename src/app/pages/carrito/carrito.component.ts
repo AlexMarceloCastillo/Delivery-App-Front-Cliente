@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
-import { ItemCarrito } from '../../models/itemCarrito.interface';
-import { CarritoService } from "../../services/carrito/carrito.service";
+import { AuthService } from '@auth/services/auth.service';
+import { CarritoService } from "@services/carrito/carrito.service";
 
+import guaymallen from '@assets/json/guaymallen.json';
+
+import { ItemCarrito } from '@models/itemCarrito.interface';
 @Component({
   selector: 'app-carrito',
   templateUrl: './carrito.component.html',
@@ -14,19 +17,20 @@ export class CarritoComponent implements OnInit {
   public subTotal:number;
   public itemsCart: ItemCarrito[];
   public sessionCart: ItemCarrito[];
-
-  constructor( private carritoSvc:CarritoService ) { }
+  public cliente: any;
+  public guaymallen = guaymallen;
+  
+  constructor( private carritoSvc:CarritoService, private auth: AuthService ) { }
 
   ngOnInit(): void {
     this.carritoSvc.cart$.subscribe( cart => {
-      try {
         this.itemsCart = cart;
-        this.subTotal = cart.reduce( (sum, current) => sum + (current.price*current.cant),0);
-      } catch (error) {
-        this.subTotal = 0;
-      }
-    });
+        this.subTotal = cart.reduce( (sum, current) => sum + (current.precioVenta*current.cantidad),0);
+    }, error => this.subTotal = 0);
+
     this.sessionCart = JSON.parse(sessionStorage.getItem('cart'));
+
+    this.auth.getDataClient().subscribe( user => this.cliente = user, error => console.error(error) );
   }
 
   /**
@@ -59,5 +63,11 @@ export class CarritoComponent implements OnInit {
     e.preventDefault();
     e.stopPropagation();
     this.carritoSvc.removeItem(item);
+  }
+
+  public deleteCart(e:Event): void {
+    e.preventDefault();
+    this.carritoSvc.deleteCart();
+    location.reload();
   }
 }
