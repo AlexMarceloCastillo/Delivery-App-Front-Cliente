@@ -53,7 +53,7 @@ export class AuthService {
   async loginGoogle(): Promise<Cliente>{
     try{
       const { user } = await this.afsAuth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
-      
+
       this.getDataClient().subscribe( e =>{
         if(!e){
           this.saveClientData(user,user.displayName,user.phoneNumber,null);
@@ -72,10 +72,10 @@ export class AuthService {
   async register(clienteRegisterForm: any, domicilio: Domicilio) {
     let { email, pwd } = clienteRegisterForm;
     let { telefono, username } = clienteRegisterForm;
-    
+
     try {
       const { user } = await this.afsAuth.createUserWithEmailAndPassword( email, pwd);
-      
+
       this.saveClientData(user, username, telefono, domicilio);
       this.successLogin('Registrado Correctamente !');
       this.sendVerificationEmail();
@@ -128,13 +128,13 @@ export class AuthService {
     } else {
       this.router.navigate(['/auth/verification']);
     }
-  
+
   }
 
   //Guardar el cliente en una coleccion de Firestore
   private saveClientData(cliente: any, username: string, telefono: any, domicilio: Domicilio) {
     console.log(cliente);
-    
+
     //Referencia de usuario a guardar
       const userRef: AngularFirestoreDocument<Cliente> = this.afs.doc(`clients/${cliente.uid}`);
       const data: Cliente = {
@@ -205,7 +205,6 @@ export class AuthService {
 
   //Errores de firebase
   public getError(ind: string,titulo: string){
-
     const code=['auth/user-not-found',
     'auth/invalid-email',
     'auth/wrong-password',
@@ -224,7 +223,7 @@ export class AuthService {
     const mss = message[index];
 
     this.toastrSvc.error(mss,titulo,{
-      positionClass: 'toast-buttom-right',
+      positionClass: 'toast-bottom-right',
     });
   }
 }

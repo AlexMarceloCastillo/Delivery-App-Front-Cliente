@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
-import { OlmapComponent } from '@components/openlayer/olmap/olmap.component';
-import { OlmarkerComponent } from '@components/openlayer/olmarker/olmarker.component';
 import { Overlay } from 'ol';
+import { OlmapComponent } from 'src/app/olmaps/olmap/olmap.component';
+import { OlmarkerComponent } from 'src/app/olmaps/olmarker/olmarker.component';
 @Component({
   selector: 'app-inicio',
   templateUrl: './inicio.component.html',
@@ -36,15 +36,8 @@ export class InicioComponent implements AfterViewInit{
 
   scrHeight:any;
   scrWidth:any;
-  zoom:number = 14;
 
-  constructor(private httpClient: HttpClient) {
-    if(window.innerWidth < 995){
-      this.zoom = 13;
-    }else {
-      this.zoom = 14
-    }
-  }
+  constructor(private httpClient: HttpClient) {}
 
   ngAfterViewInit(): void {
     const container = document.getElementById('popup');

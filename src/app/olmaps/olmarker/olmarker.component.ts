@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { OlmapComponent } from '../olmap/olmap.component';
 import VectorSource from 'ol/source/Vector';
 import VectorLayer from 'ol/layer/Vector';
 import Feature from 'ol/Feature';
@@ -7,6 +6,7 @@ import Point from 'ol/geom/Point';
 import Icon from 'ol/style/Icon';
 import Style from 'ol/style/Style';
 import * as Proj from 'ol/proj';
+import { OlmapComponent } from '../olmap/olmap.component';
 
 //Variables Globales de Marker
 export const DEFAULT_LAT = -34.603490361131385;
@@ -61,5 +61,6 @@ export class OlmarkerComponent implements OnInit {
       }, 10);
     }
   }
+
 
 }

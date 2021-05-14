@@ -14,7 +14,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from 'src/environments/environment';
 //Toast
 // import { ToastrModule } from 'ngx-toastr';
-//Auth Module 
+//Auth Module
 import { AuthModule } from "./auth/auth.module";
 
 /*    Components    */
@@ -22,9 +22,6 @@ import { NavbarComponent } from '@components/navbar/navbar.component';
 import { FooterComponent } from '@components/footer/footer.component';
 import { CarouselComponent } from '@components/carousel/carousel.component';
 import { SidebarComponent } from '@components/sidebar/sidebar.component';
-import { OlmapComponent } from '@components/openlayer/olmap/olmap.component';
-import { OlmarkerComponent } from '@components/openlayer/olmarker/olmarker.component';
-import { OlradioComponent } from '@components/openlayer/olradio/olradio.component';
 import { CardComponent } from '@components/card/card.component';
 // import { FormUserComponent } from '@components/form-user/form-user.component';
 
@@ -56,9 +53,6 @@ import { LegalComponent } from '@pages/legal/legal.component';
     FooterComponent,
     CarouselComponent,
     SidebarComponent,
-    OlmapComponent,
-    OlmarkerComponent,
-    OlradioComponent,
     CardComponent,
     ComidaDetalleComponent,
     LegalComponent

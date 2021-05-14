@@ -5,6 +5,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { RouterModule } from '@angular/router';
+import { OlmapsModule } from '../olmaps/olmaps.module';
 
 
 @NgModule({
@@ -16,13 +17,15 @@ import { RouterModule } from '@angular/router';
     FormsModule,
     HttpClientModule,
     ToastrModule.forRoot(),
+    OlmapsModule
   ],
   exports: [
     RouterModule,
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
-    ToastrModule
+    ToastrModule,
+    OlmapsModule
   ]
 })
 export class SharedModule { }
