@@ -29,7 +29,7 @@ export class DomicilioFormComponent implements OnInit, OnChanges {
   
   public mostrar: boolean = false;
 
-  public retiroLocal: boolean = true;
+  // public retiroLocal: boolean = false;
 
 
   constructor( private httpClient: HttpClient, private toast: ToastrService ) { }
@@ -42,14 +42,6 @@ export class DomicilioFormComponent implements OnInit, OnChanges {
   ngOnInit(): void {
   }
 
-
-  public handleCheckChange(e: any): void {
-    if (e.currentTarget.checked) {
-      this.retiroLocal = true;
-    } else {
-      this.retiroLocal = false;
-    }
-  }
 
   /*    Funciones de el mapa    */
 
@@ -107,7 +99,6 @@ export class DomicilioFormComponent implements OnInit, OnChanges {
             positionClass: 'toast-top-center'
           })
           this.childDomicilioForm.reset();
-          this.retiroLocal = true;
           this.btnClose.nativeElement.click();
         }
       })

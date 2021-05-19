@@ -1,4 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+
+import { Observable } from 'rxjs';
+
+import { PedidoService } from '@services/pedido/pedido.service';
+
+import { Pedido } from '@models/pedido.interface';
+
 
 @Component({
   selector: 'app-pedido',
@@ -6,16 +14,24 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./pedido.component.scss']
 })
 export class PedidoComponent implements OnInit {
+
   public tiempo: any = { 
-    calc: 65,
+    calc: 0,
     hora: ""
   };
 
-  constructor() { }
+  constructor(private route: ActivatedRoute, private pedidoSvc: PedidoService) { }
+
 
   ngOnInit(): void {
-    this.convertidor();
+    // this.convertidor();
+    let pid = this.route.snapshot.paramMap.get('pid');
+    this.pedidoSvc.getOnePedido(pid).subscribe( pedido => {
+      this.tiempo.calc = pedido.horaEstimadaFin;
+      this.convertidor();
+    }, error => console.error(error));
   }
+
 
   /**
    * Convierte un valor numerico en un formato de hora.

@@ -1,7 +1,7 @@
 import { ArtInsumo } from "./artInsumo.interface";
 
 export interface ArtManufacturado {
-    _id: any,
+    _id?: any,
     img: string,
     tiempoEstimado: number,
     denominacion: string,

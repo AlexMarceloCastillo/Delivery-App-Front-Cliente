@@ -3,7 +3,7 @@
     <h4 class="card-title text-center">Orden</h4>
     <hr class="bg-ketchup">
 
-    <ng-container *ngIf="stepp==0">
+    <ng-container *ngIf="step==0">
       <ul class="list-group list-group-flush">
         <ng-container *ngFor="let item of itemsCart">
           <li class="list-group-item">
@@ -14,19 +14,55 @@
         <li class="list-group-item">Subtotal: {{subTotal}} $</li>
       </ul>
     </ng-container>
-    <ng-container *ngIf="stepp==1">
-      <shared-domicilio-form [formParentDom]="parentDomicilioForm" [view]="'checkout'"></shared-domicilio-form>
+    <!--  -->
+    <ng-container *ngIf="step==1">
+      <div class="form-row">
+        <div class="form-group col-12">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="userCheck" [(ngModel)]="retiroLocal" [ngModelOptions]="{standalone: true}" (change)="handleCheckChange($event)">
+            <label class="form-check-label" for="userCheck">
+              Retiro en el local
+            </label>
+          </div>
+        </div>
+      </div>
+      <!-- Domicilio Form -->
+      <ng-container *ngIf="!retiroLocal">
+        <shared-domicilio-form [formParentDom]="parentDomicilioForm" [view]="'checkout'"></shared-domicilio-form>
+      </ng-container>
+
     </ng-container>
-    <ng-container *ngIf="stepp==2">
-      <p>Mercado Pago</p>
+    <!--  -->
+    <ng-container *ngIf="step==2">
+  
+      <form [formGroup]="checkoutForm">
+        <div class="form-row">
+          <div class="form-group col-12">
+            <label for="subtotal">Subtotal:</label>
+            <input type="text" class="form-control" formControlName="subtotal" readonly>
+          </div>
+          <div class="form-group col-12">
+            <label for="subtotal">Descuento:</label>
+            <input type="text" class="form-control" formControlName="desc" readonly>
+          </div>
+          <div class="form-group col-12">
+            <label for="subtotal">Total:</label>
+            <input type="text" class="form-control" formControlName="total" readonly>
+          </div>
+        </div>
+      </form>
+      <!--  -->
+    </ng-container>
+    <ng-container *ngIf="step==3">
+      Mercado Pago
     </ng-container>
   </div>
   <div class="card-footer bg-transparent justify-content-center">
-    <button class="btn btn-outline-info" (click)="back($event)" *ngIf="stepp==1 || stepp==2" [disabled]="btnDisabled">Atras</button>
-    <button class="btn btn-outline-info" (click)="next($event)" *ngIf="stepp >= 0 && stepp < 2" [disabled]="btnDisabled">Siguiente</button>
+    <button class="btn btn-outline-info" (click)="back($event)" *ngIf="step >=1" [disabled]="btnDisabled">Atras</button>
+    <button class="btn btn-outline-info" (click)="next($event)" *ngIf="step>=0 && step<3" [disabled]="btnDisabled || ( retiroLocal && step==2)">Siguiente</button>
   </div>
   <div class="card-footer">
-    <button class="btn btn-lettuce btn-block" (click)="next($event)" *ngIf="stepp==1 || stepp==2">Ordenar</button>
+    <button class="btn btn-lettuce btn-block" [disabled]="retiroLocal && step<2" (click)="onSavePedido($event)">Ordenar</button>
     <button class="btn btn-outline-danger btn-block" (click)="deleteCart($event)">Vaciar carrito</button>
   </div>
 </div>

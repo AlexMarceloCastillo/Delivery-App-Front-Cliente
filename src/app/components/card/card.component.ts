@@ -29,7 +29,7 @@ export class CardComponent implements OnInit {
 
   public addItemCart(food: any, e: Event): void {
     e.preventDefault();
-    let { _id, denominacion, tiempoEstimado, precioVenta, img  } = food;
+    let { _id, denominacion, tiempoEstimado, precioVenta, img } = food;
     let cartItem: ItemCarrito = {_id, denominacion, tiempoEstimado, precioVenta, img, cantidad: 1};
     this.cartSvc.addItem(cartItem);
     e.stopPropagation();
