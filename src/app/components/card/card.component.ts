@@ -1,10 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 import { CarritoService } from '@services/carrito/carrito.service';
+import { AuthService } from '@auth/services/auth.service';
 
 import { ItemCarrito } from '@models/itemCarrito.interface';
-import { AuthService } from '@auth/services/auth.service';
-import { ArtManufacturado } from '@models/artManufact.interface';
+// import { ArtManufacturado } from '@models/artManufact.interface';
 
 
 @Component({
@@ -13,8 +13,7 @@ import { ArtManufacturado } from '@models/artManufact.interface';
   styleUrls: ['./card.component.scss']
 })
 export class CardComponent implements OnInit {
-
-  public btnDisabled: boolean = true;
+  // public btnDisabled: boolean = true;
 
   @Input() element: ItemCarrito[];
 
@@ -23,9 +22,9 @@ export class CardComponent implements OnInit {
 
 
   ngOnInit(): void { 
-    if(this.auth.isAuth) {
-      this.btnDisabled = true;
-    }
+    // if(this.auth.isAuth) {
+    //   this.btnDisabled = false;
+    // }
   }
 
   public addItemCart(food: any, e: Event): void {

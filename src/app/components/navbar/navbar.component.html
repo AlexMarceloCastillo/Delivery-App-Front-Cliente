@@ -1,3 +1,11 @@
+<div class="text-light text-center p-1" [ngClass]="{'bg-lettuce':this.authSvc.openDelivery,'bg-ketchup':!this.authSvc.openDelivery}">
+  <ng-container *ngIf="this.authSvc.openDelivery; else closed">
+    Estamos Abierto
+  </ng-container>
+  <ng-template #closed>
+    Cerrado, ver <a routerLink="/inicio" class="card-link text-light" fragment="horario">horarios</a>
+  </ng-template>
+</div>
 <nav class="navbar navbar-expand-lg navbar-light bg-mayo shadow-sm">
     <div id="mobile">
       <button class="navbar-toggler" type="button" (click)="onToggle($event)">

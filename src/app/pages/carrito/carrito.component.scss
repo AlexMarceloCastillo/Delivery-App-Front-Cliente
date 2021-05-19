@@ -43,6 +43,12 @@ img.img-fluid#emptyCart {
   margin: 3% 20%;
 }
 
+div.card#order {
+  ul.list-group > li.list-group-item p {
+      margin-bottom: 6px;
+    }
+}
+
 // // Small devices (landscape phones, 576px and up)
 @media (min-width: 576px) {}
 

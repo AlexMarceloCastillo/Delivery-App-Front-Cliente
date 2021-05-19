@@ -61,6 +61,4 @@ export class OlmarkerComponent implements OnInit {
       }, 10);
     }
   }
-
-
 }

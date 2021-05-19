@@ -11,12 +11,14 @@ export class CarritoService {
   private carritoBS = new BehaviorSubject<Array<ItemCarrito>>([]);
   public cart$ = this.carritoBS.asObservable();
 
-  constructor(private auth: AuthService) { 
+
+  constructor( private auth: AuthService ) { 
     let auxCart = JSON.parse(sessionStorage.getItem('cart'));
     if(this.auth.isAuth && (auxCart !== null) ){
       this.carritoBS.next(auxCart);
     }
   }
+
 
   public addItem(item: ItemCarrito) {
     let currentCart = this.carritoBS.getValue();
@@ -24,7 +26,10 @@ export class CarritoService {
       let objIndex = currentCart.findIndex( (obj) => obj._id == item._id );
 
       if(objIndex != -1) {
-        currentCart[objIndex].cantidad += 1;
+        // Limita la cantidad de items del mismo tipo
+        if (currentCart[objIndex].cantidad < 5) {
+          currentCart[objIndex].cantidad += 1;
+        }
       } else {
         currentCart.push(item)
       }
@@ -68,7 +73,7 @@ export class CarritoService {
     this.persistCart(currentCart);
   }
 
-  public deleteCart(): void {
+  public emptyCart(): void {
     this.carritoBS.next(null);
     sessionStorage.removeItem('cart');
   }

@@ -12,8 +12,6 @@ import { SharedModule } from "./shared/shared.module";
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from 'src/environments/environment';
-//Toast
-// import { ToastrModule } from 'ngx-toastr';
 //Auth Module
 import { AuthModule } from "./auth/auth.module";
 
@@ -23,7 +21,7 @@ import { FooterComponent } from '@components/footer/footer.component';
 import { CarouselComponent } from '@components/carousel/carousel.component';
 import { SidebarComponent } from '@components/sidebar/sidebar.component';
 import { CardComponent } from '@components/card/card.component';
-// import { FormUserComponent } from '@components/form-user/form-user.component';
+import { CheckoutComponent } from './components/checkout/checkout.component';
 
 /*    Pages   */
 import { AppComponent } from './app.component';
@@ -35,9 +33,7 @@ import { ListaPedidoComponent } from '@pages/lista-pedido/lista-pedido.component
 import { MenuComponent } from '@pages/menu/menu.component';
 import { P404Component } from '@pages/p404/p404.component';
 import { ComidaDetalleComponent } from '@pages/comida-detalle/comida-detalle.component';
-import { ClosedComponent } from '@pages/closed/closed.component';
 import { LegalComponent } from '@pages/legal/legal.component';
-import { CheckoutComponent } from './pages/checkout/checkout.component';
 
 
 @NgModule({
@@ -49,7 +45,6 @@ import { CheckoutComponent } from './pages/checkout/checkout.component';
     ListaPedidoComponent,
     MenuComponent,
     P404Component,
-    ClosedComponent,
     NavbarComponent,
     FooterComponent,
     CarouselComponent,
@@ -57,7 +52,7 @@ import { CheckoutComponent } from './pages/checkout/checkout.component';
     CardComponent,
     ComidaDetalleComponent,
     LegalComponent,
-    CheckoutComponent
+    CheckoutComponent,
   ],
   imports: [
     SharedModule,
@@ -70,4 +65,5 @@ import { CheckoutComponent } from './pages/checkout/checkout.component';
   ],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }

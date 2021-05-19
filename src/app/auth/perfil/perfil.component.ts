@@ -1,16 +1,23 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { AuthService } from '../services/auth.service';
-import { Cliente } from '@models/cliente.interface';
-import { Observable, Subscription } from 'rxjs';
+import { Component, OnInit, OnDestroy, OnChanges } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+
 import { AngularFireStorage } from '@angular/fire/storage';
+
+import { Observable, Subscription } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 
+import { AuthService } from '../services/auth.service';
+import { FormDataBuildService } from '@shared/services/form-data-build.service';
+
+import { Cliente } from '@models/cliente.interface';
+
+
 @Component({
-  selector: 'app-perfil',
+  selector: 'auth-perfil',
   templateUrl: './perfil.component.html',
   styleUrls: ['./perfil.component.scss']
 })
-export class PerfilComponent implements OnInit, OnDestroy {
+export class PerfilComponent implements OnInit, OnChanges, OnDestroy {
 
   public usuario: Cliente;
 
@@ -23,10 +30,22 @@ export class PerfilComponent implements OnInit, OnDestroy {
   public urlImage: Observable<string>;
   public uploadPercent: Observable<number>;
 
-  constructor(private authSvc: AuthService,private storage: AngularFireStorage) { }
+  public parentUserForm: FormGroup;
+  public parentDomicilioForm: FormGroup;
+
+
+  constructor(private authSvc: AuthService,private storage: AngularFireStorage, private formDataBuildSvc: FormDataBuildService) { }
+
+
+  ngOnChanges(): void {
+    
+  }
 
   ngOnInit(): void {
-    this.clienteSubscription = this.authSvc.getDataClient().subscribe( user => this.usuario = user, error => console.error(error) );
+    this.clienteSubscription = this.authSvc.getDataClient().subscribe( user => { 
+      this.usuario = user;
+      this.fillForm(user);
+    }, error => console.error(error) );
   }
 
   ngOnDestroy(): void {
@@ -65,4 +84,18 @@ export class PerfilComponent implements OnInit, OnDestroy {
     }))
   }
 
+  /**
+   * @description
+   * Llena el formulario con información del usuario
+   * @param user Objeto de Firebase Store (user)
+   */
+  private fillForm(user: any) {
+    let auxUserObj = { 
+      username: user.nombre, 
+      telefono: user.telefono,
+      domicilio: user.domicilio 
+    };
+    this.parentUserForm = this.formDataBuildSvc.userProfileForm('profile', auxUserObj);
+    this.parentDomicilioForm = this.formDataBuildSvc.userDomicilioForm(auxUserObj);
+  }
 }

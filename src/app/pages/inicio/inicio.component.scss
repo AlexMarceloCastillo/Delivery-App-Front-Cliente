@@ -1,4 +1,3 @@
-
 div.container-fluid {
   // border: 1px solid red;
   height: 45vh;
@@ -27,7 +26,7 @@ div.container-fluid {
 
     hr {
       width: 85%;
-      border: 1px solid rgba($color: #fff, $alpha: 0.3);
+      background-color: rgba($color: #fff, $alpha: 0.7);
     }
   }
 }
@@ -43,11 +42,16 @@ section#delivery-work {
       max-width: 70%;
       margin: 15% auto;
     }
+
+    animation: fadeInUp;
+    animation-duration: 2s;
   }
 }
 
 section#ubicacion {
-  width: 100%;
+  .card#horario {
+    margin-top: 5%;
+  }
 }
 
 // Medium devices (tablets, 768px and up)
@@ -77,9 +81,16 @@ section#ubicacion {
       }
     }
   }
+
   section#delivery-work {
     .card {
       height: 425px;
+    }
+  }
+
+  section#ubicacion {
+    .card#horario {
+      margin-top: 0;
     }
   }
 }

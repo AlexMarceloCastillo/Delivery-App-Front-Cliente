@@ -2,7 +2,7 @@
   <ng-container *ngIf="itemsCart.length; else emptyCart">
 
     <div class="row mt-5">
-      <div class="col-12 col-md-7 col-lg-8">
+      <div class="col-12 col-md-7">
 
         <div class="wrap-cart mb-5">
           <ng-container *ngFor="let item of itemsCart">
@@ -39,27 +39,9 @@
         </div>
 
       </div>
-      <div class="col-12 col-md-5 col-lg-4">
+      <div class="col-12 col-md-5">
 
-        <div class="card">
-          <div class="card-body">
-            <h4 class="card-title text-center">Orden</h4>
-            <hr class="bg-ketchup">
-            <ul class="list-group list-group-flush">
-              <ng-container *ngFor="let item of itemsCart">
-                <li class="list-group-item">
-                  <p>{{item.denominacion}}</p>
-                  <p>{{item.cantidad}} x {{item.precioVenta}} = {{ item.cantidad*item.precioVenta }}$</p>
-                </li>
-              </ng-container>
-              <li class="list-group-item">Subtotal: {{subTotal}} $</li>
-            </ul>
-          </div>
-          <div class="card-footer">
-            <a routerLink="/checkout" class="btn btn-lettuce btn-block">Ordenar</a>
-            <button class="btn btn-outline-danger btn-block" (click)="deleteCart($event)">Vaciar carrito</button>
-          </div>
-        </div>
+        <app-checkout></app-checkout>
 
       </div>
     </div>
@@ -70,7 +52,9 @@
       <div class="col-12 text-center">
         <img src="../../../assets/img/web/empty_cart.svg" alt="Empty Cart img" id="emptyCart" class="img-fluid">
         <h1 class="mt-5 mb-3">Carrito vacio :(</h1>
-        <h4><a routerLink="/menu" class="text-lettuce">Menu</a></h4>
+        <h5>
+          <a routerLink="/menu" class="text-lettuce">Menu</a>
+        </h5>
       </div>
     </div>
   </ng-template>

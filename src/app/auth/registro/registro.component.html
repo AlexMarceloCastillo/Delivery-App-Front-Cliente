@@ -7,215 +7,12 @@
         </div>
         <div class="card-body">
 
-          <form [formGroup]="userForm" novalidate (ngSubmit)='onSaveRegister($event)' id="registerForm">
-            <div class="form-row">
-              <div class="form-group col-md-6">
-                <div class="input-group">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text">
-                      <i class="fas fa-user"></i>
-                    </span>
-                  </div>
-                  <input type="text" class="form-control" placeholder="Nombre de usuario" name="username" formControlName="username">
-                </div>
-                <ng-container class="form-group col-12 col-md-6" *ngIf="username.errors && username.touched; else validUsername">
-                  <p *ngIf="username.hasError('required')" [ngClass]="{'error': username.hasError('required')}">
-                    Es un campo requerido
-                  </p>
-                  <p *ngIf="username.hasError('minlength')" [ngClass]="{'error': username.hasError('minlength')}">
-                    El mínimo de caracteres es de 5
-                  </p>
-                  <p *ngIf="username.hasError('maxlength')" [ngClass]="{'error': username.hasError('maxlength')}">
-                    El máximo de caracteres debe es de 20
-                  </p>
-                </ng-container>
-                <ng-template #validUsername>
-                  <p [ngClass]="{'text-success': username.valid, 'invisible': username.pristine}">
-                    Nombre de usuario valido
-                  </p>
-                </ng-template>
-              </div>
-              <div class="form-group col-md-6">
-                <div class="input-group">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text">
-                      <i class="fas fa-mobile-alt"></i>
-                    </span>
-                  </div>
-                  <input type="number" class="form-control" placeholder="telefono" name="telefono" formControlName="telefono">
-                </div>
-                <ng-container class="form-group col-12 col-md-6" *ngIf="username.errors && username.touched; else validTelefono">
-                  <p *ngIf="telefono.hasError('required')" [ngClass]="{'error': telefono.hasError('required')}">
-                    Es un campo requerido
-                  </p>
-                </ng-container>
-                <ng-template #validTelefono>
-                  <p [ngClass]="{'text-success': telefono.valid, 'invisible': telefono.pristine}">
-                    Telefono valido
-                  </p>
-                </ng-template>
-              </div>
-            </div>
-            <!--  -->
-            <div class="form-row">
-              <div class="form-group col-12">
-                <div class="input-group">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text">
-                      <i class="far fa-envelope"></i>
-                    </span>
-                  </div>
-                  <input type="email" class="form-control" placeholder="ejemplo@email.com" name="email" formControlName="email">
-                </div>
-                <ng-container class="form-group col-12" *ngIf="email.errors && email.touched; else validEmail">
-                  <p *ngIf="email.hasError('required')" [ngClass]="{'error': email.hasError('required')}">
-                    Es un campo requerido
-                  </p>
-                  <p *ngIf="email.hasError('email')" [ngClass]="{'error': email.hasError('email')}">
-                    Debe ser un email valido
-                  </p>
-                </ng-container>
-                <ng-template #validEmail>
-                  <p [ngClass]="{'text-success': email.valid,'invisible': email.pristine}">
-                    Email Valido
-                  </p>
-                </ng-template>
-              </div>
+          <shared-usuario-form [formParent]="parentUserForm" [view]="'register'"></shared-usuario-form>
 
-              <div class="form-group col-12">
-                <div class="input-group">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon1">
-                      <i class="fas fa-lock"></i>
-                    </span>
-                  </div>
-                  <input type="password" class="form-control" placeholder="contraseña" name="pwd" formControlName="pwd">
-                </div>
-              </div>
-              <ng-container class="form-group col-12 text-left" *ngIf="pwd.errors && pwd.touched; else validPwd">
-                <p *ngIf="pwd.hasError('required')" [ngClass]="{'error': pwd.hasError('required')}">
-                  Es un campo requerido
-                </p>
-                <p *ngIf="pwd.hasError('minlength')" [ngClass]="{'error': pwd.hasError('minlength')}">
-                  El mínimo de caracteres es de 8
-                </p>
-                <p *ngIf="pwd.hasError('maxlength')" [ngClass]="{'error': pwd.hasError('maxlength')}">
-                  El máximo de caracteres debe es de 16
-                </p>
-              </ng-container>
-              <ng-template #validPwd>
-                <p [ngClass]="{'text-success text-left': pwd.valid, 'invisible': pwd.pristine}">
-                  Contraseña valida
-                </p>
-              </ng-template>
-            </div>
-          </form>
-
-          <form [formGroup]="domicilioForm" novalidate>
-            <div class="form-row">
-              <div class="form-group col-12">
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" id="userCheck" [(ngModel)]="retiroLocal" [ngModelOptions]="{standalone: true}" (change)="handleCheckChange($event)">
-                  <label class="form-check-label" for="userCheck">
-                    Retiro en el local
-                  </label>
-                </div>
-              </div>
-            </div>
-
-            <ng-container *ngIf="!retiroLocal">
-
-              <div class="form-row">
-                <div class="form-group col-12 col-md-8">
-                  <div class="input-group">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text">
-                        <i class="fas fa-road"></i>
-                      </span>
-                    </div>
-                    <input type="text" class="form-control" placeholder="Calle" name="calle" formControlName="calle">
-                  </div>
-                  <ng-container class="form-group col-12" *ngIf="calle.errors && calle.touched; else validCalle">
-                    <p *ngIf="calle.hasError('required')" [ngClass]="{'error': calle.hasError('required')}">
-                      Es un campo requerido
-                    </p>
-                    <p *ngIf="calle.hasError('minlength')" [ngClass]="{'error': calle.hasError('minlength')}">
-                      El mínimo de caracteres es de 5
-                    </p>
-                    <p *ngIf="calle.hasError('maxlength')" [ngClass]="{'error': calle.hasError('maxlength')}">
-                      El máximo de caracteres debe es de 25
-                    </p>
-                  </ng-container>
-                  <ng-template #validCalle>
-                    <p [ngClass]="{'text-success': calle.valid, 'invisible': calle.pristine}">
-                      nombre de Calle valida
-                    </p>
-                  </ng-template>
-                </div>
-                <!--  -->
-                <div class="form-group col-12 col-md-4">
-                  <div class="input-group">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text">
-                        <i class="fas fa-sort-numeric-up-alt"></i>
-                      </span>
-                    </div>
-                    <input type="number" class="form-control" placeholder="Numeración" name="numero" formControlName="numero">
-                  </div>
-                  <ng-container class="form-group col-12 col-md-6 text-left" *ngIf="numero.errors && numero.touched; else validNumero">
-                    <p *ngIf="numero.hasError('required')" [ngClass]="{'error': numero.hasError('required')}">
-                      Es un campo requerido
-                    </p>
-                    <p *ngIf="numero.hasError('minlength')" [ngClass]="{'error': numero.hasError('minlength')}">
-                      El mínimo de caracteres es de 1
-                    </p>
-                  </ng-container>
-                  <ng-template #validNumero>
-                    <p [ngClass]="{'text-success text-left': numero.valid, 'invisible': numero.pristine}">
-                      Numeración Valida
-                    </p>
-                  </ng-template>
-                </div>
-                <!--  -->
-                <div class="form-group col-12 col-md-4">
-                  <div class="input-group">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text">
-                        <i class="fas fa-map-marker-alt"></i>
-                      </span>
-                    </div>
-                    <select class="custom-select" formControlName="localidad">
-                      <option value="" disabled selected>Distrito</option>
-                      <optgroup label="Guaymallén">
-                        <option *ngFor="let distrito of guaymallen" [ngValue]="distrito.denominacion">{{distrito.denominacion}}</option>
-                      </optgroup>
-                    </select>
-                  </div>
-                  <ng-container class="form-group col-12 col-md-6 text-left" *ngIf="localidad.errors && localidad.touched; else validLocalidad">
-                    <p *ngIf="localidad.hasError('required')" [ngClass]="{'error': localidad.hasError('required')}">
-                      Es un campo requerido
-                    </p>
-                  </ng-container>
-                  <ng-template #validLocalidad>
-                    <p [ngClass]="{'text-success': localidad.valid, 'invisible': localidad.pristine}">
-                      Opción Valida
-                    </p>
-                  </ng-template>
-                </div>
-                <div class="form-group col-12 col-md-4"></div>
-                <div class="form-group col-12 col-md-4">
-                  <button (click)="mostrarMapa()" class="btn btn-outline-cheese btn-block" data-toggle="modal" data-target="#registerMapModal">
-                    <i class="fas fa-map-marked-alt"></i>
-                    Abrir mapa
-                  </button>
-                </div>
-              </div>
-
-            </ng-container>
-          </form>
+          <shared-domicilio-form [formParentDom]="parentDomicilioForm"></shared-domicilio-form>
 
           <div class="btn-wrap">
-            <button type="submit" class="btn btn-lettuce" form="registerForm">Registrarse</button>
+            <button type="submit" class="btn btn-lettuce" (click)="onSaveRegister($event)">Registrarse</button>
             <button type="button" class="btn" id="btn-google" (click)="GoogleRegister()">
               <i class="fab fa-google"></i>
               Inicia Sesión con Google
@@ -223,8 +20,8 @@
           </div>
           <div id="legal" class="text-center">
             <p class="text-muted">
-              Al registrarse Acepta los <a [routerLink]="[ '/legal' ]" fragment="service">Terminos de Servicio</a> y
-              <a [routerLink]="[ '/legal' ]" fragment="privacy">Políticas de Privacidad</a>
+              Al registrarse Acepta los <a routerLink="/legal" fragment="service">Terminos de Servicio</a> y
+              <a routerLink="/legal" fragment="privacy">Políticas de Privacidad</a>
             </p>
           </div>
 
@@ -233,32 +30,6 @@
         <div class="card-footer text-center">
           <p>¿Ya tienes una cuenta?, Inicia Sesión <a routerLink="/auth/login">aqui</a></p>
         </div>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- Modal -->
-<div class="modal fade" id="registerMapModal" tabindex="-1" aria-labelledby="registerMapLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="registerMapLabel">Mapa</h5>
-        <button #btnClose (click)="cleanMap()" type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        <button class="d-none" #btnCloseComplete type="hidden" name="button" data-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-          <ol-map *ngIf="mostrar" [readonly]=false lat="-32.9022174" lon="-68.7979539">
-            <ol-radio lat="-32.9022174" lon="-68.7979539" radio="2500"></ol-radio>
-            <ol-marker lat="-32.9022174" lon="-68.7979539" iconsrc="https://pics.freeicons.io/uploads/icons/png/3762277491606004682-512.png">
-            </ol-marker>
-          </ol-map>
-          <p id="infocoords"></p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" (click)="cleanMap()" class="btn btn-outline-dark" data-dismiss="modal" aria-label="Close">Close</button>
-        <button type="button" class="btn btn-cheese" (click)="saveCoords()">Save changes</button>
       </div>
     </div>
   </div>

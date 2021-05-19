@@ -3,9 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '@auth/services/auth.service';
 import { CarritoService } from "@services/carrito/carrito.service";
 
-import guaymallen from '@assets/json/guaymallen.json';
-
 import { ItemCarrito } from '@models/itemCarrito.interface';
+
 @Component({
   selector: 'app-carrito',
   templateUrl: './carrito.component.html',
@@ -18,8 +17,7 @@ export class CarritoComponent implements OnInit {
   public itemsCart: ItemCarrito[];
   public sessionCart: ItemCarrito[];
   public cliente: any;
-  public guaymallen = guaymallen;
-  
+
   constructor( private carritoSvc:CarritoService, private auth: AuthService ) { }
 
   ngOnInit(): void {
@@ -63,11 +61,5 @@ export class CarritoComponent implements OnInit {
     e.preventDefault();
     e.stopPropagation();
     this.carritoSvc.removeItem(item);
-  }
-
-  public deleteCart(e:Event): void {
-    e.preventDefault();
-    this.carritoSvc.deleteCart();
-    location.reload();
   }
 }

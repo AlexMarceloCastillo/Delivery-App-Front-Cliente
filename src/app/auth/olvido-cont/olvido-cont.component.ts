@@ -6,7 +6,7 @@ import { AuthService } from '@auth/services/auth.service';
 
 
 @Component({
-  selector: 'app-olvido-cont',
+  selector: 'auth-olvido-cont',
   templateUrl: './olvido-cont.component.html',
   styleUrls: ['./olvido-cont.component.scss'],
   providers: [AuthService],

@@ -23,11 +23,11 @@ export class AuthGuard implements CanActivate {
     .pipe(map(authState => !!authState))
     .pipe(tap(auth => {
       if(!auth){
-        this.authSvc.toastrSvc.error('Necesita loguearse!!','',{
+        this.authSvc.toastrSvc.error('Debes estar registrado para poder acceder a la página','',{
           positionClass: 'toast-center-center',
-          timeOut: 800
+          timeOut: 2000
         })
-        this.authSvc.router.navigate(['/login'])
+        this.authSvc.router.navigate(['/auth/login'])
       }
     })
     );

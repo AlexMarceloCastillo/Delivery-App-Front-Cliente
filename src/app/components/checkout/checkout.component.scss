@@ -1,0 +1,10 @@
+.card#order {
+    .card-footer.bg-transparent {
+        display: flex;
+        justify-content: space-evenly;
+        .btn {
+            width: 48%;
+            margin: auto;
+        }
+    }
+}

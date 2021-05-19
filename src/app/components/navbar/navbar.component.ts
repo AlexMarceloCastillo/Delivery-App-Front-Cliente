@@ -22,6 +22,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
   public cartLength: number = 0;
   private cartSuscription: Subscription;
 
+  public r:boolean = false;
+
   constructor(private togglerSvc: TogglerService, private authSvc: AuthService, private cartSvc: CarritoService) { }
   
 
@@ -30,6 +32,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.cartSuscription = this.cartSvc.cart$.subscribe( cart => {
         this.cartLength = cart.reduce((sum,current)=> sum + current.cantidad,0);
     }, error => this.cartLength = 0);
+    
   }
 
   ngOnDestroy(): void {
@@ -45,7 +48,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   public onLogout(e: Event): void {
     e.preventDefault();
+    this.cartSvc.emptyCart();
     this.authSvc.logOut();
-    this.cartSvc.deleteCart();
   }
 }

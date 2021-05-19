@@ -3,7 +3,7 @@ import { AuthService } from '@auth/services/auth.service';
 import { Observable } from 'rxjs';
 
 @Component({
-  selector: 'app-send-email',
+  selector: 'auth-send-email',
   templateUrl: './send-email.component.html',
   styleUrls: ['./send-email.component.scss'],
   providers: [AuthService],

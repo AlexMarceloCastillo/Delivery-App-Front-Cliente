@@ -1,13 +1,10 @@
-<!-- <pre>
-  {{usuario|json}}
-</pre> -->
 <ng-container *ngIf="usuario; else noDataLoad">
 
   <div class="container">
-    <div class="row">
+    <div class="row mt-5">
       <div class="col-12 col-md-5 col-lg-4">
           
-          <div class="card mt-5" id="user-display-data">
+          <div class="card" id="user-display-data">
             <!-- Picure -->
             <div class="card-body">
               <div class="wrapp-avatar bg-cheese">
@@ -53,7 +50,18 @@
           </div>
         
       </div>
+      <!-- Profile Form -->
       <div class="col-12 col-md-7 col-lg-8">
+        <div class="card">
+          <div class="card-header text-center">
+            <h4>Formulario Perfil</h4>
+          </div>
+          <div class="card-body">
+            <shared-usuario-form [formParent]="parentUserForm" [view]="'profile'"></shared-usuario-form>
+            <hr>
+            <shared-domicilio-form [formParentDom]="parentDomicilioForm"></shared-domicilio-form>
+          </div>
+        </div>
       </div>
     </div>
   </div>

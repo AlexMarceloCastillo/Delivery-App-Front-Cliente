@@ -1,0 +1,105 @@
+<form [formGroup]="childUsuarioForm" novalidate id="registerForm">
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text">
+            <i class="fas fa-user"></i>
+          </span>
+        </div>
+        <input type="text" class="form-control" placeholder="Nombre de usuario" name="username" formControlName="username">
+      </div>
+      <ng-container class="form-group col-12 col-md-6" *ngIf="username.errors && username.touched; else validUsername">
+        <p *ngIf="username.hasError('required')" [ngClass]="{'error': username.hasError('required')}">
+          Es un campo requerido
+        </p>
+        <p *ngIf="username.hasError('minlength')" [ngClass]="{'error': username.hasError('minlength')}">
+          El mínimo de caracteres es de 5
+        </p>
+        <p *ngIf="username.hasError('maxlength')" [ngClass]="{'error': username.hasError('maxlength')}">
+          El máximo de caracteres debe es de 20
+        </p>
+      </ng-container>
+      <ng-template #validUsername>
+        <p [ngClass]="{'text-success': username.valid, 'invisible': username.pristine}">
+          Nombre de usuario valido
+        </p>
+      </ng-template>
+    </div>
+    <div class="form-group col-md-6">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text">
+            <i class="fas fa-mobile-alt"></i>
+          </span>
+        </div>
+        <input type="number" class="form-control" placeholder="telefono" name="telefono" formControlName="telefono">
+      </div>
+      <ng-container class="form-group col-12 col-md-6" *ngIf="username.errors && username.touched; else validTelefono">
+        <p *ngIf="telefono.hasError('required')" [ngClass]="{'error': telefono.hasError('required')}">
+          Es un campo requerido
+        </p>
+      </ng-container>
+      <ng-template #validTelefono>
+        <p [ngClass]="{'text-success': telefono.valid, 'invisible': telefono.pristine}">
+          Telefono valido
+        </p>
+      </ng-template>
+    </div>
+  </div>
+  <!--  -->
+  <ng-container *ngIf="this.view !== 'profile'">
+    <div class="form-row">
+      <div class="form-group col-12">
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text">
+              <i class="far fa-envelope"></i>
+            </span>
+          </div>
+          <input type="email" class="form-control" placeholder="ejemplo@email.com" name="email" formControlName="email">
+        </div>
+        <ng-container class="form-group col-12" *ngIf="email.errors && email.touched; else validEmail">
+          <p *ngIf="email.hasError('required')" [ngClass]="{'error': email.hasError('required')}">
+            Es un campo requerido
+          </p>
+          <p *ngIf="email.hasError('email')" [ngClass]="{'error': email.hasError('email')}">
+            Debe ser un email valido
+          </p>
+        </ng-container>
+        <ng-template #validEmail>
+          <p [ngClass]="{'text-success': email.valid,'invisible': email.pristine}">
+            Email Valido
+          </p>
+        </ng-template>
+      </div>
+  
+      <div class="form-group col-12">
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">
+              <i class="fas fa-lock"></i>
+            </span>
+          </div>
+          <input type="password" class="form-control" placeholder="contraseña" name="pwd" formControlName="pwd">
+        </div>
+      </div>
+      <ng-container class="form-group col-12 text-left" *ngIf="pwd.errors && pwd.touched; else validPwd">
+        <p *ngIf="pwd.hasError('required')" [ngClass]="{'error': pwd.hasError('required')}">
+          Es un campo requerido
+        </p>
+        <p *ngIf="pwd.hasError('minlength')" [ngClass]="{'error': pwd.hasError('minlength')}">
+          El mínimo de caracteres es de 8
+        </p>
+        <p *ngIf="pwd.hasError('maxlength')" [ngClass]="{'error': pwd.hasError('maxlength')}">
+          El máximo de caracteres debe es de 16
+        </p>
+      </ng-container>
+      <ng-template #validPwd>
+        <p [ngClass]="{'text-success text-left': pwd.valid, 'invisible': pwd.pristine}">
+          Contraseña valida
+        </p>
+      </ng-template>
+    </div>
+  </ng-container>
+</form>

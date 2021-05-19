@@ -115,9 +115,5 @@ function coerceCssPixelValue(value: any): string {
   if (value == null) {
     return '';
   }
-
   return cssUnitsPattern.test(value) ? value : `${value}px`;
-
-
-
 }
