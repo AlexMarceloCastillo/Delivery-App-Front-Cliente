@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 
 import { AuthService } from '@auth/services/auth.service';
 import { CarritoService } from "@services/carrito/carrito.service";
 
 import { ItemCarrito } from '@models/itemCarrito.interface';
+
 
 @Component({
   selector: 'app-carrito',
@@ -18,6 +20,7 @@ export class CarritoComponent implements OnInit {
   public sessionCart: ItemCarrito[];
   public cliente: any;
 
+
   constructor( private carritoSvc:CarritoService, private auth: AuthService ) { }
 
   ngOnInit(): void {
@@ -25,9 +28,7 @@ export class CarritoComponent implements OnInit {
         this.itemsCart = cart;
         this.subTotal = cart.reduce( (sum, current) => sum + (current.precioVenta*current.cantidad),0);
     }, error => this.subTotal = 0);
-
     this.sessionCart = JSON.parse(sessionStorage.getItem('cart'));
-
     this.auth.getDataClient().subscribe( user => this.cliente = user, error => console.error(error) );
   }
 

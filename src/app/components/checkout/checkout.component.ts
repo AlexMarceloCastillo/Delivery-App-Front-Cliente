@@ -8,6 +8,7 @@ import { ToastrService } from 'ngx-toastr';
 
 import { AuthService } from '@auth/services/auth.service';
 import { CarritoService } from "@services/carrito/carrito.service";
+import { FormDataBuildService } from '@shared/services/form-data-build.service';
 
 import { ItemCarrito } from '@models/itemCarrito.interface';
 import { Domicilio } from '@models/domicilio.interface';
@@ -31,19 +32,16 @@ export class CheckoutComponent implements OnInit, OnDestroy {
 
   public stepp: number = 0;
   public mostrar = false;
-  public userForm: FormGroup;
   public domicilioForm: FormGroup;
   public guaymallen = guaymallen;
 
-  // private latHome = null;
-  // private lonHome = null;
-  // private domicilio: Domicilio;
 
   public retiroLocal: boolean = true;
 
-  constructor(private carritoSvc:CarritoService, private auth: AuthService, private formBuilder: FormBuilder, private httpClient: HttpClient,private toast: ToastrService ) { 
-    this.buildDomicilioForm();
-  }
+  public parentDomicilioForm: FormGroup;
+
+
+  constructor( private carritoSvc:CarritoService, private auth: AuthService, private formDataBuildSvc: FormDataBuildService ) { }
 
 
   ngOnInit(): void {
@@ -51,6 +49,10 @@ export class CheckoutComponent implements OnInit, OnDestroy {
       this.itemsCart = cart;
       this.subTotal = cart.reduce( (sum, current) => sum + (current.precioVenta*current.cantidad),0);
     }, error => console.error(error) );
+    this.auth.getDataClient().subscribe( user => {
+      console.log(user.domicilio);
+      this.parentDomicilioForm = this.formDataBuildSvc.userDomicilioForm(user);
+    }, error => console.error(error));
   }
 
   ngOnDestroy(): void {
@@ -70,32 +72,5 @@ export class CheckoutComponent implements OnInit, OnDestroy {
     e.preventDefault();
     this.carritoSvc.emptyCart();
     location.reload();
-  }
-
-  public handleCheckChange(e: any): void {
-    if (e.currentTarget.checked) {
-      this.retiroLocal = true;
-    } else {
-      this.retiroLocal = false;
-    }
-  }
-
-  private buildDomicilioForm(): void {
-    this.domicilioForm = this.formBuilder.group({
-      calle: ['',[Validators.required,Validators.minLength(5),Validators.maxLength(25)]],
-      numero:[0,[Validators.required,Validators.min(1)]],
-      localidad: ['',[Validators.required,Validators.minLength(5),Validators.maxLength(15)]]
-    });
-  }
-
-
-  public get calle(): any {
-    return this.domicilioForm.get('calle');
-  }
-  public get numero(): any {
-    return this.domicilioForm.get('numero');
-  }
-  public get localidad(): any {
-    return this.domicilioForm.get('localidad');
   }
 }

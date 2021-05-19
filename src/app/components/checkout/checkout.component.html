@@ -15,7 +15,7 @@
       </ul>
     </ng-container>
     <ng-container *ngIf="stepp==1">
-      <p>Domicilio</p>
+      <shared-domicilio-form [formParentDom]="parentDomicilioForm" [view]="'checkout'"></shared-domicilio-form>
     </ng-container>
     <ng-container *ngIf="stepp==2">
       <p>Mercado Pago</p>

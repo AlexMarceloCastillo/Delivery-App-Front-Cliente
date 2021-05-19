@@ -14,7 +14,7 @@
   <ng-container *ngIf="!retiroLocal">
 
     <div class="form-row">
-      <div class="form-group col-12 col-md-8">
+      <div class="form-group col-12" [ngClass]="{'col-md-8': this.view!='checkout'}">
         <div class="input-group">
           <div class="input-group-prepend">
             <span class="input-group-text">
@@ -41,7 +41,7 @@
         </ng-template>
       </div>
       <!--  -->
-      <div class="form-group col-12 col-md-4">
+      <div class="form-group col-12" [ngClass]="{'col-md-4': this.view!='checkout'}">
         <div class="input-group">
           <div class="input-group-prepend">
             <span class="input-group-text">
@@ -50,8 +50,11 @@
           </div>
           <input type="number" class="form-control" placeholder="Numeración" name="numero" formControlName="numero">
         </div>
-        <ng-container class="form-group col-12 col-md-6 text-left"
-          *ngIf="numero.errors && numero.touched; else validNumero">
+        <ng-container 
+          class="form-group col-12 text-left"
+          *ngIf="numero.errors && numero.touched; else validNumero"
+          [ngClass]="{'col-md-6': this.view!='checkout'}"
+        >
           <p *ngIf="numero.hasError('required')" [ngClass]="{'error': numero.hasError('required')}">
             Es un campo requerido
           </p>
@@ -66,7 +69,7 @@
         </ng-template>
       </div>
       <!--  -->
-      <div class="form-group col-12 col-md-4">
+      <div class="form-group col-12" [ngClass]="{'col-md-4': this.view!='checkout'}">
         <div class="input-group">
           <div class="input-group-prepend">
             <span class="input-group-text">
@@ -81,8 +84,11 @@
             </optgroup>
           </select>
         </div>
-        <ng-container class="form-group col-12 col-md-6 text-left"
-          *ngIf="localidad.errors && localidad.touched; else validLocalidad">
+        <ng-container 
+          class="form-group col-12 text-left" 
+          *ngIf="localidad.errors && localidad.touched; else validLocalidad"
+          [ngClass]="{'col-md-6': this.view!='checkout'}"
+        >
           <p *ngIf="localidad.hasError('required')" [ngClass]="{'error': localidad.hasError('required')}">
             Es un campo requerido
           </p>
@@ -93,8 +99,8 @@
           </p>
         </ng-template>
       </div>
-      <div class="form-group col-12 col-md-4"></div>
-      <div class="form-group col-12 col-md-4">
+      <div class="form-group col-12" [ngClass]="{'col-md-4': this.view!='checkout'}"></div>
+      <div class="form-group col-12" [ngClass]="{'col-md-4': this.view!='checkout'}">
         <button (click)="mostrarMapa()" class="btn btn-outline-cheese btn-block" data-toggle="modal"
           data-target="#registerMapModal">
           <i class="fas fa-map-marked-alt"></i>

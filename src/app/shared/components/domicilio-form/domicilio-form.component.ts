@@ -15,6 +15,7 @@ import guaymallen from '@assets/json/guaymallen.json';
 })
 export class DomicilioFormComponent implements OnInit, OnChanges {
   @Input() formParentDom: FormGroup;
+  @Input() view: string = 'register';
 
   //Modal
   @ViewChild('btnClose') btnClose : ElementRef;
