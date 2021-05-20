@@ -4,7 +4,7 @@
     <div class="row mt-5">
       <div class="col-12 col-md-5 col-lg-4">
           
-          <div class="card" id="user-display-data">
+          <div class="card mb-5" id="user-display-data">
             <!-- Picure -->
             <div class="card-body">
               <div class="wrapp-avatar bg-cheese">
@@ -60,6 +60,9 @@
             <shared-usuario-form [formParent]="parentUserForm" [view]="'profile'"></shared-usuario-form>
             <hr>
             <shared-domicilio-form [formParentDom]="parentDomicilioForm"></shared-domicilio-form>
+          </div>
+          <div class="card-footer bg-transparent text-center">
+            <button class="btn btn-outline-ketchup" (click)="onUpdateProfile($event)">Actualizar Perfil</button>
           </div>
         </div>
       </div>

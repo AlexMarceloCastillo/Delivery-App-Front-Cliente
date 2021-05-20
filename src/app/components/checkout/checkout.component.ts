@@ -128,7 +128,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
     let pedido: Pedido = {
       Cliente: {
         id: this.user.uid,
-        Domicilio: this.user.domicilio
+        Domicilio: this.parentDomicilioForm.value
       },
       horaEstimadaFin,
       estado: 'no aprobado',

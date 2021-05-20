@@ -98,4 +98,17 @@ export class PerfilComponent implements OnInit, OnChanges, OnDestroy {
     this.parentUserForm = this.formDataBuildSvc.userProfileForm('profile', auxUserObj);
     this.parentDomicilioForm = this.formDataBuildSvc.userDomicilioForm(auxUserObj);
   }
+
+
+  public onUpdateProfile(e: Event): void {
+    let { username, telefono } = this.parentUserForm.value;
+
+    let clienteUpdated: Cliente = { 
+      ...this.usuario,
+      telefono,
+      nombre: username,
+      domicilio: this.parentDomicilioForm.value
+    };
+    this.authSvc.updateProfile(clienteUpdated);
+  }
 }

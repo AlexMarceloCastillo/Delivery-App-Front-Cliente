@@ -152,6 +152,7 @@ export class AuthService {
   //Actualizar datos de usuario en Firestore
   public updateProfile(cliente: Cliente){
     const userRef: AngularFirestoreDocument<Cliente> = this.afs.doc(`clients/${cliente.uid}`);
+    
     userRef.update(cliente)
       .then( () => {
           this.toastrSvc.success('','Datos Actualizados con Exito',{
