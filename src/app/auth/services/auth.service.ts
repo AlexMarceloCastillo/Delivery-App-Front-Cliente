@@ -38,9 +38,10 @@ export class AuthService {
   }
 
   //Login
-  async login(email: string, pwd: string): Promise<Cliente>{
+  async login(login: any): Promise<Cliente>{
     try{
-      const { user } = await this.afsAuth.signInWithEmailAndPassword(email,pwd);
+      firebase.auth().setPersistence(login.remember ? firebase.auth.Auth.Persistence.LOCAL : firebase.auth.Auth.Persistence.SESSION);
+      const { user } = await this.afsAuth.signInWithEmailAndPassword(login.email, login.pwd);
       this.successLogin('Logueado Correctamente!');
       this.setStatus(true);
       return user;

@@ -29,8 +29,6 @@ export class DomicilioFormComponent implements OnInit, OnChanges {
   
   public mostrar: boolean = false;
 
-  // public retiroLocal: boolean = false;
-
 
   constructor( private httpClient: HttpClient, private toast: ToastrService ) { }
 
@@ -72,7 +70,7 @@ export class DomicilioFormComponent implements OnInit, OnChanges {
       this.childDomicilioForm.patchValue({ latitud:coords[1], longitud:coords[0]});
 
       this.httpClient.get(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${coords[1]}&lon=${coords[0]}`)
-      .subscribe((data:any)=>{
+      .subscribe( (data:any) => {
         let exists: boolean = false;
         let display = data.display_name.split(',')
         for(let i = 0;i < display.length; i++){
@@ -87,21 +85,21 @@ export class DomicilioFormComponent implements OnInit, OnChanges {
             })
           }
         }
-        if(exists){
+        if( exists ) {
           this.btnCloseComplete.nativeElement.click()
           this.toast.success('Distrito disponible, porfavor agrege el numero de su calle','',{
             timeOut: 4000,
             positionClass: 'toast-top-center'
-          })
-        }else{
+          });
+        } else {
           this.toast.error('Su distrito no se encuentra disponible para el delivery','',{
             timeOut: 4000,
             positionClass: 'toast-top-center'
-          })
+          });
           this.childDomicilioForm.reset();
           this.btnClose.nativeElement.click();
         }
-      })
+      });
     }
   }
 

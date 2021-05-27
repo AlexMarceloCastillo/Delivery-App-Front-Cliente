@@ -12,28 +12,28 @@ import { AuthService } from "../services/auth.service";
 })
 export class LoginComponent implements OnInit {
 
-  public hide:boolean = true;
   public loginForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder,private authSvc: AuthService) { 
+
+  constructor( private formBuilder: FormBuilder, private authSvc: AuthService ) { 
     this.buildLoginForm();
   }
 
   ngOnInit(): void {}
 
+
   private buildLoginForm(): void {
     this.loginForm = this.formBuilder.group({
       email: ['',[Validators.required, Validators.email]],
       pwd: ['',[Validators.required,Validators.minLength(8),Validators.maxLength(16)]], //password
-      // remember: [true]
+      remember: [ true ]
     });
   }
 
   onSaveLogin(e: Event): void {
     e.preventDefault();
     if(this.loginForm.valid){
-      const {email,pwd} = this.loginForm.value;
-      this.authSvc.login(email,pwd)
+      this.authSvc.login( this.loginForm.value );
       this.loginForm.reset();
     } else {
       this.loginForm.markAllAsTouched();

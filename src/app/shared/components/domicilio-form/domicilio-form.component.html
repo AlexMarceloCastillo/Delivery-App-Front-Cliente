@@ -1,94 +1,106 @@
 <form [formGroup]="childDomicilioForm" novalidate>
   <div class="form-row">
-    <div class="form-group col-12" [ngClass]="{'col-md-8': this.view!='checkout'}">
-      <div class="input-group">
-        <div class="input-group-prepend">
-          <span class="input-group-text">
-            <i class="fas fa-road"></i>
-          </span>
-        </div>
-        <input type="text" class="form-control" placeholder="Calle" name="calle" formControlName="calle">
+    <div class="form-group col-12">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="userCheck" formControlName="local">
+        <label class="form-check-label" for="userCheck">
+          Retiro en el local
+        </label>
       </div>
-      <ng-container class="form-group col-12" *ngIf="calle.errors && calle.touched; else validCalle">
-        <p *ngIf="calle.hasError('required')" [ngClass]="{'error': calle.hasError('required')}">
-          Es un campo requerido
-        </p>
-        <p *ngIf="calle.hasError('minlength')" [ngClass]="{'error': calle.hasError('minlength')}">
-          El mínimo de caracteres es de 5
-        </p>
-        <p *ngIf="calle.hasError('maxlength')" [ngClass]="{'error': calle.hasError('maxlength')}">
-          El máximo de caracteres debe es de 25
-        </p>
-      </ng-container>
-      <ng-template #validCalle>
-        <p [ngClass]="{'text-success': calle.valid, 'invisible': calle.pristine}">
-          nombre de Calle valida
-        </p>
-      </ng-template>
-    </div>
-    <!--  -->
-    <div class="form-group col-12" [ngClass]="{'col-md-4': this.view!='checkout'}">
-      <div class="input-group">
-        <div class="input-group-prepend">
-          <span class="input-group-text">
-            <i class="fas fa-sort-numeric-up-alt"></i>
-          </span>
-        </div>
-        <input type="number" class="form-control" placeholder="Numeración" name="numero" formControlName="numero">
-      </div>
-      <ng-container class="form-group col-12 text-left" *ngIf="numero.errors && numero.touched; else validNumero"
-        [ngClass]="{'col-md-6': this.view!='checkout'}">
-        <p *ngIf="numero.hasError('required')" [ngClass]="{'error': numero.hasError('required')}">
-          Es un campo requerido
-        </p>
-        <p *ngIf="numero.hasError('minlength')" [ngClass]="{'error': numero.hasError('minlength')}">
-          El mínimo de caracteres es de 1
-        </p>
-      </ng-container>
-      <ng-template #validNumero>
-        <p [ngClass]="{'text-success text-left': numero.valid, 'invisible': numero.pristine}">
-          Numeración Valida
-        </p>
-      </ng-template>
-    </div>
-    <!--  -->
-    <div class="form-group col-12" [ngClass]="{'col-md-4': this.view!='checkout'}">
-      <div class="input-group">
-        <div class="input-group-prepend">
-          <span class="input-group-text">
-            <i class="fas fa-map-marker-alt"></i>
-          </span>
-        </div>
-        <select class="custom-select" formControlName="localidad">
-          <option value="" disabled selected>Distrito</option>
-          <optgroup label="Guaymallén">
-            <option *ngFor="let distrito of guaymallen" [ngValue]="distrito.denominacion">{{distrito.denominacion}}
-            </option>
-          </optgroup>
-        </select>
-      </div>
-      <ng-container class="form-group col-12 text-left"
-        *ngIf="localidad.errors && localidad.touched; else validLocalidad"
-        [ngClass]="{'col-md-6': this.view!='checkout'}">
-        <p *ngIf="localidad.hasError('required')" [ngClass]="{'error': localidad.hasError('required')}">
-          Es un campo requerido
-        </p>
-      </ng-container>
-      <ng-template #validLocalidad>
-        <p [ngClass]="{'text-success': localidad.valid, 'invisible': localidad.pristine}">
-          Opción Valida
-        </p>
-      </ng-template>
-    </div>
-    <div class="form-group col-12" [ngClass]="{'col-md-4': this.view!='checkout'}"></div>
-    <div class="form-group col-12" [ngClass]="{'col-md-4': this.view!='checkout'}">
-      <button (click)="mostrarMapa()" class="btn btn-outline-cheese btn-block" data-toggle="modal"
-        data-target="#registerMapModal">
-        <i class="fas fa-map-marked-alt"></i>
-        Abrir mapa
-      </button>
     </div>
   </div>
+  <!-- Domicilio -->
+  <ng-container *ngIf="!this.childDomicilioForm.value.local">
+    
+    <div class="form-row">
+      <div class="form-group col-12 col-md-8">
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text">
+              <i class="fas fa-road"></i>
+            </span>
+          </div>
+          <input type="text" class="form-control" placeholder="Calle" name="calle" formControlName="calle">
+        </div>
+        <ng-container class="form-group col-12" *ngIf="calle.errors && calle.touched; else validCalle">
+          <p *ngIf="calle.hasError('required')" [ngClass]="{'error': calle.hasError('required')}">
+            Es un campo requerido
+          </p>
+          <p *ngIf="calle.hasError('minlength')" [ngClass]="{'error': calle.hasError('minlength')}">
+            El mínimo de caracteres es de 5
+          </p>
+          <p *ngIf="calle.hasError('maxlength')" [ngClass]="{'error': calle.hasError('maxlength')}">
+            El máximo de caracteres debe es de 25
+          </p>
+        </ng-container>
+        <ng-template #validCalle>
+          <p [ngClass]="{'text-success': calle.valid, 'invisible': calle.pristine}">
+            nombre de Calle valida
+          </p>
+        </ng-template>
+      </div>
+      <!--  -->
+      <div class="form-group col-12 col-md-4">
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text">
+              <i class="fas fa-sort-numeric-up-alt"></i>
+            </span>
+          </div>
+          <input type="number" class="form-control" placeholder="Numeración" name="numero" formControlName="numero">
+        </div>
+        <ng-container class="form-group col-12 col-md-6 text-left" *ngIf="numero.errors && numero.touched; else validNumero">
+          <p *ngIf="numero.hasError('required')" [ngClass]="{'error': numero.hasError('required')}">
+            Es un campo requerido
+          </p>
+          <p *ngIf="numero.hasError('minlength')" [ngClass]="{'error': numero.hasError('minlength')}">
+            El mínimo de caracteres es de 1
+          </p>
+        </ng-container>
+        <ng-template #validNumero>
+          <p [ngClass]="{'text-success text-left': numero.valid, 'invisible': numero.pristine}">
+            Numeración Valida
+          </p>
+        </ng-template>
+      </div>
+      <!--  -->
+      <div class="form-group col-12 col-md-4">
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text">
+              <i class="fas fa-map-marker-alt"></i>
+            </span>
+          </div>
+          <select class="custom-select" formControlName="localidad">
+            <option value="" disabled selected>Distrito</option>
+            <optgroup label="Guaymallén">
+              <option *ngFor="let distrito of guaymallen" [ngValue]="distrito.denominacion">{{distrito.denominacion}}
+              </option>
+            </optgroup>
+          </select>
+        </div>
+        <ng-container class="form-group col-12 col-md-6text-left" *ngIf="localidad.errors && localidad.touched; else validLocalidad">
+          <p *ngIf="localidad.hasError('required')" [ngClass]="{'error': localidad.hasError('required')}">
+            Es un campo requerido
+          </p>
+        </ng-container>
+        <ng-template #validLocalidad>
+          <p [ngClass]="{'text-success': localidad.valid, 'invisible': localidad.pristine}">
+            Opción Valida
+          </p>
+        </ng-template>
+      </div>
+      <div class="form-group col-12 col-md-4"></div>
+      <div class="form-group col-12 col-md-4">
+        <button (click)="mostrarMapa()" class="btn btn-outline-cheese btn-block" data-toggle="modal"
+          data-target="#registerMapModal">
+          <i class="fas fa-map-marked-alt"></i>
+          Abrir mapa
+        </button>
+      </div>
+    </div>
+
+  </ng-container>
 
 </form>
 

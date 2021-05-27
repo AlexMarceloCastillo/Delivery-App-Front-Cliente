@@ -17,7 +17,7 @@ export class RegistroComponent implements OnInit{
   public parentUserForm: FormGroup;
   public parentDomicilioForm: FormGroup;
 
-  private domicilio: Domicilio;
+  private domicilio: Domicilio = null;
 
   constructor( private authSvc: AuthService, private formDataBuildSvc: FormDataBuildService ) { }
 
@@ -31,13 +31,12 @@ export class RegistroComponent implements OnInit{
   onSaveRegister(e: Event): void {
     e.preventDefault();
     if(this.parentUserForm.valid) {
-      if(this.parentDomicilioForm.valid) {
-        this.domicilio = { ...this.parentDomicilioForm.value}
-      } else {
-        this.domicilio = null;
-      }
-      this.authSvc.register(this.parentUserForm.value,this.domicilio);
+      if( this.parentDomicilioForm.valid && !this.parentDomicilioForm.value.local )
+        this.domicilio = { ...this.parentDomicilioForm.value };
+
+      this.authSvc.register(this.parentUserForm.value, this.domicilio);
       this.parentUserForm.reset();
+      this.parentDomicilioForm.reset();
     } else {
       this.parentUserForm.markAllAsTouched();
     }

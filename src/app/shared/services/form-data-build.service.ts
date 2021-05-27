@@ -57,12 +57,15 @@ export class FormDataBuildService {
       numero:[0, [ Validators.required, Validators.min(1)] ],
       localidad: ['', [ Validators.required, Validators.minLength(5), Validators.maxLength(15)] ],
       latitud: [ 0 ],
-      longitud: [ 0 ]
+      longitud: [ 0 ],
+      local: [ true ]
     });
 
-    if (userData) {
-      domicilioFormGroup.patchValue(userData.domicilio);
+    if (userData.domicilio) {
+      domicilioFormGroup.setValue(userData.domicilio);
+      domicilioFormGroup.patchValue({ local: false })
     }
+
     return domicilioFormGroup;
   }
 }
