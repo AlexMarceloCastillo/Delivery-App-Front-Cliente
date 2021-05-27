@@ -6,7 +6,7 @@
           
           <div class="card mb-5" id="user-display-data">
             <!-- Picure -->
-            <div class="card-body">
+            <div class="card-body text-center">
               <div class="wrapp-avatar bg-cheese">
                 <ng-container *ngIf="usuario.photoURL; else noPicture">
                   <img [src]="usuario.photoURL" alt="Imagen de Perfil" class="user-img">
@@ -20,14 +20,14 @@
                 <input type="file" accept="image/*" name="avatar" #imgInput (change)="onFile($event)">
               </div>
               <!-- User Data -->
-              <div class="card-body text-center">
+              <div class="card-body">
                 <h3 class="card-title">{{usuario.nombre}}<i class="fas fa-check-circle"></i></h3>
                 <h6 class="card-subtitle mb-2 text-muted">{{usuario.email}}</h6>
               </div>
               <div class="progress" style="height: 2px;">
                 <div class="progress-bar bg-lettuce" role="progressbar" [style.width]="(uploadPercent | async) + '%'"></div>
               </div>
-              <div class="card-body text-left">
+              <div class="card-body">
                 <p class="card-text" *ngIf="usuario.domicilio; else noLocation">
                   {{usuario.domicilio.localidad}}, {{usuario.domicilio.calle}}, {{usuario.domicilio.numero}}.
                 </p>
@@ -36,22 +36,20 @@
                 </ng-template>
               </div>
             </div>
-            <div class="card-footer bg-transparent text-center">
+            <div class="card-footer bg-mayo text-center">
                 <ng-container *ngIf="usuario.provider==='password'; else googleProvider">
-                  <p>Registro con 'El Buen Sabor'</p>
+                  <p class="mt-3">Registro con 'El Buen Sabor'</p>
                 </ng-container>
                 <ng-template #googleProvider>
-                  <p>Registro con Google Sign In</p>
+                  <p class="mt-3">Registro con Google Sign In</p>
                 </ng-template>
-            </div>
-            <div class="card-footer">
-              <a [routerLink]="['/auth/olvido-clave']" class="btn btn-outline-burger btn-block">¿Olvido su contraseña?</a>
             </div>
           </div>
         
       </div>
       <!-- Profile Form -->
       <div class="col-12 col-md-7 col-lg-8">
+        
         <div class="card">
           <div class="card-header text-center">
             <h4>Formulario Perfil</h4>
@@ -64,10 +62,14 @@
           <div class="card-footer bg-transparent text-center">
             <button class="btn btn-outline-ketchup" (click)="onUpdateProfile($event)">Actualizar Perfil</button>
           </div>
+          <div class="card-footer d-grid">
+            <a [routerLink]="['/auth/olvido-clave']" class="btn btn-link">¿Olvido su contraseña?</a>
+          </div>
         </div>
+
       </div>
-    </div>
-  </div>
+    </div><!-- .row -->
+  </div><!-- .container -->
 
 </ng-container>
 <ng-template #noDataLoad>

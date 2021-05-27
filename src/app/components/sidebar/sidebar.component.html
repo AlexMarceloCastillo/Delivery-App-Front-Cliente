@@ -1,34 +1,41 @@
-<nav id="sidebar" [ngClass]="{'active': this.toggleStatus.status$ | async}">
-  <div class="wrapper bg-mayo shadow">
-    <div class="sidebar-heading">
-      <button type="button" class="close" aria-label="Close" (click)="onToggle()">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
+<div class="offcanvas offcanvas-start" tabindex="-1" id="sidebar" aria-labelledby="sidebarLabel">
+  <div class="offcanvas-header">
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <hr>
+  <div class="offcanvas-body">
     <div *ngIf="cliente" class="img-wrap">
-        <img *ngIf="cliente.photoURL != null" src={{cliente.photoURL}} alt="user profile picture" class="rounded-circle" loading="lazy">
-        <img *ngIf="cliente.photoURL == null" src="https://www.w3schools.com/howto/img_avatar.png" alt="user default picture" class="rounded-circle" loading="lazy">
+      <img *ngIf="cliente.photoURL != null" src={{cliente.photoURL}} alt="profile picture" class="rounded-circle" loading="lazy">
+      <img *ngIf="cliente.photoURL == null" src="https://www.w3schools.com/howto/img_avatar.png" alt="user default picture" class="rounded-circle" loading="lazy">
     </div>
     <div class="list-group list-group-flush">
-      <a class="list-group-item list-group-item-action bg-mayo" [routerLink]="[ '/inicio']" >Home</a>
-      <a class="list-group-item list-group-item-action bg-mayo" [routerLink]="[ '/menu']" >Menu</a>
-      <a class="list-group-item list-group-item-action bg-mayo" [routerLink]="[ '/carrito']" >Carrito</a>
-      <a class="list-group-item list-group-item-action bg-mayo" [routerLink]="[ '/login']" *ngIf="!cliente" >Login</a>
-      <a class="list-group-item list-group-item-action bg-mayo" [routerLink]="['/inicio']" fragment="ubicacion" *ngIf="!cliente" >Ubicación</a>
+      <a class="list-group-item list-group-item-action" [routerLink]="[ '/inicio']">Home</a>
+      <a class="list-group-item list-group-item-action" [routerLink]="[ '/menu']">Menu</a>
+      <a class="list-group-item list-group-item-action" [routerLink]="[ '/carrito']">Carrito</a>
+      <a class="list-group-item list-group-item-action" [routerLink]="[ '/login']" *ngIf="!cliente">Login</a>
+      <a class="list-group-item list-group-item-action" [routerLink]="['/inicio']" fragment="ubicacion"
+        *ngIf="!cliente">Ubicación</a>
 
-      <div class="dropdown" *ngIf="cliente">
-        <button class="btn bg-mayo dropdown-toggle" type="button" id="dropMenuPerfil" data-toggle="dropdown"
-          aria-haspopup="true" aria-expanded="false">
-          {{cliente.nombre}}
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropMenuPerfil">
-          <a class="dropdown-item" [routerLink]="[ '/auth/perfil/', cliente.uid ]">Perfil</a>
-          <a class="dropdown-item" [routerLink]="[ cliente.uid, 'pedidos' ]">Mis pedidos</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" (click)="onLogout()">Cerrar Sesión</a>
-        </div>
-      </div>
     </div>
+
+    <ng-container *ngIf="this.cliente">
+      <div class="dropdown mt-3">
+        <button class="btn dropdown-toggle" type="button" id="userProfileSidebar" data-bs-toggle="dropdown">
+          {{this.cliente.nombre}}
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="userProfileSidebar">
+          <li>
+            <a class="dropdown-item" [routerLink]="[ '/auth/perfil/', cliente.uid ]">Perfil</a>
+          </li>
+          <li>
+            <a class="dropdown-item" [routerLink]="[ cliente.uid, 'pedidos' ]">Mis pedidos</a>
+          </li>
+          <div class="dropdown-divider"></div>
+          <li>
+            <a class="dropdown-item" (click)="onLogout()">Cerrar Sesión</a>
+          </li>
+        </ul>
+      </div>
+    </ng-container>
   </div>
-  <div class="overlay"></div>
-</nav>
+</div>

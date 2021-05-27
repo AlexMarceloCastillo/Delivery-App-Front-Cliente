@@ -1,12 +1,18 @@
 @import "../../../node_modules/bootstrap/scss/functions";
+
+// 2. Include any default variable overrides here
+
+// 3. Include remainder of required Bootstrap stylesheets
 @import "../../../node_modules/bootstrap/scss/variables";
 @import "../../../node_modules/bootstrap/scss/mixins";
 @import "./variables";
 
-$theme-colors: (
+$hamburger-theme: (
     "cheese": $cheese,
     "mayo": $mayo,
     "ketchup": $ketchup,
     "burger": $burger,
     "lettuce": $lettuce
 );
+
+$theme-colors: map-merge($theme-colors, $hamburger-theme);

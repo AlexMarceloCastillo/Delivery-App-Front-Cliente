@@ -92,11 +92,10 @@ export class PerfilComponent implements OnInit, OnChanges, OnDestroy {
   private fillForm(user: any) {
     let auxUserObj = { 
       username: user.nombre, 
-      telefono: user.telefono,
-      domicilio: user.domicilio 
+      telefono: user.telefono
     };
     this.parentUserForm = this.formDataBuildSvc.userProfileForm('profile', auxUserObj);
-    this.parentDomicilioForm = this.formDataBuildSvc.userDomicilioForm(auxUserObj);
+    this.parentDomicilioForm = this.formDataBuildSvc.userDomicilioForm(user);
   }
 
 

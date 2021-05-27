@@ -37,8 +37,7 @@ export class DomicilioFormComponent implements OnInit, OnChanges {
     this.childDomicilioForm = this.formParentDom;
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
 
 
   /*    Funciones de el mapa    */

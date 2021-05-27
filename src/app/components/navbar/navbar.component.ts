@@ -23,6 +23,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   private cartSuscription: Subscription;
 
   public r:boolean = false;
+  public isOpen: boolean = true;
 
   constructor(private togglerSvc: TogglerService, private authSvc: AuthService, private cartSvc: CarritoService) { }
   
@@ -32,7 +33,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.cartSuscription = this.cartSvc.cart$.subscribe( cart => {
         this.cartLength = cart.reduce((sum,current)=> sum + current.cantidad,0);
     }, error => this.cartLength = 0);
-    
+    this.isOpen = this.authSvc.openDelivery;
   }
 
   ngOnDestroy(): void {

@@ -1,28 +1,28 @@
 <form [formGroup]="childDomicilioForm" novalidate>
-  <div class="form-row">
-    <div class="form-group col-12">
-      <div class="form-check">
+  <div class="row mb-5">
+    <div class="col-12">
+      
+      <div class="form-check form-switch">
         <input class="form-check-input" type="checkbox" id="userCheck" formControlName="local">
-        <label class="form-check-label" for="userCheck">
-          Retiro en el local
-        </label>
+        <label class="form-check-label" for="userCheck">Retiro en el local</label>
       </div>
+
     </div>
   </div>
   <!-- Domicilio -->
   <ng-container *ngIf="!this.childDomicilioForm.value.local">
     
-    <div class="form-row">
-      <div class="form-group col-12 col-md-8">
-        <div class="input-group">
-          <div class="input-group-prepend">
-            <span class="input-group-text">
-              <i class="fas fa-road"></i>
-            </span>
-          </div>
+    <div class="row">
+      <div class="col-12 col-md-8">
+
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon1">
+            <i class="fas fa-road"></i>
+          </span>
           <input type="text" class="form-control" placeholder="Calle" name="calle" formControlName="calle">
         </div>
-        <ng-container class="form-group col-12" *ngIf="calle.errors && calle.touched; else validCalle">
+
+        <ng-container class="col-12" *ngIf="calle.errors && calle.touched; else validCalle">
           <p *ngIf="calle.hasError('required')" [ngClass]="{'error': calle.hasError('required')}">
             Es un campo requerido
           </p>
@@ -40,16 +40,16 @@
         </ng-template>
       </div>
       <!--  -->
-      <div class="form-group col-12 col-md-4">
-        <div class="input-group">
-          <div class="input-group-prepend">
-            <span class="input-group-text">
-              <i class="fas fa-sort-numeric-up-alt"></i>
-            </span>
-          </div>
+      <div class="col-12 col-md-4">
+
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon1">
+            <i class="fas fa-sort-numeric-up-alt"></i>
+          </span>
           <input type="number" class="form-control" placeholder="Numeración" name="numero" formControlName="numero">
         </div>
-        <ng-container class="form-group col-12 col-md-6 text-left" *ngIf="numero.errors && numero.touched; else validNumero">
+
+        <ng-container class="col-12 col-md-6 text-left" *ngIf="numero.errors && numero.touched; else validNumero">
           <p *ngIf="numero.hasError('required')" [ngClass]="{'error': numero.hasError('required')}">
             Es un campo requerido
           </p>
@@ -64,13 +64,12 @@
         </ng-template>
       </div>
       <!--  -->
-      <div class="form-group col-12 col-md-4">
-        <div class="input-group">
-          <div class="input-group-prepend">
-            <span class="input-group-text">
-              <i class="fas fa-map-marker-alt"></i>
-            </span>
-          </div>
+      <div class="col-12 col-md-4">
+
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon1">
+            <i class="fas fa-map-marker-alt"></i>
+          </span>
           <select class="custom-select" formControlName="localidad">
             <option value="" disabled selected>Distrito</option>
             <optgroup label="Guaymallén">
@@ -79,7 +78,8 @@
             </optgroup>
           </select>
         </div>
-        <ng-container class="form-group col-12 col-md-6text-left" *ngIf="localidad.errors && localidad.touched; else validLocalidad">
+
+        <ng-container class="col-12 col-md-6 text-left" *ngIf="localidad.errors && localidad.touched; else validLocalidad">
           <p *ngIf="localidad.hasError('required')" [ngClass]="{'error': localidad.hasError('required')}">
             Es un campo requerido
           </p>
@@ -90,10 +90,9 @@
           </p>
         </ng-template>
       </div>
-      <div class="form-group col-12 col-md-4"></div>
-      <div class="form-group col-12 col-md-4">
-        <button (click)="mostrarMapa()" class="btn btn-outline-cheese btn-block" data-toggle="modal"
-          data-target="#registerMapModal">
+      <div class="col-12 col-md-4"></div>
+      <div class="col-12 col-md-4">
+        <button (click)="mostrarMapa()" class="btn btn-outline-cheese btn-block" data-toggle="modal" data-target="#registerMapModal">
           <i class="fas fa-map-marked-alt"></i>
           Abrir mapa
         </button>

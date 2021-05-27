@@ -2,7 +2,7 @@
   <ng-container *ngIf="itemsCart.length; else emptyCart">
 
     <div class="row mt-5">
-      <div class="col-12 col-md-7">
+      <div class="col-12 col-md-9">
 
         <div class="wrap-cart mb-5">
           <ng-container *ngFor="let item of itemsCart">
@@ -28,9 +28,7 @@
                 <button class="btn btn-danger btn-block" id="mobile" (click)="deleteItemCart(item._id,$event)">
                   Quitar del carrito
                 </button>
-                <button type="button" class="close" (click)="deleteItemCart(item._id,$event)">
-                  <span aria-hidden="true">&times;</span>
-                </button>
+                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close" (click)="deleteItemCart(item._id,$event)"></button>
               </div>
             </div>
 
@@ -39,12 +37,61 @@
         </div>
 
       </div>
-      <div class="col-12 col-md-5">
+      <div class="col-12 col-md-3">
 
-        <app-checkout></app-checkout>
+        <div class="card" id="order">
+          <div class="card-header text-center">
+            <h5>Pedido</h5>
+          </div>
+          <div class="card-body">
+            <ul class="list-group list-group-flush">
+              <ng-container *ngFor="let item of itemsCart">
+                <li class="list-group-item">
+                  <p>{{item.denominacion}}</p>
+                  <p>{{item.cantidad}} x {{item.precioVenta}} = {{ item.cantidad*item.precioVenta }}$</p>
+                </li>
+              </ng-container>
+              <li class="list-group-item">
+                <b>Subtotal: {{subTotal}} $</b>
+              </li>
+            </ul>
+          </div>
+          <div class="card-footer bg-transparent">
+            <button class="btn btn-block btn-outline-danger" (click)="deleteCart($event)">Vaciar Carrito</button>
+          </div>
+        </div>
 
       </div>
     </div>
+
+    <div class="row" *ngIf="this.cliente">
+      <div class="col-12 my-5">
+        <h1>Checkout</h1>
+      </div>
+      <div class="col-12">
+        <shared-domicilio-form [formParentDom]="parentDomicilioForm"></shared-domicilio-form>
+      </div>
+      <div class="col-12">
+        <h5>Metodos de pago</h5>
+        <div>
+          <div class="form-row">
+            <div class="form-group col-12 col-md-6">
+              
+              <ng-container *ngIf="parentDomicilioForm.value.local; else mdoPagoCheck">
+                <p>local</p>
+              </ng-container>
+              <ng-template #mdoPagoCheck>
+                <p>Mercado Pago</p>
+              </ng-template>
+              
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
 
   </ng-container>
   <ng-template #emptyCart>

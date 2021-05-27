@@ -62,7 +62,7 @@ export class FormDataBuildService {
     });
 
     if (userData.domicilio) {
-      domicilioFormGroup.setValue(userData.domicilio);
+      domicilioFormGroup.patchValue(userData.domicilio);
       domicilioFormGroup.patchValue({ local: false })
     }
 

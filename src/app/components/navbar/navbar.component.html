@@ -1,57 +1,60 @@
-<div class="text-light text-center p-1" [ngClass]="{'bg-lettuce':this.authSvc.openDelivery,'bg-ketchup':!this.authSvc.openDelivery}">
-  <ng-container *ngIf="this.authSvc.openDelivery; else closed">
+<div class="text-light text-center p-1" [ngClass]="{'bg-lettuce':this.isOpen,'bg-ketchup':!this.isOpen}">
+  <ng-container *ngIf="this.isOpen; else closed">
     Estamos Abierto
   </ng-container>
   <ng-template #closed>
-    Cerrado, ver <a routerLink="/inicio" class="card-link text-light" fragment="horario">horarios</a>
+    Cerrado, ver <a routerLink="/inicio" class="link-light" fragment="horario">horarios</a>
   </ng-template>
 </div>
 <nav class="navbar navbar-expand-lg navbar-light bg-mayo shadow-sm">
+  <div class="container">
     <div id="mobile">
-      <button class="navbar-toggler" type="button" (click)="onToggle($event)">
+      <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebar" aria-controls="sidebar">
         <span class="navbar-toggler-icon"></span>
       </button>
       <a class="navbar-brand" [routerLink]="['/']">El Buen Sabor</a>
     </div>
     <div class="collapse navbar-collapse" id="desktop">
-      <div class="container">
-        <a class="navbar-brand" [routerLink]="['/']">El Buen Sabor</a>
-        <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-          <li class="nav-item">
-            <a class="nav-link" [routerLink]="['/inicio']" routerLinkActive="active">Inicio<span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" [routerLink]="['/menu']" routerLinkActive="active">Menu</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" [routerLink]="['/inicio']" fragment="ubicacion" >Ubicación</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link cart" [routerLink]="['/carrito']" routerLinkActive="active">
-              <i class="fas fa-shopping-cart"></i><span class="badge text-ketchup">{{cartLength}}</span>
-            </a>
-          </li>
-
-          <a class="btn btn-burger ml-3" role="button" [routerLink]="['/auth/login']" routerLinkActive="active" *ngIf="!cliente">Inicio de Sesión</a>
-          <a class="btn btn-outline-burger m-3" role="button" [routerLink]="['/auth/register']" routerLinkActive="active" *ngIf="!cliente">Registrarse</a>
-
-          <li class="nav-item dropdown" *ngIf="cliente">
-            <a class="nav-link dropdown-toggle" id="perfilDropdown" role="button" data-toggle="dropdown"
-              aria-haspopup="true" aria-expanded="false">
-              <img *ngIf="cliente.photoURL == null" src="https://www.w3schools.com/howto/img_avatar.png"
-                alt="user default picture" width="50" height="50" class="rounded-circle" loading="lazy">
-              <img *ngIf="cliente.photoURL != null" src={{cliente.photoURL}} alt="user profile picture" width="50"
-                height="50" class="rounded-circle" loading="lazy">
-            </a>
-            <div class="dropdown-menu" aria-labelledby="perfilDropdown">
-              <a class="dropdown-item" [routerLink]="[ '/auth/perfil/', cliente.uid ]">Perfil</a>
-              <a class="dropdown-item" [routerLink]="[ cliente.uid, 'pedidos' ]">Mis pedidos</a>
+      <a class="navbar-brand" [routerLink]="['/']">El Buen Sabor</a>
+      <ul class="navbar-nav ms-auto mt-2 my-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/inicio']" routerLinkActive="active">Inicio<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/menu']" routerLinkActive="active">Menu</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/inicio']" fragment="ubicacion">Ubicación</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link cart" [routerLink]="['/carrito']" routerLinkActive="active">
+            <i class="fas fa-shopping-cart"></i><span class="badge text-ketchup">{{cartLength}}</span>
+          </a>
+        </li>
+  
+        <a class="btn btn-burger ml-3" role="button" [routerLink]="['/auth/login']" *ngIf="!cliente">Inicio de Sesión</a>
+        <a class="btn btn-outline-burger m-3" role="button" [routerLink]="['/auth/register']" *ngIf="!cliente">Registrarse</a>
+  
+        <li class="nav-item dropdown" *ngIf="cliente">
+          <div class="dropdown">
+            <button class="btn dropdown-toggle" type="button" id="perfilDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+              <ng-container *ngIf="cliente.photoURL!=null; else noPhoto">
+                <img src={{cliente.photoURL}} alt="profile picture" width="50" height="50" class="rounded-circle" loading="lazy">
+              </ng-container>
+              <ng-template #noPhoto>
+                <img src="https://www.w3schools.com/howto/img_avatar.png" alt="user default" width="50" height="50" class="rounded-circle" loading="lazy">
+              </ng-template>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="perfilDropdown">
+              <li><a class="dropdown-item" [routerLink]="[ '/auth/perfil/', cliente.uid ]">Perfil</a></li>
+              <li><a class="dropdown-item" [routerLink]="[ cliente.uid, 'pedidos' ]">Mis pedidos</a></li>
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item" (click)="onLogout($event)">Cerrar Sesión</a>
-            </div>
-          </li>
-
-        </ul>
-      </div>
+              <li><a class="dropdown-item" (click)="onLogout($event)">Cerrar Sesión</a></li>
+            </ul>
+          </div>
+        </li>
+  
+      </ul>
     </div>
-  </nav>
+  </div>
+</nav>
