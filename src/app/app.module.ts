@@ -21,7 +21,6 @@ import { FooterComponent } from '@components/footer/footer.component';
 import { CarouselComponent } from '@components/carousel/carousel.component';
 import { SidebarComponent } from '@components/sidebar/sidebar.component';
 import { CardComponent } from '@components/card/card.component';
-import { CheckoutComponent } from './components/checkout/checkout.component';
 
 /*    Pages   */
 import { AppComponent } from './app.component';
@@ -52,7 +51,6 @@ import { LegalComponent } from '@pages/legal/legal.component';
     CardComponent,
     ComidaDetalleComponent,
     LegalComponent,
-    CheckoutComponent,
   ],
   imports: [
     SharedModule,

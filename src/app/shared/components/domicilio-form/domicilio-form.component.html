@@ -70,7 +70,7 @@
           <span class="input-group-text" id="basic-addon1">
             <i class="fas fa-map-marker-alt"></i>
           </span>
-          <select class="custom-select" formControlName="localidad">
+          <select class="form-select" formControlName="localidad">
             <option value="" disabled selected>Distrito</option>
             <optgroup label="Guaymallén">
               <option *ngFor="let distrito of guaymallen" [ngValue]="distrito.denominacion">{{distrito.denominacion}}

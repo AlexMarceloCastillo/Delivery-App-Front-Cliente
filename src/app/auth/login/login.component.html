@@ -81,8 +81,8 @@
             <div class="col-12 col-md-6">
               <a [routerLink]="[ '/auth/olvido-clave', ]" class="btn btn-link">¿Olvido su contraseña?</a>
             </div>
-            <div class="col-12 col-md-6">
-              <button type="button" class="btn btn-primary" [disabled]="loginForm.invalid">Iniciar Sesión</button>
+            <div class="col-12 col-md-6 d-grid">
+              <button type="submit" class="btn btn-primary" [disabled]="loginForm.invalid">Iniciar Sesión</button>
             </div>
           </div>
         </form>

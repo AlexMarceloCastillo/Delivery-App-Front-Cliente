@@ -3,7 +3,6 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { AuthService } from '@auth/services/auth.service';
-import { TogglerService } from '@services/toggler/toggler.service';
 import { CarritoService } from '@services/carrito/carrito.service';
 
 import { Cliente } from '@models/cliente.interface';
@@ -25,7 +24,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   public r:boolean = false;
   public isOpen: boolean = true;
 
-  constructor(private togglerSvc: TogglerService, private authSvc: AuthService, private cartSvc: CarritoService) { }
+  constructor(private authSvc: AuthService, private cartSvc: CarritoService) { }
   
 
   ngOnInit(): void {
@@ -40,12 +39,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.clienteSuscription.unsubscribe();
     this.cartSuscription.unsubscribe();
   }
-
   
-  public onToggle(e: Event): void {
-    e.preventDefault();
-    this.togglerSvc.toggle(!this.togglerSvc.statusSubject.getValue());
-  }
 
   public onLogout(e: Event): void {
     e.preventDefault();
