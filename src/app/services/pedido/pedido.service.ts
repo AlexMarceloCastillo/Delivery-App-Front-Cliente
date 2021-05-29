@@ -19,6 +19,10 @@ export class PedidoService {
     return this.http.get<Pedido>(`${this.URL_API}/${pid}`);
   }
 
+  public getAllPedidoByUser(uid: any): Observable<Pedido[]> {
+    return this.http.get<Pedido[]>(`${this.URL_API}/byUsers/${uid}`)
+  }
+
   public savePedido(pedido: Pedido): Observable<Pedido> {
     return this.http.post<Pedido>(this.URL_API,pedido);
   }

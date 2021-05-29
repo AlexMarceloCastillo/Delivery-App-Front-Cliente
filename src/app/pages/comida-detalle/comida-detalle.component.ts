@@ -1,7 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+
 import { AuthService } from '@auth/services/auth.service';
-import { ItemCarrito } from '@models/itemCarrito.interface';
 import { CarritoService } from '@services/carrito/carrito.service';
+import { ArtmanufactService } from '@services/artManufact/artmanufact.service';
+
+import { ItemCarrito } from '@models/itemCarrito.interface';
+import { ArtManufacturado } from "@models/artManufact.interface";
+
 
 @Component({
   selector: 'app-comida-detalle',
@@ -10,32 +16,26 @@ import { CarritoService } from '@services/carrito/carrito.service';
 })
 export class ComidaDetalleComponent implements OnInit {
   public btnDisabled: boolean = true;
-  public food: ItemCarrito = {
-    _id: 1,
-    denominacion: 'Articulo Insumo',
-    img: 'https://place-hold.it/700x400',
-    precioVenta: 1000
-  }
+  public food: ArtManufacturado;
 
-  constructor(private cartSvc: CarritoService, private auth: AuthService) { }
+
+  constructor(private cartSvc: CarritoService, private auth: AuthService, private artManufactSvc: ArtmanufactService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     if(this.auth.isAuth) {
-      this.btnDisabled = true;
+      this.btnDisabled = false;
     }
+    let artManufact_id = this.route.snapshot.paramMap.get('id');
+    this.artManufactSvc.getOne(artManufact_id).subscribe( data => this.food = data, error => console.error(error));
   }
 
-  public addItemCart(item: any, e: Event): void {
-    // e.preventDefault();
-    // let cartItem: ItemCarrito = {
-    //   id: item.id,
-    //   name: item.name,
-    //   img: item.img,
-    //   price: item.price,
-    //   cant: 1
-    // }
-    // this.cartSvc.addItem(cartItem);
-    // e.stopPropagation();
+
+  public addItemCart(food: any, e: Event): void {
+    e.preventDefault();
+    let { _id, denominacion, tiempoEstimado, precioVenta, img } = food;
+    let cartItem: ItemCarrito = {_id, denominacion, tiempoEstimado, precioVenta, img, cantidad: 1};
+    this.cartSvc.addItem(cartItem);
+    e.stopPropagation();
   }
 
 }

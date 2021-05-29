@@ -128,8 +128,6 @@ export class AuthService {
       timeOut: 800
     })
     const user = await this.afsAuth.currentUser;
-    console.log(user.emailVerified);
-    console.log(flag);
     
     if(!user.emailVerified && (flag === 'verified' || flag === 'inicio') ) { 
       this.redirectHub('verified');

@@ -8,7 +8,7 @@ export interface Pedido {
     tipoEnvio: number,
     total: number,
     Cliente: {
-        id : string,
+        firebase_id : string,
         Domicilio ?: Domicilio
     },
     DetallePedido ?: [

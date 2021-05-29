@@ -44,7 +44,7 @@ export class CarritoComponent implements OnInit, DoCheck {
     this.sessionCart = JSON.parse(sessionStorage.getItem('cart'));
 
     
-    if (!this.auth.isAuth) {
+    if (this.auth.isAuth) {
       this.auth.getDataClient().subscribe( user => {
         this.cliente = user;
         this.parentDomicilioForm = this.formDataBuildSvc.userDomicilioForm(user);
@@ -147,7 +147,7 @@ export class CarritoComponent implements OnInit, DoCheck {
 
     let pedido: Pedido = {
       Cliente: {
-        id: this.cliente.uid,
+        firebase_id: this.cliente.uid,
         Domicilio: this.parentDomicilioForm.value
       },
       horaEstimadaFin,

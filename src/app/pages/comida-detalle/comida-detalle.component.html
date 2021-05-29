@@ -12,8 +12,8 @@
         </ol>
       </nav>
       <h4>{{food.denominacion}}</h4>
-      <h5 class="mt-2">Precio: ${{food.precioVenta}},00 ARS</h5>
-      <!-- <h6>Precio con descuento por retiro en local (10%): ${{food.precioVenta-(food.precioVenta*0.1)}},00 ARS</h6> -->
+      <h5 class="mt-2">Precio: ${{food.precioVenta}},00 ARS</h5> -->
+      <h6>Precio con descuento por retiro en local (10%): ${{food.precioVenta-(food.precioVenta*0.1)}},00 ARS</h6>
       <p class="text-success"><i class="fas fa-check"></i> Stock Disponible</p>
       <p>Tiempo estimado de preparacion: 1hr</p>
       <p>Formas de pago disponibles:</p>
@@ -45,7 +45,7 @@
     <div class="info border-dark border-left">
       <h4>{{food.denominacion}}</h4>
       <h5 class="mt-2">Precio: ${{food.precioVenta}},00 ARS</h5>
-      <!-- <h6>Precio con descuento por retiro en local (10%): ${{food.precioVenta-(food.precioVenta*0.1)}},00 ARS</h6> -->
+      <h6>Precio con descuento por retiro en local (10%): ${{food.precioVenta-(food.precioVenta*0.1)}},00 ARS</h6>
       <p class="text-success"><i class="fas fa-check"></i> Stock Disponible</p>
       <p>Tiempo estimado de preparacion: 1hr</p>
       <p>Formas de pago disponibles:</p>
@@ -55,4 +55,4 @@
       <button type="button" class="btn mt-2 mb-2 btn-outline-burger" (click)="addItemCart(food,$event)" [disabled]="btnDisabled">Agregar al carrito<i class="fas fa-cart-plus"></i></button>
     </div>
   </div>
-</div>
+</div> 
