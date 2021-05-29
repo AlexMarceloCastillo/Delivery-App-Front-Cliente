@@ -26,7 +26,7 @@ export class DomicilioFormComponent implements OnInit, OnChanges {
   public childDomicilioForm: FormGroup;
 
   public guaymallen = guaymallen;
-  
+
   public mostrar: boolean = false;
 
 
@@ -71,26 +71,25 @@ export class DomicilioFormComponent implements OnInit, OnChanges {
       this.httpClient.get(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${coords[1]}&lon=${coords[0]}`)
       .subscribe( (data:any) => {
         let exists: boolean = false;
-        let display = data.display_name.split(',')
-        for(let i = 0;i < display.length; i++){
-          if(display[i].includes('Distrito')){
-            let localidad = display[i].trim().substr(8,display[i].length)
-            this.guaymallen.forEach((e)=>{
-              if(e.denominacion.includes(localidad.trim())){
-                this.childDomicilioForm.get('localidad').setValue(localidad.trim())
-                this.childDomicilioForm.get('calle').setValue(data.address.road);
-                exists = true
-              }
-            })
-          }
+        console.log(data)
+        let display = data.display_name.replace('Distrito','').split(',')
+        let displayFull = display.map(string => string.trim())
+        for(let i = 0;i < displayFull.length; i++){
+          this.guaymallen.forEach((e)=>{
+            if(e.denominacion.includes(displayFull[i])){
+              this.childDomicilioForm.get('localidad').setValue(displayFull[i])
+              this.childDomicilioForm.get('calle').setValue(data.address.road);
+              exists = true
+            }
+          })
         }
-        if( exists ) {
+        if(exists){
           this.btnCloseComplete.nativeElement.click()
           this.toast.success('Distrito disponible, porfavor agrege el numero de su calle','',{
             timeOut: 4000,
             positionClass: 'toast-top-center'
           });
-        } else {
+        }else{
           this.toast.error('Su distrito no se encuentra disponible para el delivery','',{
             timeOut: 4000,
             positionClass: 'toast-top-center'

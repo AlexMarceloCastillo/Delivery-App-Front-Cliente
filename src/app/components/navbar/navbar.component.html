@@ -1,9 +1,9 @@
 <div class="text-light text-center p-1" [ngClass]="{'bg-lettuce':this.isOpen,'bg-ketchup':!this.isOpen}">
   <ng-container *ngIf="this.isOpen; else closed">
-    Estamos Abierto
+    Estamos Abierto <i class="fas fa-lock-open"></i>
   </ng-container>
   <ng-template #closed>
-    Cerrado, ver <a routerLink="/inicio" class="link-light" fragment="horario">horarios</a>
+    Cerrado <i class="fas fa-lock"></i>, ver <a routerLink="/inicio" class="link-light" fragment="horario">horarios</a>
   </ng-template>
 </div>
 <nav class="navbar navbar-expand-lg navbar-light bg-mayo shadow-sm">
@@ -31,10 +31,10 @@
             <i class="fas fa-shopping-cart"></i><span class="badge text-ketchup">{{cartLength}}</span>
           </a>
         </li>
-  
+
         <a class="btn btn-burger ml-3" role="button" [routerLink]="['/auth/login']" *ngIf="!cliente">Inicio de Sesión</a>
         <a class="btn btn-outline-burger m-3" role="button" [routerLink]="['/auth/register']" *ngIf="!cliente">Registrarse</a>
-  
+
         <li class="nav-item dropdown" *ngIf="cliente">
           <div class="dropdown">
             <button class="btn dropdown-toggle" type="button" id="perfilDropdown" data-bs-toggle="dropdown" aria-expanded="false">
@@ -53,7 +53,7 @@
             </ul>
           </div>
         </li>
-  
+
       </ul>
     </div>
   </div>

@@ -1,7 +1,7 @@
 <form [formGroup]="childDomicilioForm" novalidate>
   <div class="row mb-5">
     <div class="col-12">
-      
+
       <div class="form-check form-switch">
         <input class="form-check-input" type="checkbox" id="userCheck" formControlName="local">
         <label class="form-check-label" for="userCheck">Retiro en el local</label>
@@ -11,7 +11,7 @@
   </div>
   <!-- Domicilio -->
   <ng-container *ngIf="!this.childDomicilioForm.value.local">
-    
+
     <div class="row">
       <div class="col-12 col-md-8">
 
@@ -92,7 +92,7 @@
       </div>
       <div class="col-12 col-md-4"></div>
       <div class="col-12 col-md-4">
-        <button (click)="mostrarMapa()" class="btn btn-outline-cheese" data-toggle="modal" data-target="#registerMapModal">
+        <button (click)="mostrarMapa()" class="btn btn-outline-cheese" data-bs-toggle="modal" data-bs-target="#registerMapModal">
           <i class="fas fa-map-marked-alt"></i>
           Abrir mapa
         </button>
@@ -109,10 +109,10 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="registerMapLabel">Mapa</h5>
-        <button #btnClose (click)="cleanMap()" type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button #btnClose (click)="cleanMap()" type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-        <button class="d-none" #btnCloseComplete type="hidden" name="button" data-dismiss="modal"
+        <button class="d-none" #btnCloseComplete type="hidden" name="button" data-bs-dismiss="modal"
           aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -125,7 +125,7 @@
         <p id="infocoords"></p>
       </div>
       <div class="modal-footer">
-        <button type="button" (click)="cleanMap()" class="btn btn-outline-dark" data-dismiss="modal"
+        <button type="button" (click)="cleanMap()" class="btn btn-outline-dark" data-bs-dismiss="modal"
           aria-label="Close">Close</button>
         <button type="button" class="btn btn-cheese" (click)="saveCoords()">Save changes</button>
       </div>
