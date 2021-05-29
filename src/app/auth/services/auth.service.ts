@@ -42,8 +42,11 @@ export class AuthService {
     try{
       firebase.auth().setPersistence(login.remember ? firebase.auth.Auth.Persistence.LOCAL : firebase.auth.Auth.Persistence.SESSION);
       const { user } = await this.afsAuth.signInWithEmailAndPassword(login.email, login.pwd);
-      this.successLogin('Logueado Correctamente!');
+
       this.setStatus(true);
+
+      this.succesToastMessage('inicio','¡ Logueado Correctamente !');
+
       return user;
     } catch(error) {
       this.getError(error.code,'Error al loguearse')
@@ -62,7 +65,7 @@ export class AuthService {
           this.setStatus(true);
         }
       })
-      this.successLogin('Logueado Correctamente!');
+      this.succesToastMessage('inicio', '¡ Logueado Correctamente !');
       return user;
     }catch(error){
       this.getError(error.code,'Error al loguearse con Google');
@@ -77,9 +80,11 @@ export class AuthService {
     try {
       const { user } = await this.afsAuth.createUserWithEmailAndPassword( email, pwd);
 
-      this.saveClientData(user, username, telefono, domicilio);
-      this.successLogin('Registrado Correctamente !');
-      this.sendVerificationEmail();
+      await this.saveClientData(user, username, telefono, domicilio);
+
+      await this.sendVerificationEmail();
+
+      this.succesToastMessage('verified', '¡ Registrado Correctamente !');
       return user;
     }
     catch(error){
@@ -91,7 +96,7 @@ export class AuthService {
   //LogOut
   async logOut() {
     this.setStatus(false);
-    this.successLogin('Sesion Cerrada con Exito');
+    this.succesToastMessage('logout','Sesion Cerrada con Exito');
     try {
       await this.afsAuth.signOut();
     } catch (error) {
@@ -117,18 +122,20 @@ export class AuthService {
   }
 
   //Redireccionar al inicio
-  async successLogin(title:string): Promise<void>{
+  public async succesToastMessage(flag: string, title: string): Promise<void>{
     this.toastrSvc.success(title,'',{
       positionClass: 'toast-top-right',
       timeOut: 800
     })
     const user = await this.afsAuth.currentUser;
-
-    if(user && user.emailVerified){
-      this.router.navigate(['/inicio']);
-    } else {
-      this.router.navigate(['/auth/verification']);
-    }
+    console.log(user.emailVerified);
+    console.log(flag);
+    
+    if(!user.emailVerified && (flag === 'verified' || flag === 'inicio') ) { 
+      this.redirectHub('verified');
+      return ;
+    } 
+    this.redirectHub(flag);
   }
 
   //Guardar el cliente en una coleccion de Firestore
@@ -201,6 +208,24 @@ export class AuthService {
       this.openDelivery = true;
     }
   }
+
+  private redirectHub(flag: string): void {
+    switch (flag) {
+      case 'inicio':
+        this.router.navigate(['/inicio']);
+        break;
+      case 'verified':
+        this.router.navigate(['/auth/verification']);
+        break;
+      case 'logout':
+        this.router.navigate(['/auth/login']);
+        break;
+      default:
+        this.router.navigate(['/404']);
+        break;
+    }
+  }
+
 
   //Errores de firebase
   public getError(ind: string,titulo: string){

@@ -53,7 +53,7 @@ export class DomicilioFormComponent implements OnInit, OnChanges {
       this.mapComp.map.getLayers().removeAt(3);
       this.mapComp.userCoords = null;
       this.childDomicilioForm.patchValue({ latitud:0, longitud:0});
-      this.childDomicilioForm.reset()
+      this.childDomicilioForm.reset();
     }
   }
 
