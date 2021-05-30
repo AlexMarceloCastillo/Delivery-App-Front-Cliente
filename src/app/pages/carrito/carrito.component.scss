@@ -5,8 +5,8 @@ div.wrap-cart {
     margin: auto;
 
     img {
-      width: 500 px;
-      height: 300 px;
+      max-width: 100%;
+      height: auto;
     }
 
     div.wrap-button {
@@ -17,9 +17,6 @@ div.wrap-cart {
       button.btn {
         text-align: center;
         width: 60px;
-      }
-
-      button.btn {
         border: none !important;
       }
 
@@ -28,7 +25,11 @@ div.wrap-cart {
       }
     }
 
-    button.close {
+    button.btn-danger {
+      width: 100%;
+    }
+
+    button.btn-close {
       visibility: hidden;
     }
   }
@@ -43,18 +44,7 @@ img.img-fluid#emptyCart {
   margin: 3% 20%;
 }
 
-// .card#order {
-//   .card-footer.bg-transparent {
-//       display: flex;
-//       justify-content: space-evenly;
-//       .btn {
-//           width: 48%;
-//           margin: auto;
-//       }
-//   }
-// }
-
-// // Small devices (landscape phones, 576px and up)
+// Small devices (landscape phones, 576px and up)
 @media (min-width: 576px) {}
 
 // Medium devices (tablets, 768px and up)
@@ -64,37 +54,45 @@ img.img-fluid#emptyCart {
 @media (min-width: 992px) {
   div.wrap-cart {
 
-    div.card {
+    div.card.shadow {
       display: flex;
       flex-direction: row;
-      justify-content: baseline;
+
       width: 95%;
+      height: 150px;
 
       div.card-body {
-        h5 {
-          margin-top: 10px;
-        }
+        display: inherit;
+        justify-content: baseline;
 
         .wrap-button {
-          margin: 10% auto;
+          margin: auto;
+          align-self: center;
+        }
+
+        &:first-of-type {
+          width: 400px;
+          flex-direction: column;
+          justify-content: center;
+        }
+
+        &:last-of-type {
+          max-width: 7.5%;
+
+          align-self: center;
         }
       }
-
-      div.card-body:last-child {
-        display: flex;
-        align-content: center;
-        justify-content: baseline;
-      }
+      
 
       img {
         display: block;
-        width: 75px;
-        height: 75px;
-        margin: 3% 2.5%;
+        width: 100px;
+        height: 100px;
+        margin: auto 3%;
         border-radius: 5px;
       }
 
-      button.close {
+      button.btn-close {
         visibility: visible;
       }
 

@@ -2,12 +2,12 @@
   <ng-container *ngIf="itemsCart.length; else emptyCart">
 
     <div class="row mt-5">
-      <div class="col-12 col-md-9">
+      <div class="col-12 col-lg-9">
 
         <div class="wrap-cart mb-5">
           <ng-container *ngFor="let item of itemsCart">
 
-            <div class="card shadow-sm">
+            <div class="card shadow">
               <img [src]="item.img" loading="lazy">
               <div class="card-body">
                 <h5 class="card-title">{{item.denominacion}}</h5>
@@ -25,11 +25,10 @@
                 </div>
               </div>
               <div class="card-body">
-                <button class="btn btn-danger btn-block" id="mobile" (click)="deleteItemCart(item._id,$event)">
+                <button class="btn btn-danger" id="mobile" (click)="deleteItemCart(item._id,$event)">
                   Quitar del carrito
                 </button>
-                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"
-                  (click)="deleteItemCart(item._id,$event)"></button>
+                <button type="button" class="btn-close text-reset" aria-label="Close" (click)="deleteItemCart(item._id,$event)"></button>
               </div>
             </div>
 
@@ -38,7 +37,7 @@
         </div>
 
       </div>
-      <div class="col-12 col-md-3">
+      <div class="col-12 col-lg-3">
 
         <div class="card" id="order">
           <div class="card-header text-center">
