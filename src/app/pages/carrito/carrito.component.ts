@@ -9,6 +9,7 @@ import { PedidoService } from '@services/pedido/pedido.service';
 
 import { ItemCarrito } from '@models/itemCarrito.interface';
 import { Pedido } from '@models/pedido.interface';
+import { MdopagoService } from '@services/mdopago/mdopago.service';
 
 
 @Component({
@@ -30,26 +31,27 @@ export class CarritoComponent implements OnInit, DoCheck {
   public sumaryForm: FormGroup;
 
 
-  constructor( 
-    private carritoSvc:CarritoService, private auth: AuthService, 
+  constructor(
+    private carritoSvc:CarritoService, private auth: AuthService,
     private formDataBuildSvc: FormDataBuildService, private formBuilder: FormBuilder,
-    private pedidoSvc: PedidoService, private router: Router
+    private pedidoSvc: PedidoService, private router: Router,
+    private mdopagoSvc: MdopagoService
   ) { }
 
   ngOnInit(): void {
     this.carritoSvc.cart$.subscribe( cart => {
-        this.itemsCart = cart;
-        this.subTotal = cart.reduce( (sum, current) => sum + (current.precioVenta*current.cantidad),0);
+      this.itemsCart = cart;
+      this.subTotal = cart.reduce( (sum, current) => sum + (current.precioVenta*current.cantidad),0);
     }, error => { this.subTotal = 0, console.error(error) });
     this.sessionCart = JSON.parse(sessionStorage.getItem('cart'));
 
-    
+
     if (this.auth.isAuth) {
       this.auth.getDataClient().subscribe( user => {
         this.cliente = user;
         this.parentDomicilioForm = this.formDataBuildSvc.userDomicilioForm(user);
         this.buildSuamryForm();
-  
+
         this.parentDomicilioForm.get('local').valueChanges.subscribe( value => {
           this.updateSumaryForm(value);
         }, error => console.error(error));
@@ -62,20 +64,20 @@ export class CarritoComponent implements OnInit, DoCheck {
 
 
   /**
-   * Elimina un item del carrito permanentemente
-   * @param id: Id de un elemento
-   * @param e: Event
-   */
+  * Elimina un item del carrito permanentemente
+  * @param id: Id de un elemento
+  * @param e: Event
+  */
   public deleteItemCart(id: any, e: Event): void{
     e.preventDefault();
     this.carritoSvc.deleteItem(id);
   }
 
   /**
-   * Aumenta la cantidad de un item en el carrito
-   * @param item: ItemCart
-   * @param e: Event
-   */
+  * Aumenta la cantidad de un item en el carrito
+  * @param item: ItemCart
+  * @param e: Event
+  */
   public plus(item: ItemCarrito, e: Event): void{
     e.preventDefault();
     e.stopPropagation();
@@ -83,10 +85,10 @@ export class CarritoComponent implements OnInit, DoCheck {
   }
 
   /**
-   * Disminuye la cantidad de un item en el carrito
-   * @param item: ItemCart
-   * @param e: Event
-   */
+  * Disminuye la cantidad de un item en el carrito
+  * @param item: ItemCart
+  * @param e: Event
+  */
   public minus(item: ItemCarrito, e: Event): void{
     e.preventDefault();
     e.stopPropagation();
@@ -94,9 +96,9 @@ export class CarritoComponent implements OnInit, DoCheck {
   }
 
   /**
-   * Vacia el carrito
-   * @param e: Event
-   */
+  * Vacia el carrito
+  * @param e: Event
+  */
   public deleteCart(e: Event): void {
     e.preventDefault();
     this.carritoSvc.emptyCart();
@@ -152,17 +154,30 @@ export class CarritoComponent implements OnInit, DoCheck {
       },
       horaEstimadaFin,
       estado: 'en espera',
-      total: this.sumaryForm.value.subtotal,
+      total: this.sumaryForm.value.subTotal,
       fecha: new Date(),
       tipoEnvio: this.parentDomicilioForm.value.local? 0 : 1,
       DetallePedido: itemsPedido
     }
-
     this.pedidoSvc.savePedido(pedido).toPromise()
-      .then(data => {
-        this.carritoSvc.emptyCart();
+    .then(data => {
+      if(pedido.tipoEnvio == 1){
+        console.log('CREAR PEDIDO ONLINE')
+        let checkout = {
+          uidPedido: data._id,
+          uidUsuario: this.cliente.uid,
+          titulo: 'Good State Pedido',
+          descripcion: '',
+          precioTotal: data.total
+        }
+        this.mdopagoSvc.createCheckout(checkout).subscribe(link => {
+         window.location.assign(link)
+        })
+      }else {
         this.router.navigate([this.cliente.uid, 'pedidos', data._id]);
-      })
-      .catch(e=>console.error(e));
+      }
+      this.carritoSvc.emptyCart();
+    })
+    .catch(e=>console.error(e));
   }
 }

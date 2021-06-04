@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { Observable } from 'rxjs';
-
 import { PedidoService } from '@services/pedido/pedido.service';
 
 import { Pedido } from '@models/pedido.interface';
+import { MdopagoService } from '@services/mdopago/mdopago.service';
 
 
 @Component({
@@ -15,12 +14,12 @@ import { Pedido } from '@models/pedido.interface';
 })
 export class PedidoComponent implements OnInit {
 
-  public tiempo: any = { 
+  public tiempo: any = {
     calc: 0,
     hora: ""
   };
 
-  constructor(private route: ActivatedRoute, private pedidoSvc: PedidoService) { }
+  constructor(private route: ActivatedRoute, private pedidoSvc: PedidoService, private mdoSvc: MdopagoService) { }
 
 
   ngOnInit(): void {
@@ -28,6 +27,10 @@ export class PedidoComponent implements OnInit {
     let pid = this.route.snapshot.paramMap.get('pid');
     this.pedidoSvc.getOnePedido(pid).subscribe( pedido => {
       this.tiempo.calc = pedido.horaEstimadaFin;
+      if(pedido.tipoEnvio == 1 && pedido.estado == 'en espera'){
+        console.log('ENTRO')
+        this.mdoSvc.getPagoStatus(pedido._id).subscribe(e => console.log(e))
+      }
       this.convertidor();
     }, error => console.error(error));
   }
