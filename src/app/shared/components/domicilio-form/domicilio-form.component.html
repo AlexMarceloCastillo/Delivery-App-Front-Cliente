@@ -92,7 +92,7 @@
       </div>
       <div class="col-12 col-md-4"></div>
       <div class="col-12 col-md-4">
-        <button (click)="mostrarMapa()" class="btn btn-outline-cheese" data-bs-toggle="modal" data-bs-target="#registerMapModal">
+        <button (click)="mostrarMapa($event)" class="btn btn-outline-cheese" data-bs-toggle="modal" data-bs-target="#registerMapModal">
           <i class="fas fa-map-marked-alt"></i>
           Abrir mapa
         </button>
@@ -116,7 +116,7 @@
           aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <ol-map *ngIf="mostrar" [readonly]=false lat="-32.9022174" lon="-68.7979539">
+        <ol-map [readonly]=false lat="-32.9022174" lon="-68.7979539">
           <ol-radio lat="-32.9022174" lon="-68.7979539" radio="2500"></ol-radio>
           <ol-marker lat="-32.9022174" lon="-68.7979539"
             iconsrc="https://pics.freeicons.io/uploads/icons/png/3762277491606004682-512.png">
