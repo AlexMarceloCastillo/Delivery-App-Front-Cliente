@@ -17,6 +17,7 @@ import { ArtManufacturado } from "@models/artManufact.interface";
 export class ComidaDetalleComponent implements OnInit {
   public btnDisabled: boolean = true;
   public food: ArtManufacturado;
+  public tiempoEstimado: string;
 
 
   constructor(private cartSvc: CarritoService, private auth: AuthService, private artManufactSvc: ArtmanufactService, private route: ActivatedRoute) { }
@@ -26,7 +27,10 @@ export class ComidaDetalleComponent implements OnInit {
       this.btnDisabled = false;
     }
     let artManufact_id = this.route.snapshot.paramMap.get('id');
-    this.artManufactSvc.getOne(artManufact_id).subscribe( data => this.food = data, error => console.error(error));
+    this.artManufactSvc.getOne(artManufact_id).subscribe( data => { 
+      this.food = data;
+      this.calcTiempo(data.tiempoEstimado);
+    }, error => console.error(error));
   }
 
 
@@ -38,4 +42,20 @@ export class ComidaDetalleComponent implements OnInit {
     e.stopPropagation();
   }
 
+
+  private calcTiempo(tiempo) {
+    let num = tiempo;
+
+    let hours = (num / 60);
+    let rhours = Math.floor(hours);
+
+    let minutes = (hours - rhours) * 60;
+    let rminutes = Math.round(minutes);
+
+    if(rhours >= 1){
+      this.tiempoEstimado = `${rhours} hora(s) ${rminutes} minuto(s)`;
+    } else {
+      this.tiempoEstimado = `${rminutes} minuto(s)`
+    }
+  }
 }

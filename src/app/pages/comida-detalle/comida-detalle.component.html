@@ -1,4 +1,4 @@
-<div class="container mobile-tablet mt-4 mb-4">
+<!-- <div class="container mobile-tablet mt-4 mb-4">
   <div class="card mb-3">
     <img class="card-img-top" src="https://place-hold.it/500x300" alt="Card image cap">
     <div class="card-body">
@@ -12,7 +12,7 @@
         </ol>
       </nav>
       <h4>{{food.denominacion}}</h4>
-      <h5 class="mt-2">Precio: ${{food.precioVenta}},00 ARS</h5> -->
+      <h5 class="mt-2">Precio: ${{food.precioVenta}},00 ARS</h5>
       <h6>Precio con descuento por retiro en local (10%): ${{food.precioVenta-(food.precioVenta*0.1)}},00 ARS</h6>
       <p class="text-success"><i class="fas fa-check"></i> Stock Disponible</p>
       <p>Tiempo estimado de preparacion: 1hr</p>
@@ -24,11 +24,11 @@
     </div>
   </div>
 
-</div>
+</div> -->
 
 
 <!-- DESKTOP ONLY -->
-<div class="container desktop mt-4 mb-4">
+<!-- <div class="container desktop mt-4 mb-4">
   <nav>
     <ol class="breadcrumb border-dark border-bottom">
       <li><a href="#">Categoria</a></li>
@@ -55,4 +55,55 @@
       <button type="button" class="btn mt-2 mb-2 btn-outline-burger" (click)="addItemCart(food,$event)" [disabled]="btnDisabled">Agregar al carrito<i class="fas fa-cart-plus"></i></button>
     </div>
   </div>
-</div> 
+</div>  -->
+
+<div class="container">
+  <div class="row my-3">
+    <div class="col-12">
+
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">Home</li>
+          <li class="breadcrumb-item">Library</li>
+          <li class="breadcrumb-item active" aria-current="page">Data</li>
+        </ol>
+      </nav>
+
+    </div>
+  </div>
+  <div class="row mb-5">
+    <div class="col-12 col-lg-7">
+
+      <figure class="figure">
+        <img [src]='food.img' class="figure-img img-fluid rounded" alt="Comida">
+        <figcaption class="figure-caption">{{food.denominacion}}. Imagenes ilustrativas.</figcaption>
+      </figure>
+
+    </div>
+    <div class="col-12 col-lg-5">
+      <div class="card border-light shadow-sm">
+        <div class="card-body">
+          <h3 class="card-title">{{food.denominacion}}</h3>
+          <h5 class="card-subtitle my-3">{{food.precioVenta}} $ ARS</h5>
+          <h6 class="card-subtitle text-muted">
+            <del>{{food.precioVenta}} $</del> -> {{food.precioVenta-(food.precioVenta*0.1)}}$, Con retiro en Local.
+          </h6>
+        </div>
+        <div class="card-body">
+          <ng-container *ngIf="food.stock; else noStock">
+            <p class="card-text"> Stock: disponible </p>
+          </ng-container>
+          <ng-template #noStock>
+            <p class="card-text"> Stock: no disponible </p>
+          </ng-template>
+        </div>
+        <div class="card-body">
+          <p class="card-text" > Tiempo en cocina: {{tiempoEstimado}}</p>
+        </div>
+        <div class="card-body d-grid">
+          <button type="button" class="btn btn-outline-burger" (click)="addItemCart(food,$event)">Agregar al carrito</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

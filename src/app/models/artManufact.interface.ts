@@ -14,6 +14,7 @@ export interface ArtManufacturado {
             ArtInsumo: ArtInsumo
         }
     ],
+    stock: boolean,
     RubroGeneral: RubroGeneral,
 }
 
