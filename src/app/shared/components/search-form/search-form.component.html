@@ -1,0 +1,85 @@
+<div class="search-wrapper">
+  <div class="search-bar">
+    <input [(ngModel)]="search" (ngModelChange)="searchChange($event)" type="search" class="search shadow" placeholder="Buscar . . .">
+    <button (click)="searchQuery()" class="btn btn-cheese">
+      <i class="fas fa-search"></i>
+    </button>
+    <button id="btnFilter" class="btn btn-cheese" data-bs-toggle="modal" data-bs-target="#modalFilter">
+      <i class="fas fa-sliders-h"></i>
+    </button>
+    <div class="list-sample ">
+      <div class="card mb-3" *ngFor="let item of datalist$ | async" (click)="viewDetail(item._id)">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img class="list-img" src="{{item.img}}" alt="...">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h6 class="card-title">{{item.denominacion}}</h6>
+              <h6 class="card-text">${{item.precioVenta}}</h6>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modalFilter" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Filtrar</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="input-group mb-3">
+          <label class="input-group-text" for="inputGroupSelect01">Filtrar por</label>
+          <select class="form-select" id="inputGroupSelect01" [(ngModel)]="filter" (ngModelChange)="filterChange($event)">
+            <option [value]="'drinkfood'" selected>Comida/Bebida</option>
+            <option [value]="'food'">Solo Comida</option>
+            <option [value]="'drink'">Solo Bebida</option>
+          </select>
+        </div>
+        <div class="food" *ngIf="foodCheck">
+          <h5>Comidas: </h5>
+          <div class="form-check" *ngFor="let comida of categoryFood">
+            <input class="form-check-input" type="checkbox" [value]="comida" id="defaultCheck1" checked>
+            <label class="form-check-label" for="defaultCheck1">
+              {{comida}}
+            </label>
+          </div>
+        </div>
+
+        <div class="drink" *ngIf="drinkCheck">
+          <h5>Bebidas: </h5>
+          <input class="form-check-input" type="checkbox" name="" [value]="ALL" id="defaultCheck1" checked>
+          <label class="form-check-label" for="defaultCheck1">
+            TODO
+          </label>
+          <hr>
+          <h6>Bebidas Sin Alcohol</h6>
+          <div class="form-check" *ngFor="let bebida of noAlcoholDrink">
+            <input class="form-check-input" type="checkbox" [value]="bebida" id="defaultCheck1" checked>
+            <label class="form-check-label" for="defaultCheck1">
+              {{bebida}}
+            </label>
+          </div>
+          <hr>
+          <h6>Bebidas Con Alcohol</h6>
+          <div class="form-check" *ngFor="let bebida of alcoholDrink">
+            <input class="form-check-input" type="checkbox" [value]="bebida" id="defaultCheck1" checked>
+            <label class="form-check-label" for="defaultCheck1">
+              {{bebida}}
+            </label>
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary">Aplicar</button>
+      </div>
+    </div>
+  </div>
+</div>

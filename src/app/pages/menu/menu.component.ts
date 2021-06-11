@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
 import { CarritoService } from '@services/carrito/carrito.service';
-import { ArtmanufactService } from '@services/artManufact/artmanufact.service';
-
-import { ItemCarrito } from '@models/itemCarrito.interface';
-import { ArtManufacturado } from "@models/artManufact.interface";
 import { Observable } from 'rxjs';
+import { MenuService } from '@services/menu/menu.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-menu',
@@ -13,7 +11,8 @@ import { Observable } from 'rxjs';
   styleUrls: ['./menu.component.scss']
 })
 export class MenuComponent implements OnInit {
-  public artManufact$: Observable<ArtManufacturado[]>;
+  public search: string = '';
+  public menu$: Observable<any[]>;
   public categories: any[] = [
     {
       imgPath: "../../../assets/img/web/menu/pizza-slice.png",
@@ -33,10 +32,17 @@ export class MenuComponent implements OnInit {
     },
   ];
 
-  constructor(private cartSvc: CarritoService, private artManufactSvc: ArtmanufactService) { }
+  constructor(private cartSvc: CarritoService, private menuSvc: MenuService, private router: Router) { }
 
 
   ngOnInit(): void {
-    this.artManufact$ = this.artManufactSvc.getAll();
+    this.menu$ = this.menuSvc.getAllMenu();
+  }
+
+  public searchQuery(){
+    this.router.navigate(['search'],{queryParams: {query: this.search.trim()}})
+  }
+  public searchIcon(query:string){
+    this.router.navigate(['search'],{queryParams:{query: query}})
   }
 }

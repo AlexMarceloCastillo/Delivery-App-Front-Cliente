@@ -8,12 +8,13 @@ import { RouterModule } from '@angular/router';
 import { OlmapsModule } from '../olmaps/olmaps.module';
 import { UsuarioFormComponent } from './components/usuario-form/usuario-form.component';
 import { DomicilioFormComponent } from './components/domicilio-form/domicilio-form.component';
+import { SearchFormComponent } from './components/search-form/search-form.component';
 
 
 @NgModule({
-  declarations: [ 
-    UsuarioFormComponent, 
-    DomicilioFormComponent
+  declarations: [
+    UsuarioFormComponent,
+    DomicilioFormComponent, SearchFormComponent
   ],
   imports: [
     CommonModule,
@@ -31,8 +32,9 @@ import { DomicilioFormComponent } from './components/domicilio-form/domicilio-fo
     HttpClientModule,
     ToastrModule,
     OlmapsModule,
-    UsuarioFormComponent, 
-    DomicilioFormComponent
+    UsuarioFormComponent,
+    DomicilioFormComponent,
+    SearchFormComponent
   ]
 })
 export class SharedModule { }
