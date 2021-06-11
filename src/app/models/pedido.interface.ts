@@ -7,6 +7,9 @@ export interface Pedido {
     horaEstimadaFin: number,
     tipoEnvio: number,
     total: number,
+    MdoPago ?: {
+      _id: any
+    },
     Cliente: {
         firebase_id : string,
         Domicilio ?: Domicilio

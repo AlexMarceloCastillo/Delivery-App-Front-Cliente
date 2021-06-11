@@ -13,6 +13,7 @@ import { MenuComponent } from '@pages/menu/menu.component';
 import { P404Component } from '@pages/p404/p404.component';
 import { PedidoComponent } from '@pages/pedido/pedido.component';
 import { LegalComponent } from '@pages/legal/legal.component';
+import { SearchComponent } from '@pages/search/search.component';
 
 
 const routerOptions: ExtraOptions = {
@@ -27,6 +28,7 @@ const routes: Routes = [
   { path: ':uid/pedidos/:pid', component: PedidoComponent, canActivate:[AuthGuard] },
   { path: ':uid/pedidos', component: ListaPedidoComponent, canActivate:[AuthGuard] },
   { path: 'menu', component: MenuComponent },
+  { path: 'search', component: SearchComponent },
   { path: 'comida/:id', component: ComidaDetalleComponent },
   { path: 'legal', component: LegalComponent },
   { path: 'auth', loadChildren: () => import('./auth/auth.module').then( m => m.AuthModule )},

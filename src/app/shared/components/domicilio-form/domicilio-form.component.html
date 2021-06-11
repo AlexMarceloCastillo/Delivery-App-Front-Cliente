@@ -109,26 +109,26 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="registerMapLabel">Mapa</h5>
-        <button #btnClose (click)="cleanMap()" type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        <button class="d-none" #btnCloseComplete type="hidden" name="button" data-bs-dismiss="modal"
-          aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <ol-map [readonly]=false lat="-32.9022174" lon="-68.7979539">
-          <ol-radio lat="-32.9022174" lon="-68.7979539" radio="2500"></ol-radio>
-          <ol-marker lat="-32.9022174" lon="-68.7979539"
-            iconsrc="https://pics.freeicons.io/uploads/icons/png/3762277491606004682-512.png">
-          </ol-marker>
-        </ol-map>
-        <p id="infocoords"></p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" (click)="cleanMap()" class="btn btn-outline-dark" data-bs-dismiss="modal"
-          aria-label="Close">Close</button>
-        <button type="button" class="btn btn-cheese" (click)="saveCoords()">Save changes</button>
-      </div>
+        <button #btnClose (click)="cleanMap()" type="button" class="btn-close close" data-bs-dismiss="modal" aria-label="Close"></button>
+      <button class="d-none" #btnCloseComplete type="hidden" name="button" data-bs-dismiss="modal"
+      aria-label="Close"></button>
+      <button class="d-none" #btnCloseComplete type="hidden" name="button" data-bs-dismiss="modal"
+      aria-label="Close"></button>
     </div>
+    <div class="modal-body">
+      <ol-map [readonly]=false lat="-32.9022174" lon="-68.7979539">
+        <ol-radio lat="-32.9022174" lon="-68.7979539" radio="2500"></ol-radio>
+        <ol-marker lat="-32.9022174" lon="-68.7979539"
+        iconsrc="https://pics.freeicons.io/uploads/icons/png/3762277491606004682-512.png">
+      </ol-marker>
+    </ol-map>
+    <p id="infocoords"></p>
   </div>
+  <div class="modal-footer">
+    <button type="button" (click)="cleanMap()" class="btn btn-outline-dark" data-bs-dismiss="modal"
+    aria-label="Close">Close</button>
+    <button type="button" class="btn btn-cheese" (click)="saveCoords()">Save changes</button>
+  </div>
+</div>
+</div>
 </div>
