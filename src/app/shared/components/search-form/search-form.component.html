@@ -7,22 +7,25 @@
     <button id="btnFilter" class="btn btn-cheese" data-bs-toggle="modal" data-bs-target="#modalFilter">
       <i class="fas fa-sliders-h"></i>
     </button>
-    <div class="list-sample ">
-      <div class="card mb-3" *ngFor="let item of datalist$ | async" (click)="viewDetail(item._id)">
-        <div class="row g-0">
-          <div class="col-md-4">
-            <img class="list-img" src="{{item.img}}" alt="...">
+  </div>
+  <ng-container *ngIf="datalist$ | async as datalist">
+    <div class="list-sample">
+      <div class="card">
+        
+        <ng-container *ngIf="datalist.length; else noResult">
+          <div class="list-group list-group-flush" *ngFor="let item of datalist">
+              <a class="list-group-item" [routerLink]="[ '/comida', item._id ]">{{item.denominacion}}</a>
           </div>
-          <div class="col-md-8">
-            <div class="card-body">
-              <h6 class="card-title">{{item.denominacion}}</h6>
-              <h6 class="card-text">${{item.precioVenta}}</h6>
-            </div>
-          </div>
-        </div>
+        </ng-container>
+        <ng-template #noResult>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">Sin resultados</li>
+          </ul>
+        </ng-template>
+
       </div>
     </div>
-  </div>
+  </ng-container>
 </div>
 
 <div class="modal fade" id="modalFilter" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

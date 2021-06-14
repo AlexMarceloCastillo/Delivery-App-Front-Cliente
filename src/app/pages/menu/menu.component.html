@@ -1,23 +1,12 @@
-
-<app-search-form></app-search-form>
-<div class="container-fluid">
-  <div class="row my-3" id="categorias">
-    <!-- Filter Data -->
-    <div class="col-6 col-md-3" *ngFor="let category of categories">
-      <div class="icon-card-category shadow-lg">
-        <img [src]="category.imgPath" alt="category.name" (click)="searchIcon(category.name)">
-      </div>
-    </div>
-  </div>
+<shared-search-form></shared-search-form>
+<div class="container" *ngIf="menu$ | async as menu; else load">
   <div class="row">
     <!-- Products -->
     <div class="col-12">
-      <ng-container *ngIf="menu$ | async as menu; else load">
         <app-card [element]="menu"></app-card>
-      </ng-container>
-      <ng-template #load>
-        <p>Loading . . .</p>
-      </ng-template>
     </div>
   </div>
 </div>
+<ng-template #load>
+  <shared-spinner-load></shared-spinner-load>
+</ng-template>

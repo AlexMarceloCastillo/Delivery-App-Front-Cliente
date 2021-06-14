@@ -13,7 +13,7 @@ import { MdopagoService } from '@services/mdopago/mdopago.service';
   styleUrls: ['./pedido.component.scss']
 })
 export class PedidoComponent implements OnInit {
-
+  public pedido: Pedido;
   public tiempo: any = {
     calc: 0,
     hora: ""
@@ -26,6 +26,8 @@ export class PedidoComponent implements OnInit {
     // this.convertidor();
     let pid = this.route.snapshot.paramMap.get('pid');
     this.pedidoSvc.getOnePedido(pid).subscribe( pedido => {
+      console.log(pedido);
+      this.pedido = pedido;
       this.tiempo.calc = pedido.horaEstimadaFin;
       if(pedido.tipoEnvio == 1 && pedido.estado == 'en espera'){
         console.log('ENTRO')

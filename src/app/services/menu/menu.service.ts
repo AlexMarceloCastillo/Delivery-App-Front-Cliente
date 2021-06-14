@@ -15,6 +15,10 @@ export class MenuService {
     return this.http.get<any[]>(this.URL_API)
   }
 
+  public getOneMenu(id: any): Observable<any>{
+    return this.http.get<any>(`${this.URL_API}/${id}`);
+  }
+
   public search(query:string): Observable<any[]>{
     let params = new HttpParams();
     params = params.append('search', query);

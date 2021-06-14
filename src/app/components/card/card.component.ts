@@ -4,7 +4,6 @@ import { CarritoService } from '@services/carrito/carrito.service';
 import { AuthService } from '@auth/services/auth.service';
 
 import { ItemCarrito } from '@models/itemCarrito.interface';
-// import { ArtManufacturado } from '@models/artManufact.interface';
 
 
 @Component({
@@ -13,7 +12,7 @@ import { ItemCarrito } from '@models/itemCarrito.interface';
   styleUrls: ['./card.component.scss']
 })
 export class CardComponent implements OnInit {
-  // public btnDisabled: boolean = true;
+  public btnDisabled: boolean = true;
 
   @Input() element: ItemCarrito[];
 
@@ -21,10 +20,10 @@ export class CardComponent implements OnInit {
   constructor(private cartSvc: CarritoService, private auth: AuthService) { }
 
 
-  ngOnInit(): void { 
-    // if(this.auth.isAuth) {
-    //   this.btnDisabled = false;
-    // }
+  ngOnInit(): void {
+    this.auth.isAuth().subscribe(data => {
+      if(data) this.btnDisabled = false;
+    }, error => console.error(error));
   }
 
   public addItemCart(food: any, e: Event): void {

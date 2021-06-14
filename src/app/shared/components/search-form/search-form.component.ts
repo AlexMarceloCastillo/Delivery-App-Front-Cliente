@@ -4,7 +4,7 @@ import { MenuService } from '@services/menu/menu.service';
 import { Observable } from 'rxjs';
 
 @Component({
-  selector: 'app-search-form',
+  selector: 'shared-search-form',
   templateUrl: './search-form.component.html',
   styleUrls: ['./search-form.component.scss']
 })

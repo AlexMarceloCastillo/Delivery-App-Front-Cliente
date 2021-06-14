@@ -3,10 +3,10 @@ import { ActivatedRoute } from '@angular/router';
 
 import { AuthService } from '@auth/services/auth.service';
 import { CarritoService } from '@services/carrito/carrito.service';
-import { ArtmanufactService } from '@services/artManufact/artmanufact.service';
 
 import { ItemCarrito } from '@models/itemCarrito.interface';
-import { ArtManufacturado } from "@models/artManufact.interface";
+import { MenuService } from '@services/menu/menu.service';
+import { RubartService } from '@services/rubroArticulo/rubart.service';
 
 
 @Component({
@@ -16,20 +16,35 @@ import { ArtManufacturado } from "@models/artManufact.interface";
 })
 export class ComidaDetalleComponent implements OnInit {
   public btnDisabled: boolean = true;
-  public food: ArtManufacturado;
+  public tipoArt = "";
+  public food: any;
   public tiempoEstimado: string;
+  public rubArt: any;
 
 
-  constructor(private cartSvc: CarritoService, private auth: AuthService, private artManufactSvc: ArtmanufactService, private route: ActivatedRoute) { }
+  constructor(
+    private cartSvc: CarritoService, private auth: AuthService, private menuSvc: MenuService, 
+    private rubArtSvc: RubartService, private route: ActivatedRoute
+  ) { }
 
+  
   ngOnInit(): void {
-    if(this.auth.isAuth) {
-      this.btnDisabled = false;
-    }
-    let artManufact_id = this.route.snapshot.paramMap.get('id');
-    this.artManufactSvc.getOne(artManufact_id).subscribe( data => { 
-      this.food = data;
-      this.calcTiempo(data.tiempoEstimado);
+    this.auth.isAuth().subscribe(data => {
+      if(data) this.btnDisabled = false;
+    }, error => console.error(error));
+
+    let menuId = this.route.snapshot.paramMap.get('id');
+
+    this.menuSvc.getOneMenu(menuId).subscribe( item => {
+      this.tipoArt = item.tipo;
+      this.food = item.data;
+      this.calcTiempo(item.data.tiempoEstimado);
+
+      if(this.tipoArt==='artInsumo') {
+        this.rubArtSvc.getOneRubArt(item.data.RubArt._id).subscribe( data => {
+          this.rubArt = data[0];
+        }, error => console.error(error) );
+      }
     }, error => console.error(error));
   }
 

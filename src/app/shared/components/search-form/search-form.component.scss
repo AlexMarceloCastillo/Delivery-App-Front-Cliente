@@ -5,14 +5,14 @@
   height: 25vh;
   margin-bottom: 30px;
   padding: 0.05px;
+  position: relative;
 
   div.search-bar {
     max-width: 80%;
     height: 40px;
-
+    position: relative;
     margin: 20% auto;
     display: flex;
-    position: relative;
     justify-content: center;
     align-content: center;
 
@@ -71,22 +71,17 @@
       vertical-align: bottom;
     }
   }
-}
-
-.list-sample {
-  z-index: 99;
-  background-color: white;
-  width: 100%;
-  position: absolute;
-  margin-top: 40px;
-  text-align: center;
-}
-.list-img{
-  width: 100%;
-  height: 140px;
-}
-.card{
-  border-radius: 16px;
+  // Data list
+  .list-sample {
+    z-index: 3000;
+    width: 100%;
+    position: absolute;
+    top: 125px;
+  }
+  .card{
+    width: 70%;
+    margin: 0 15%;
+  }
 }
 
 // Small devices (landscape phones, 576px and up)
@@ -117,24 +112,11 @@
         line-height: 11px;
       }
     }
+    // Data list
+    .list-sample {
+      top: 165px;
+    }
   }
-  .list-sample {
-    margin-top: 52px;
-  }
-  .list-img{
-    width: 100%;
-    height: 160px;
-  }
-  .card{
-    box-shadow: 20px 20px 75px rgba(0,0,0,0.4);
-  }
-  .card-title{
-    font-size: 24px;
-  }
-  .card-text{
-    font-size: 16px;
-  }
-
 }
 
 // Large devices (desktops, 992px and up)
@@ -160,23 +142,14 @@
         line-height: 18px;
       }
     }
-  }
-  .list-sample {
-    width: 75%;
-    margin: auto;
-    margin-top: 62px;
-  }
-  .list-img{
-    height: 180px;
-  }
-  .card-title{
-    font-size: 28px;
-  }
-  .card-text{
-    font-size: 18px;
-  }
-  .card{
-    cursor: pointer;
+    // Data list
+    .list-sample {
+      top: 215px;
+    }
+    .card{
+      width: 65%;
+      margin: 0 17.5%;
+    }
   }
 }
 
@@ -200,8 +173,19 @@
         font-size: 18px;
       }
     }
+
+    // Data list
+    .list-sample {
+      top: 287px;
+    }
   }
-  .list-sample {
-    margin-top: 70px;
+}
+
+@media (min-width: 1400px) {
+  .search-wrapper {
+    // Data list
+    .list-sample {
+      top: 332px;
+    }
   }
 }

@@ -43,10 +43,10 @@ export class DomicilioFormComponent implements OnInit, OnChanges {
   /*    Funciones de el mapa    */
 
   public mostrarMapa(e: Event){
-    e.preventDefault()
-    setTimeout(()=>{
-    this.mapComp.map.updateSize()
-    },100)
+    e.preventDefault();
+    setTimeout(() => {
+      this.mapComp.map.updateSize()
+    }, 1000)
 
   }
 

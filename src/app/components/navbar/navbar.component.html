@@ -1,9 +1,11 @@
-<div class="text-light text-center p-1" [ngClass]="{'bg-lettuce':this.isOpen,'bg-ketchup':!this.isOpen}">
+<div class="navbar fixed-top d-flex justify-content-center text-white" [ngClass]="{'bg-lettuce':this.isOpen,'bg-ketchup':!this.isOpen}">
   <ng-container *ngIf="this.isOpen; else closed">
-    Local Abierto <i class="fas fa-lock-open"></i>
+      <span>Local Abierto <i class="fas fa-lock-open"></i></span>
   </ng-container>
   <ng-template #closed>
-    Local Cerrado <i class="fas fa-lock"></i> No es posible realizar pedidos,ver <a routerLink="/inicio" class="link-light" fragment="horario">horarios</a>
+    <span>
+      Local Cerrado <i class="fas fa-lock"></i> Ver <a routerLink="/inicio" class="link-light" fragment="horario">horarios</a>
+    </span>
   </ng-template>
 </div>
 <nav class="navbar navbar-expand-lg navbar-light bg-mayo shadow-sm">

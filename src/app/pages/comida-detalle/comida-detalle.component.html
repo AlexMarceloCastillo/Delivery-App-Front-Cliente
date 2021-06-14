@@ -1,73 +1,19 @@
-<!-- <div class="container mobile-tablet mt-4 mb-4">
-  <div class="card mb-3">
-    <img class="card-img-top" src="https://place-hold.it/500x300" alt="Card image cap">
-    <div class="card-body">
-      <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="#">Categoria</a></li>
-          <li><a href="#"><i class="fas fa-chevron-down"></i></a>  </li>
-          <li class="breadcrumb-item"><a href="#">SubCategoria</a></li>
-          <li><a href="#"><i class="fas fa-chevron-down"></i></a>  </li>
-          <li class="breadcrumb-item"><a href="#">{{food.denominacion}}</a></li>
-        </ol>
-      </nav>
-      <h4>{{food.denominacion}}</h4>
-      <h5 class="mt-2">Precio: ${{food.precioVenta}},00 ARS</h5>
-      <h6>Precio con descuento por retiro en local (10%): ${{food.precioVenta-(food.precioVenta*0.1)}},00 ARS</h6>
-      <p class="text-success"><i class="fas fa-check"></i> Stock Disponible</p>
-      <p>Tiempo estimado de preparacion: 1hr</p>
-      <p>Formas de pago disponibles:</p>
-      <li>Efectivo</li>
-      <li>Credito</li>
-      <li>Debito</li>
-      <button type="button" class="btn mt-2 mb-2 btn-outline-burger" (click)="addItemCart(food,$event)" [disabled]="btnDisabled">Agregar al carrito<i class="fas fa-cart-plus"></i></button>
-    </div>
-  </div>
-
-</div> -->
-
-
-<!-- DESKTOP ONLY -->
-<!-- <div class="container desktop mt-4 mb-4">
-  <nav>
-    <ol class="breadcrumb border-dark border-bottom">
-      <li><a href="#">Categoria</a></li>
-      <li><a href="#"><i class="fas fa-chevron-right"></i></a>  </li>
-      <li><a href="#">SubCategoria</a></li>
-      <li><a href="#"><i class="fas fa-chevron-right"></i></a>  </li>
-      <li><a href="#">{{food.denominacion}}</a></li>
-    </ol>
-  </nav>
-  <div class="detalle col-md-12">
-    <div class="img">
-      <img src="{{food.img}}" alt="">
-    </div>
-    <div class="info border-dark border-left">
-      <h4>{{food.denominacion}}</h4>
-      <h5 class="mt-2">Precio: ${{food.precioVenta}},00 ARS</h5>
-      <h6>Precio con descuento por retiro en local (10%): ${{food.precioVenta-(food.precioVenta*0.1)}},00 ARS</h6>
-      <p class="text-success"><i class="fas fa-check"></i> Stock Disponible</p>
-      <p>Tiempo estimado de preparacion: 1hr</p>
-      <p>Formas de pago disponibles:</p>
-      <li>Efectivo</li>
-      <li>Credito</li>
-      <li>Debito</li>
-      <button type="button" class="btn mt-2 mb-2 btn-outline-burger" (click)="addItemCart(food,$event)" [disabled]="btnDisabled">Agregar al carrito<i class="fas fa-cart-plus"></i></button>
-    </div>
-  </div>
-</div>  -->
-
-<div class="container">
+<div class="container" *ngIf="food; else noData">
   <div class="row my-3">
     <div class="col-12">
 
-      <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item">Home</li>
-          <li class="breadcrumb-item">Library</li>
-          <li class="breadcrumb-item active" aria-current="page">Data</li>
+      <ng-container *ngIf="tipoArt==='artInsumo'; else rubGnl">
+        <ol class="breadcrumb" *ngIf="rubArt">
+          <li class="breadcrumb-item">{{rubArt.rubroSuperior[0].denominacion}}</li>
+          <li class="breadcrumb-item">{{rubArt.denominacion}}</li>
         </ol>
-      </nav>
+      </ng-container>
+      <ng-template #rubGnl>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">Comida</li>
+          <li class="breadcrumb-item">{{food.RubroGeneral.denominacion}}</li>
+        </ol>
+      </ng-template>
 
     </div>
   </div>
@@ -91,19 +37,22 @@
         </div>
         <div class="card-body">
           <ng-container *ngIf="food.stock; else noStock">
-            <p class="card-text"> Stock: disponible </p>
+            <p class="card-text"> Stock: <span class="text-success">disponible</span> </p>
           </ng-container>
           <ng-template #noStock>
-            <p class="card-text"> Stock: no disponible </p>
+            <p class="card-text"> Stock: <span class="text-danger">no disponible</span> </p>
           </ng-template>
         </div>
-        <div class="card-body">
+        <div class="card-body" *ngIf="tipoArt!=='artInsumo'">
           <p class="card-text" > Tiempo en cocina: {{tiempoEstimado}}</p>
         </div>
         <div class="card-body d-grid">
-          <button type="button" class="btn btn-outline-burger" (click)="addItemCart(food,$event)">Agregar al carrito</button>
+          <button type="button" class="btn btn-outline-burger" (click)="addItemCart(food,$event)" [disabled]="btnDisabled || !food.stock">Agregar al carrito</button>
         </div>
       </div>
     </div>
   </div>
 </div>
+<ng-template #noData>
+  <shared-spinner-load></shared-spinner-load>
+</ng-template>
