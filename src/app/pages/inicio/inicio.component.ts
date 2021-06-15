@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { ConfigService } from '@services/config/config.service';
 import { Overlay } from 'ol';
+import { Observable } from 'rxjs/internal/Observable';
 import { OlmapComponent } from 'src/app/olmaps/olmap/olmap.component';
 import { OlmarkerComponent } from 'src/app/olmaps/olmarker/olmarker.component';
 @Component({
@@ -12,6 +14,7 @@ export class InicioComponent implements AfterViewInit{
 
   @ViewChild(OlmapComponent,{static: false}) mapComp: OlmapComponent;
   @ViewChild(OlmarkerComponent,{static: false}) markerComp: OlmarkerComponent;
+  public config$: Observable<any>;
 
   public cardsInfo: any = [
     {
@@ -37,7 +40,9 @@ export class InicioComponent implements AfterViewInit{
   scrHeight:any;
   scrWidth:any;
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient, private configSvc: ConfigService) {
+    this.config$ = this.configSvc.getFirstConfig()
+  }
 
   ngAfterViewInit(): void {
     const container = document.getElementById('popup');

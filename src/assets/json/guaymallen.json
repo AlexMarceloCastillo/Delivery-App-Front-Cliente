@@ -14,5 +14,17 @@
    {
      "id":4,
      "denominacion":"Villa Nueva"
+   },
+   {
+     "id":5,
+     "denominacion":"Nueva Ciudad"
+   },
+   {
+     "id":6,
+     "denominacion":"Las Cañas"
+   },
+   {
+     "id":7,
+     "denominacion":"Belgrano"
    }
 ]

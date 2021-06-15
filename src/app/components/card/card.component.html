@@ -12,10 +12,10 @@
         </div>
         <div class="card-body">
           <ng-container *ngIf="!item.stock; else noStock">
-            <p class="card-text text-danger">Sin stock</p>
+            <p class="card-text text-danger"><i class="far fa-times-circle"></i> Sin stock</p>
           </ng-container>
           <ng-template #noStock>
-            <p class="card-text text-success">Stock disponible</p>
+            <p class="card-text text-success"><i style="color:green" class="far fa-check-circle"></i> Stock disponible</p>
           </ng-template>
         </div>
         <div class="card-body">

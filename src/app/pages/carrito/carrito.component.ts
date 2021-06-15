@@ -135,24 +135,30 @@ export class CarritoComponent implements OnInit, DoCheck {
 
   public onSubmitPedido(e: Event): void {
     e.preventDefault();
-    let horaEstimadaFin = this.itemsCart.reduce((sum,item)=> sum + (item.tiempoEstimado)*item.cantidad,0);
+    console.log(this.itemsCart)
+    let horaEstimadaFin = this.itemsCart.reduce((sum,item)=> item.tiempoEstimado ? sum + (item.tiempoEstimado)*item.cantidad : 0,0);
     let itemsPedido: any = [];
-
+    let descripcion: any = [];
     this.itemsCart.forEach( item => {
-      let aux = {
+      descripcion.push(item.denominacion)
+      let aux = item.tiempoEstimado ? {
         cantidad: item.cantidad,
         subTotal: item.cantidad*item.precioVenta,
         ArtManufact: { _id: item._id}
+      } : {
+        cantidad: item.cantidad,
+        subTotal: item.cantidad*item.precioVenta,
+        ArticuloInsumo: {_id: item._id}
       };
       itemsPedido.push(aux);
     });
-
+    console.log(descripcion)
     let pedido: Pedido = {
       Cliente: {
         firebase_id: this.cliente.uid,
         Domicilio: this.parentDomicilioForm.value
       },
-      horaEstimadaFin,
+      horaEstimadaFin: this.parentDomicilioForm.value.local ? horaEstimadaFin : horaEstimadaFin +10,
       estado: 'en espera',
       total: this.sumaryForm.value.subTotal,
       fecha: new Date(),
@@ -162,12 +168,11 @@ export class CarritoComponent implements OnInit, DoCheck {
     this.pedidoSvc.savePedido(pedido).toPromise()
     .then(data => {
       if(pedido.tipoEnvio == 1){
-        console.log('CREAR PEDIDO ONLINE')
         let checkout = {
           uidPedido: data._id,
           uidUsuario: this.cliente.uid,
           titulo: 'Good State Pedido',
-          descripcion: '',
+          descripcion: descripcion.toString(),
           precioTotal: data.total
         }
         this.mdopagoSvc.createCheckout(checkout).subscribe(link => {

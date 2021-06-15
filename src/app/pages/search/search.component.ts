@@ -18,7 +18,7 @@ export class SearchComponent implements OnInit {
   constructor(private activatedRoute: ActivatedRoute, private menuSvc: MenuService, private cartSvc: CarritoService) {
     this.activatedRoute.queryParams.subscribe((e)=>{
       this.query = e.query;
-      this.menuSvc.search(this.query).subscribe( e => this.menuSearched = e)
+      this.menuSvc.search(this.query,e.filter).subscribe( e => this.menuSearched = e)
     })
   }
 
@@ -28,10 +28,6 @@ export class SearchComponent implements OnInit {
     let cartItem: ItemCarrito = {_id, denominacion, tiempoEstimado, precioVenta, img, cantidad: 1};
     this.cartSvc.addItem(cartItem);
     e.stopPropagation();
-  }
-
-  public detalleProducto(id: string){
-    //ir a detalle id
   }
 
   ngOnInit(): void {}

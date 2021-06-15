@@ -6,6 +6,8 @@ import { ToastrService } from 'ngx-toastr';
 
 import { OlmapComponent } from 'src/app/olmaps/olmap/olmap.component';
 import guaymallen from '@assets/json/guaymallen.json';
+import { ConfigService } from '@services/config/config.service';
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -16,7 +18,7 @@ import guaymallen from '@assets/json/guaymallen.json';
 export class DomicilioFormComponent implements OnInit, OnChanges {
   @Input() formParentDom: FormGroup;
   @Input() view: string = 'register';
-
+  @Input() coords: boolean = false;
   //Modal
   @ViewChild('btnClose') btnClose : ElementRef;
   @ViewChild('btnCloseComplete') btnCloseComplete : ElementRef;
@@ -29,8 +31,12 @@ export class DomicilioFormComponent implements OnInit, OnChanges {
 
   public mostrar: boolean = false;
 
+  public config$: Observable<any>
 
-  constructor( private httpClient: HttpClient, private toast: ToastrService ) { }
+
+  constructor( private httpClient: HttpClient, private toast: ToastrService, private configSvc: ConfigService ) {
+    this.config$ = this.configSvc.getFirstConfig()
+  }
 
 
   ngOnChanges(): void {
@@ -54,8 +60,10 @@ export class DomicilioFormComponent implements OnInit, OnChanges {
     if(this.mapComp.map.getLayers().getLength() == 4){
       this.mapComp.map.getLayers().removeAt(3);
       this.mapComp.userCoords = null;
-      this.childDomicilioForm.patchValue({ latitud:0, longitud:0});
-      this.childDomicilioForm.reset();
+      if(!this.coords){
+        this.childDomicilioForm.patchValue({ latitud:0, longitud:0});
+        this.childDomicilioForm.reset();
+      }
     }
   }
 

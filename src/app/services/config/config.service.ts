@@ -10,7 +10,7 @@ export class ConfigService {
 
   constructor(private httpClient: HttpClient) { }
 
-  public getConfig():Observable<any>{
+  public getFirstConfig():Observable<any>{
     return this.httpClient.get<any>(this.URL_API)
   }
 }

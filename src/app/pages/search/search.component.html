@@ -3,7 +3,7 @@
   <div class="row">
     <ng-container *ngIf="menuSearched && menuSearched.length >0; else notFound">
       <div class="card mt-4"  *ngFor="let item of menuSearched">
-      <img class="card-img-top img-fluid" [src]="item.img" (click)="detalleProducto(item.id)">
+      <img class="card-img-top img-fluid" [src]="item.img">
       <h6>{{item.denominacion}}</h6>
       <p>{{item.precioVenta}}$</p>
       <a [routerLink]="[ '/comida', item._id ]" class="btn btn-outline-cheese">Ver detalle</a>

@@ -48,7 +48,7 @@
               <ng-container *ngFor="let item of itemsCart">
                 <li class="list-group-item">
                   <p>{{item.denominacion}}</p>
-                  <p>{{item.cantidad}} x {{item.precioVenta}} = {{ item.cantidad*item.precioVenta }}$</p>
+                  <p>{{item.cantidad}} x {{item.precioVenta}}$ = {{ item.cantidad*item.precioVenta }}$</p>
                 </li>
               </ng-container>
               <li class="list-group-item">
@@ -70,7 +70,7 @@
       </div>
       <div class="col-12">
         <h5 class="mb-3">Dirección de Envio</h5>
-        <shared-domicilio-form [formParentDom]="parentDomicilioForm"></shared-domicilio-form>
+        <shared-domicilio-form [formParentDom]="parentDomicilioForm" [coords]="cliente.domicilio != null"></shared-domicilio-form>
       </div>
       <hr class="bg-lettuce my-4">
       <div class="col-12">
@@ -129,7 +129,7 @@
           </div>
           <div class="row">
             <div class="col-12 col-md-4 d-grid">
-              <button class="btn btn-outline-primary" type="submit">Ordenar</button>
+              <button class="btn btn-outline-primary" type="submit" [disabled]="this.parentDomicilioForm.invalid && !this.parentDomicilioForm.value.local" >Ordenar</button>
             </div>
           </div>
         </form>

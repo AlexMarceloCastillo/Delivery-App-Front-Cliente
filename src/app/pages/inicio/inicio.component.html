@@ -31,16 +31,19 @@
       <div class="col-12 mb-5">
         <h1 class="text-center">¿Dónde estamos?</h1>
       </div>
-      <div class="col-12 col-lg-9">
-        <ol-map lat="-32.9022174" lon="-68.7979539">
-          <ol-radio lat="-32.9022174" lon="-68.7979539" radio="2500"></ol-radio>
-          <ol-marker lat="-32.9022174" lon="-68.7979539" iconsrc="https://pics.freeicons.io/uploads/icons/png/3762277491606004682-512.png">
+      <div class="col-12 col-lg-9" *ngIf="config$ | async as config; else load">
+        <ol-map [lat]="config.lat" [lon]="config.lng">
+          <ol-radio [lat]="config.lat" [lon]="config.lng" radio="2500"></ol-radio>
+          <ol-marker [lat]="config.lat" [lon]="config.lng" iconsrc="https://pics.freeicons.io/uploads/icons/png/3762277491606004682-512.png">
           </ol-marker>
         </ol-map>
         <div id="popup" class="ol-popup">
           <div id="popup-content"></div>
         </div>
       </div>
+      <ng-template #load>
+        <shared-spinner-load></shared-spinner-load>
+      </ng-template>
       <div class="col-12 col-lg-3">
         <div class="card" id="horario">
           <div class="card-body">
