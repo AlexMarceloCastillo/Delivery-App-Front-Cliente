@@ -71,17 +71,17 @@
       <hr>
       <h6>Bebidas Sin Alcohol</h6>
       <div class="form-check" *ngFor="let bebida of noAlcoholDrink" >
-        <input [value]="bebida" [(ngModel)]="category" class="form-check-input" type="radio" name="flexRadioDefault" id="drinkFood">
+        <input [value]="bebida.id" [(ngModel)]="category" class="form-check-input" type="radio" name="flexRadioDefault" id="drinkFood">
         <label class="form-check-label" for="radioFood">
-          {{bebida}}
+          {{bebida.denominacion}}
         </label>
       </div>
       <hr>
       <h6>Bebidas Con Alcohol</h6>
       <div class="form-check" *ngFor="let bebida of alcoholDrink" >
-        <input [value]="bebida" [(ngModel)]="category" class="form-check-input" type="radio" name="flexRadioDefault" id="drinkFood">
+        <input [value]="bebida.id" [(ngModel)]="category" class="form-check-input" type="radio" name="flexRadioDefault" id="drinkFood">
         <label class="form-check-label" for="radioFood">
-          {{bebida}}
+          {{bebida.denominacion}}
         </label>
       </div>
     </div>

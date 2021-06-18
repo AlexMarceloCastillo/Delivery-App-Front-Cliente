@@ -135,7 +135,6 @@ export class CarritoComponent implements OnInit, DoCheck {
 
   public onSubmitPedido(e: Event): void {
     e.preventDefault();
-    console.log(this.itemsCart)
     let horaEstimadaFin = this.itemsCart.reduce((sum,item)=> item.tiempoEstimado ? sum + (item.tiempoEstimado)*item.cantidad : 0,0);
     let itemsPedido: any = [];
     let descripcion: any = [];
@@ -152,7 +151,6 @@ export class CarritoComponent implements OnInit, DoCheck {
       };
       itemsPedido.push(aux);
     });
-    console.log(descripcion)
     let pedido: Pedido = {
       Cliente: {
         firebase_id: this.cliente.uid,
@@ -160,7 +158,7 @@ export class CarritoComponent implements OnInit, DoCheck {
       },
       horaEstimadaFin: this.parentDomicilioForm.value.local ? horaEstimadaFin : horaEstimadaFin +10,
       estado: 'en espera',
-      total: this.sumaryForm.value.subTotal,
+      total: this.sumaryForm.value.total ,
       fecha: new Date(),
       tipoEnvio: this.parentDomicilioForm.value.local? 0 : 1,
       DetallePedido: itemsPedido
@@ -184,5 +182,5 @@ export class CarritoComponent implements OnInit, DoCheck {
       this.carritoSvc.emptyCart();
     })
     .catch(e=>console.error(e));
-  }
+   }
 }

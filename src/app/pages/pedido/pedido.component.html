@@ -1,16 +1,55 @@
 <div class="container">
-  <div class="row my-5">
-    <div class="col-12">
-      
-    </div>
-    <div class="col-12">
-      <pre>
+  <div class="row my-5" *ngIf="pedido; else load">
+    <div class="col-12" >
+      <h4>Pedido: {{pedido._id}}</h4>
+      <h4>Detalle del Pedido: </h4>
+      <table class="table table-bordered">
+        <thead>
+          <tr class="d-flex table-secondary">
+            <th class="col-4">Cantidad</th>
+            <th class="col-4">Articulo</th>
+            <th class="col-4">Precio $</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="d-flex table-secondary" *ngFor="let articulo of articulos">
+            <th class="col-4"><h6>{{articulo.cantidad}}</h6></th>
+            <td class="col-4"><h6>{{articulo.artManu ? articulo.artManu.denominacion : articulo.artIn.denominacion}}</h6></td>
+            <td class="col-4"><h6>{{articulo.subTotal}} $</h6></td>
+          </tr>
+          <tr class="d-flex table-info" *ngIf="pedido.tipoEnvio == 0">
+            <th class="col-8"><h5>Descuento %:</h5></th>
+            <td class="col-4"><h5> {{subTotal * 0.1}}$</h5></td>
+          </tr>
+          <tr class="d-flex table-info">
+            <th class="col-8"><h5>Precio TOTAL: </h5></th>
+            <td class="col-4"><h5>{{pedido.total}}$</h5></td>
+          </tr>
+          <tr class="d-flex table-info">
+            <th class="col-12"><h5>Fecha: {{fecha}}</h5></th>
+          </tr>
+        </tbody>
+      </table>
+      <!-- <pre>
         {{pedido | json}}
-      </pre>
+      </pre> -->
     </div>
     <hr>
-    <div class="col-12 mt-1">
-      <p>Tiempo estimado de entrega: {{tiempo.hora}}</p>
+    <div class="col-12">
+      <h3>Estado del Pedido:</h3>
+      <div [ngClass]="[statusClass, text]" class="card col-md-12">
+        <div class="card-header"><h4> {{pedido.estado.toUpperCase()}} <i [ngClass]="icon"></i></h4></div>
+        <div class="card-body">
+          <h5 class="card-title">{{statusInfo}}</h5>
+        </div>
+      </div>
+      <hr>
+      <div class="col-12 mt-1">
+        <h4>Tiempo estimado de entrega: {{tiempo.hora}} <i class="far fa-clock"></i></h4>
+      </div>
     </div>
   </div>
+  <ng-template #load>
+    <shared-spinner-load></shared-spinner-load>
+  </ng-template>
 </div>

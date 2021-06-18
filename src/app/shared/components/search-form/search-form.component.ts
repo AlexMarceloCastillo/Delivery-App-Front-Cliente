@@ -42,8 +42,8 @@ export class SearchFormComponent implements OnInit {
   }
 
   public categoryFood$: Observable<any>;
-  public noAlcoholDrink: any = ['GASEOSA'];
-  public alcoholDrink: any =['CERVEZA'];
+  public noAlcoholDrink: any = [{id:"60bc3aa0cabb522214ef4d6a",denominacion: 'Gaseosa'}];
+  public alcoholDrink: any =[{id:"60bc3aa0cabb522214ef4d6b",denominacion: 'Cerveza'}];
 
   public datalist$: Observable<any[]>;
 
