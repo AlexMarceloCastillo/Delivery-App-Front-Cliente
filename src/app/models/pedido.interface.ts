@@ -7,6 +7,11 @@ export interface Pedido {
     horaEstimadaFin: number,
     tipoEnvio: number,
     total: number,
+    accepted ?: Date,
+    canceled : {
+      fecha: Date,
+      motivo: String
+    } ,
     MdoPago ?: {
       _id: any
     },
@@ -14,6 +19,7 @@ export interface Pedido {
         firebase_id : string,
         Domicilio ?: Domicilio
     },
+    Factura: any,
     DetallePedido ?: [
         {
             cantidad: number,

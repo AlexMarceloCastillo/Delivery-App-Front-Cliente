@@ -50,7 +50,7 @@ export class SearchFormComponent implements OnInit {
   constructor(private menuSvc: MenuService, private router: Router, private rubGralSvc: RubGralService) { }
 
   ngOnInit(): void {
-    this.categoryFood$ = this.rubGralSvc.getAllRubroGnral()
+    this.categoryFood$ = this.rubGralSvc.getAll()
   }
 
   public searchQuery(){

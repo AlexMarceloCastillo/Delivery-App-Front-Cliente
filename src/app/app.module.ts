@@ -34,6 +34,7 @@ import { P404Component } from '@pages/p404/p404.component';
 import { ComidaDetalleComponent } from '@pages/comida-detalle/comida-detalle.component';
 import { LegalComponent } from '@pages/legal/legal.component';
 import { SearchComponent } from './pages/search/search.component';
+import { FacturaComponent } from './pages/factura/factura.component';
 
 
 @NgModule({
@@ -53,6 +54,7 @@ import { SearchComponent } from './pages/search/search.component';
     ComidaDetalleComponent,
     LegalComponent,
     SearchComponent,
+    FacturaComponent,
   ],
   imports: [
     SharedModule,

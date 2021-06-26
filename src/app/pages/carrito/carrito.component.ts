@@ -161,9 +161,11 @@ export class CarritoComponent implements OnInit, DoCheck {
       total: this.sumaryForm.value.total ,
       fecha: new Date(),
       tipoEnvio: this.parentDomicilioForm.value.local? 0 : 1,
-      DetallePedido: itemsPedido
+      DetallePedido: itemsPedido,
+      Factura: null,
+      canceled: null
     }
-    this.pedidoSvc.savePedido(pedido).toPromise()
+    this.pedidoSvc.post(pedido).toPromise()
     .then(data => {
       if(pedido.tipoEnvio == 1){
         let checkout = {

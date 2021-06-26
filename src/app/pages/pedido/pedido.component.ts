@@ -38,7 +38,7 @@ export class PedidoComponent implements OnInit {
     ngOnInit(): void {
       this.convertidor();
       let pid = this.route.snapshot.paramMap.get('pid');
-      this.pedidoSvc.getOnePedido(pid).subscribe( pedido => {
+      this.pedidoSvc.getOne(pid).subscribe( pedido => {
         this.pedido = pedido;
         let auxFecha = new Date(pedido.fecha)
         this.fecha = auxFecha.getDate() + "/"+(auxFecha.getMonth()+1)+"/"+auxFecha.getFullYear()
@@ -53,7 +53,12 @@ export class PedidoComponent implements OnInit {
         })
         this.tiempo.calc = pedido.horaEstimadaFin;
         if(pedido.tipoEnvio == 1 && pedido.estado == 'en espera'){
-          this.mdoSvc.getPagoStatus(pedido._id).subscribe(e => console.log(e))
+          this.mdoSvc.getPagoStatus(pedido._id).subscribe(e => {
+            console.log(e)
+            if(e.estado == 'failure' && !this.pedido.canceled){
+            this.pedidoSvc.cancelPedido(this.pedido._id,{motivo:'Error el pago ha sido rechazado por Mercado Pago'})
+          }
+        })
         }
         switch (pedido.estado) {
           case 'en espera':

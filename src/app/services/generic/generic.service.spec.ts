@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import RubGralService from './rub-gral.service';
+import { GenericService } from './generic.service';
 
-describe('RubGralService', () => {
-  let service: RubGralService;
+describe('GenericService', () => {
+  let service: GenericService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(RubGralService);
+    service = TestBed.inject(GenericService);
   });
 
   it('should be created', () => {

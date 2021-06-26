@@ -1,0 +1,31 @@
+.info{
+  text-align: center;
+}
+button{
+  margin: auto;
+}
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) {
+  .card img{
+    height: 200px;
+    width: 175px;
+    margin: auto;
+  }
+
+}
+
+// Large devices (desktops, 992px and up)
+@media (min-width: 992px) {
+  .info-card{
+    display: flex;
+    width: 100%;
+  }
+  .card{
+    width: 25%;
+    margin: auto;
+  }
+}
+
+
+// Extra large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) {}

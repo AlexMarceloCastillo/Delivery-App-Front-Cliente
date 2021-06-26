@@ -1,0 +1,62 @@
+<div class="container" *ngIf="pedido; else load">
+  <div class="info">
+    <h2>Factura TIPO 'C'</h2>
+    <h4>FECHA DE IMPRESION: {{fecha}}</h4>
+    <div class="info-card mb-2 mt-2">
+      <div class="card" >
+        <img src="../../../assets/img/web/Delibery The Good Taste.png" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Empresa Delivery  "The Good Taste"</h5>
+          <h6 class="card-text">Telefono: 2615179908</h6>
+          <h6 class="card-text">Plaza Shopping 3280, Acceso Este Lateral Norte</h6>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">FACTURA NRO {{facturaNro}}</h5>
+          <p class="card-text">CUIT NRO*: 20-4328230-3</p>
+          <p class="card-text">INGRESOS BRUTOS: 123123-D5</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">IVA Y CONDICIONES DE VENTA</h5>
+          <h6 class="card-text">CONSUMIDOR FINAL</h6>
+          <h6 class="card-text">{{pedido.tipoEnvio == 1 ? "CUENTA CORRIENTE" : "CONTADO"}}</h6>
+        </div>
+    </div>
+    </div>
+  </div>
+  <div class="data">
+    <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Cant</th>
+      <th scope="col">Detalle</th>
+      <th scope="col">Precio Unit.</th>
+      <th scope="col">Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let articulo of articulos">
+      <th scope="row">{{articulo.cantidad}}</th>
+      <td>{{articulo.denominacion}}</td>
+      <td>{{articulo.subTotal/articulo.cantidad}}$</td>
+      <td>{{articulo.subTotal}}$</td>
+    </tr>
+    <tr>
+      <td>ORIGINAL para el CLIENTE</td>
+      <td> DUPLICADO para el Emisor</td>
+      <td>TOTAL: </td>
+      <td>{{pedido.total}}$</td>
+    </tr>
+  </tbody>
+</table>
+<div class="d-grid gap-2">
+  <input type="button" value="DESCARGAR FACTURA EN PDF" class="btn btn-success" (click)="downloadPdf()">
+</div>
+  </div>
+</div>
+<ng-template #load>
+  <shared-spinner-load></shared-spinner-load>
+</ng-template>

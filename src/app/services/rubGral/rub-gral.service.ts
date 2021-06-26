@@ -1,19 +1,11 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { GenericService } from '@services/generic/generic.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class RubGralService {
+export class RubGralService extends GenericService<any> {
 
-  private URL_API: string = "http://localhost:2021/api/v1/rubrogeneral";
+  URL: string = "http://localhost:2021/api/v1/rubrogeneral";
 
-
-  constructor(private http: HttpClient) { }
-
-
-  public getAllRubroGnral(): Observable<any> {
-    return this.http.get<any>(`${this.URL_API}`);
-  }
 }

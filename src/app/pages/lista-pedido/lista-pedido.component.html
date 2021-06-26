@@ -8,7 +8,6 @@
             <th scope="col">Esatdo</th>
             <th scope="col">Progreso</th>
             <th scope="col">Fecha</th>
-            <th scope="col">Factura</th>
           </tr>
         </thead>
         <tbody>
@@ -20,9 +19,6 @@
             </td>
             <td>
               {{order.fecha | date}}
-            </td>
-            <td>
-              <button class="btn btn-primary" (click)="imprimir(order._id, $event)">Imprimir</button>
             </td>
           </tr>
         </tbody>

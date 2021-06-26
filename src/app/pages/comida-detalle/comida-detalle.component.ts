@@ -23,11 +23,11 @@ export class ComidaDetalleComponent implements OnInit {
 
 
   constructor(
-    private cartSvc: CarritoService, private auth: AuthService, private menuSvc: MenuService, 
+    private cartSvc: CarritoService, private auth: AuthService, private menuSvc: MenuService,
     private rubArtSvc: RubartService, private route: ActivatedRoute
   ) { }
 
-  
+
   ngOnInit(): void {
     this.auth.isAuth().subscribe(data => {
       if(data) this.btnDisabled = false;
@@ -41,7 +41,7 @@ export class ComidaDetalleComponent implements OnInit {
       this.calcTiempo(item.data.tiempoEstimado);
 
       if(this.tipoArt==='artInsumo') {
-        this.rubArtSvc.getOneRubArt(item.data.RubArt._id).subscribe( data => {
+        this.rubArtSvc.getOne(item.data.RubArt._id).subscribe( data => {
           this.rubArt = data[0];
         }, error => console.error(error) );
       }
