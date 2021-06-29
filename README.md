@@ -4,7 +4,7 @@ Este repositorio contiene el frontend del cliente. El lenguaje de programación 
 
 ## Requisitos 
 * Node.js
-* Angular v11
+* Angular v12
 
 ## Instalación
 
