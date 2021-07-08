@@ -41,7 +41,7 @@
         <div class="card-header"><h4> {{pedido.estado.toUpperCase()}} <i [ngClass]="icon"></i></h4></div>
         <div class="card-body">
           <h5 class="card-title">{{statusInfo}}</h5>
-          <h5 *ngIf="pedido.estado == 'entregado'"><a [routerLink]="[ '/pedido.Cliente.firebase_id/factura', pedido._id ]">VER FACTURA</a></h5>
+          <h5 *ngIf="pedido.estado == 'entregado'"><a [routerLink]="[ '/'+pedido.Cliente.firebase_id+'/factura', pedido._id ]">VER FACTURA</a></h5>
           <h5 *ngIf="pedido.estado == 'cancelado'">Su pedido ha sido cancelado por la siguiente razon: {{pedido.canceled.motivo}}</h5>
         </div>
       </div>

@@ -124,7 +124,7 @@ export class FacturaComponent implements OnInit {
     //TABLA
    doc.setFontSize(20)
    doc.rect(0, 115, 25, 15);
-   doc.text('CANT',0,125)
+   doc.text('CANT',2.5,125)
    doc.rect(25, 115,100, 15);
    doc.text('DETALLE',62.5,125)
    doc.rect(125, 115, 55, 15);
@@ -133,32 +133,32 @@ export class FacturaComponent implements OnInit {
    doc.text('TOTAL',182,125)
    let acum = 130;
    let acumData = 140;
-   doc.setFontSize(20)
+   doc.setFontSize(18)
    this.articulos.forEach((e:any) =>{
      doc.rect(0,acum,25,15)
      doc.rect(25,acum,100,15)
      doc.rect(125,acum,55,15)
      doc.rect(180,acum,30, 15)
-     doc.text(`${e.cantidad}`,5,acumData)
-     doc.text(`${e.denominacion}`,60,acumData)
+     doc.text(`${e.cantidad}`,10,acumData)
+     doc.text(`${e.denominacion}`,30,acumData)
      doc.text(`${e.subTotal/e.cantidad}$`,128,acumData)
      doc.text(`${e.subTotal}$`,182,acumData)
      acum +=15;
     acumData += 15;
    })
-   // for(var i = 0; i < 9; i ++){
-   //     doc.rect(0,acum,25,15)
-   //     doc.rect(25,acum,100,15)
-   //     doc.rect(125,acum,55,15)
-   //     doc.rect(180,acum,30, 15)
-   //     doc.text('2',5,acumData)
-   //     doc.text('Pizza Especial',60,acumData)
-   //     doc.text('320$',128,acumData)
-   //     doc.text('640$',182,acumData)
-   //     acum +=15;
-   //     acumData += 15;
-   // }
-   //FOOTER
+   //GENERAR ESPACIOS EN BLANCO
+   for(let i = 0;i < 9 - this.articulos.length;i++){
+     doc.rect(0,acum,25,15)
+     doc.rect(25,acum,100,15)
+     doc.rect(125,acum,55,15)
+     doc.rect(180,acum,30, 15)
+     doc.text(``,10,acumData)
+     doc.text(``,30,acumData)
+     doc.text(``,128,acumData)
+     doc.text(``,182,acumData)
+     acum +=15;
+    acumData += 15;
+   }
    doc.setFontSize(12)
    doc.rect(0,265,180,15)
    doc.rect(180,265,30,15)

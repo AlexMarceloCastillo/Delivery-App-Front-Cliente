@@ -128,11 +128,11 @@ export class AuthService {
       timeOut: 800
     })
     const user = await this.afsAuth.currentUser;
-    
-    if(!user.emailVerified && (flag === 'verified' || flag === 'inicio') ) { 
+
+    if(!user.emailVerified && (flag === 'verified' || flag === 'inicio') ) {
       this.redirectHub('verified');
       return ;
-    } 
+    }
     this.redirectHub(flag);
   }
 
@@ -148,7 +148,7 @@ export class AuthService {
         photoURL: cliente.photoURL,
         estado: 1,
         domicilio: domicilio,
-        role: 0,
+        role: 3,
         online: true,
         provider: cliente.providerData[0].providerId
       }
@@ -158,7 +158,7 @@ export class AuthService {
   //Actualizar datos de usuario en Firestore
   public updateProfile(cliente: Cliente){
     const userRef: AngularFirestoreDocument<Cliente> = this.afs.doc(`clients/${cliente.uid}`);
-    
+
     userRef.update(cliente)
       .then( () => {
           this.toastrSvc.success('','Datos Actualizados con Exito',{
