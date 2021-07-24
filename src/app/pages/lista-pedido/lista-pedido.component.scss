@@ -1,6 +1,12 @@
 .hscroll {
   overflow-x: auto; /* Horizontal */
 }
+
+img.img-fluid#emptyOrder {
+  max-width: 40% !important;
+  margin: 3% auto;
+}
+
 @media (min-width: 768px) {}
 
 // Large devices (desktops, 992px and up)

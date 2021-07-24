@@ -81,7 +81,7 @@ export class DomicilioFormComponent implements OnInit, OnChanges {
       this.httpClient.get(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${coords[1]}&lon=${coords[0]}`)
       .subscribe( (data:any) => {
         let exists: boolean = false;
-        console.log(data)
+        // console.log(data);
         let display = data.display_name.replace('Distrito','').split(',')
         let displayFull = display.map(string => string.trim())
         for(let i = 0;i < displayFull.length; i++){

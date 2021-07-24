@@ -17,10 +17,10 @@ import { MdopagoService } from '@services/mdopago/mdopago.service';
   templateUrl: './carrito.component.html',
   styleUrls: ['./carrito.component.scss']
 })
-export class CarritoComponent implements OnInit, DoCheck {
+export class CarritoComponent implements OnInit {
 
   public itemsCart: ItemCarrito[];
-  public sessionCart: ItemCarrito[];
+  public localStorageCart: ItemCarrito[];
   public cliente: any;
 
   // <Form>
@@ -38,28 +38,28 @@ export class CarritoComponent implements OnInit, DoCheck {
     private mdopagoSvc: MdopagoService
   ) { }
 
+
   ngOnInit(): void {
     this.carritoSvc.cart$.subscribe( cart => {
       this.itemsCart = cart;
       this.subTotal = cart.reduce( (sum, current) => sum + (current.precioVenta*current.cantidad),0);
     }, error => { this.subTotal = 0, console.error(error) });
-    this.sessionCart = JSON.parse(sessionStorage.getItem('cart'));
+    this.localStorageCart = JSON.parse(sessionStorage.getItem('cart'));
 
 
-    if (this.auth.isAuth) {
-      this.auth.getDataClient().subscribe( user => {
-        this.cliente = user;
-        this.parentDomicilioForm = this.formDataBuildSvc.userDomicilioForm(user);
-        this.buildSuamryForm();
-
-        this.parentDomicilioForm.get('local').valueChanges.subscribe( value => {
-          this.updateSumaryForm(value);
-        }, error => console.error(error));
-      }, error => console.error(error) );
-    }
-  }
-
-  ngDoCheck(): void {
+    this.auth.isAuth().subscribe( data => {
+      if(data) {
+        this.auth.getDataClient().subscribe( user => {
+          this.cliente = user;
+          this.parentDomicilioForm = this.formDataBuildSvc.userDomicilioForm(user);
+          this.buildSuamryForm();
+  
+          this.parentDomicilioForm.get('local').valueChanges.subscribe( value => {
+            this.updateSumaryForm(value);
+          }, error => console.error(error));
+        }, error => console.error(error) );
+      }
+    }, error => console.error(error) );
   }
 
 
@@ -102,7 +102,6 @@ export class CarritoComponent implements OnInit, DoCheck {
   public deleteCart(e: Event): void {
     e.preventDefault();
     this.carritoSvc.emptyCart();
-    window.location.reload();
   }
 
   private updateSumaryForm(local: boolean): void {

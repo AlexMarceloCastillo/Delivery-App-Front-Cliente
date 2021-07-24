@@ -5,8 +5,8 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import firebase from 'firebase/app';
 
-import { of } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
+import { of, Observable } from 'rxjs';
+import { first, map, switchMap } from 'rxjs/operators';
 
 import { ToastrService } from 'ngx-toastr';
 import { Cliente } from '@models/cliente.interface';
@@ -105,8 +105,9 @@ export class AuthService {
   }
 
   //Obtener estado de login
-  isAuth(): any{
-    return this.afsAuth.authState.pipe(map(auth => auth));
+  //Referencia: https://fireship.io/snippets/check-if-current-user-exists-with-angularfire/
+  isAuth(): Observable<any>{
+    return this.afsAuth.authState.pipe(first());
   }
 
   //Obtener datos de usuario

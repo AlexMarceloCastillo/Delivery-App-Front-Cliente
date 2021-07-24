@@ -16,6 +16,7 @@ import jsPDF from 'jspdf';
   styleUrls: ['./factura.component.scss']
 })
 export class FacturaComponent implements OnInit {
+  
   @ViewChild('factura') htmlData:ElementRef | any;
   public cliente: Cliente;
   public factura: Observable<any>;

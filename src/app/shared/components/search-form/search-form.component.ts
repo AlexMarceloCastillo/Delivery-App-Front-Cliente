@@ -47,20 +47,24 @@ export class SearchFormComponent implements OnInit {
 
   public datalist$: Observable<any[]>;
 
+
   constructor(private menuSvc: MenuService, private router: Router, private rubGralSvc: RubGralService) { }
 
   ngOnInit(): void {
     this.categoryFood$ = this.rubGralSvc.getAll()
   }
 
+  
   public searchQuery(){
     this.router.navigate(['search'],{queryParams: {query: this.search.trim(),filter: this.category}})
   }
+
   public searchFilter(){
     this.btnClose.nativeElement.click()
     this.category != '' ? this.router.navigate(['search'],{queryParams: {query: this.search.trim(),filter: this.category}})
     : this.router.navigate(['menu'])
   }
+
   public searchChange(e: Event){
     if(this.search.trim() == ''){
       this.cleanSearch()
@@ -68,16 +72,13 @@ export class SearchFormComponent implements OnInit {
       this.datalist$ = this.menuSvc.search(this.search.trim())
     }
   }
+
   public cleanSearch(){
     this.search = '';
     this.datalist$ = new Observable<any[]>()
   }
 
   public filterChange(e: Event){
-    console.log(this.filter,e)
     this.filterList[this.filter]()
   }
-
-
-
 }

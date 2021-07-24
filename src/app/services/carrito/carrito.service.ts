@@ -13,12 +13,19 @@ export class CarritoService {
 
 
   constructor( private auth: AuthService ) { 
-    let auxCart = JSON.parse(sessionStorage.getItem('cart'));
+    let auxCart = JSON.parse(localStorage.getItem('cart'));
     if(this.auth.isAuth && (auxCart !== null) ){
       this.carritoBS.next(auxCart);
     }
   }
 
+
+  private persistCart(cart: ItemCarrito[]): void {
+    this.carritoBS.next(cart);
+    if(this.auth.isAuth && (this.carritoBS.getValue().length >= 0)) {
+      localStorage.setItem('cart' , JSON.stringify(this.carritoBS.getValue()));
+    }
+  }
 
   public addItem(item: ItemCarrito) {
     let currentCart = this.carritoBS.getValue();
@@ -38,13 +45,6 @@ export class CarritoService {
       currentCart.push(item);
     }
     this.persistCart(currentCart);
-  }
-
-  private persistCart(cart: ItemCarrito[]): void {
-    this.carritoBS.next(cart);
-    if(this.auth.isAuth && (this.carritoBS.getValue().length >= 0)) {
-      sessionStorage.setItem('cart' , JSON.stringify(this.carritoBS.getValue()));
-    }
   }
 
   public removeItem(item: ItemCarrito): void{
@@ -74,8 +74,8 @@ export class CarritoService {
   }
 
   public emptyCart(): void {
-    this.carritoBS.next(null);
-    sessionStorage.removeItem('cart');
+    this.carritoBS.next([]);
+    localStorage.removeItem('cart');
   }
 }
 // https://www.sebastianbauer.dev/2019/12/11/carrito-reactivo-con-angular-y-rxjs/ (referencia)

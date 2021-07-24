@@ -63,7 +63,7 @@
             <button class="btn btn-outline-ketchup" (click)="onUpdateProfile($event)">Actualizar Perfil</button>
           </div>
           <div class="card-footer d-grid">
-            <a [routerLink]="['/auth/olvido-clave']" class="btn btn-link">¿Olvido su contraseña?</a>
+            <a [routerLink]="['/auth/olvido-clave']" class="btn btn-link" *ngIf="usuario.provider==='password'">¿Olvido su contraseña?</a>
           </div>
         </div>
 

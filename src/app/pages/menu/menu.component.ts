@@ -12,6 +12,7 @@ import { MenuService } from '@services/menu/menu.service';
   styleUrls: ['./menu.component.scss']
 })
 export class MenuComponent implements OnInit {
+  
   public search: string = '';
   public menu$: Observable<any[]>;
 
@@ -27,6 +28,8 @@ export class MenuComponent implements OnInit {
   ngOnInit(): void {
     this.getData()
   }
+
+
   public getData(){
     this.menu$ = this.menuSvc.getAllMenu(this.limit,this.page);
     this.menu$.subscribe((e:any) => {this.isLast = e.isLast; this.isFirst = e.isFirst});

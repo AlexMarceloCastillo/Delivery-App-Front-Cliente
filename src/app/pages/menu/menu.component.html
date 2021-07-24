@@ -3,15 +3,19 @@
   <div class="row">
     <!-- Products -->
     <div class="col-12">
-        <app-card [element]="menu.data"></app-card>
+      <app-card [element]="menu.data"></app-card>
     </div>
   </div>
-  <nav aria-label="Page navigation example" class="d-flex justify-content-center">
-  <ul class="pagination">
-    <li class="page-item"><button (click)="previous()" [ngClass]="{disabled : isFirst}" type="button" class="btn btn-primary" [disabled]="isFirst">Anterior</button></li>
-    <li class="page-item"><button (click)="next()" [ngClass]="{disabled : isLast}" type="button" class="btn btn-primary" [disabled]="isLast">Siguiente</button></li>
-  </ul>
-</nav>
+  <nav aria-label="Page navigation" class="d-flex justify-content-center mt-5">
+    <ul class="pagination">
+      <li class="page-item">
+        <button (click)="previous()" [ngClass]="{disabled : isFirst}" type="button" class="btn btn-primary me-5" [disabled]="isFirst">Anterior</button>
+      </li>
+      <li class="page-item">
+        <button (click)="next()" [ngClass]="{disabled : isLast}" type="button" class="btn btn-primary" [disabled]="isLast">Siguiente</button>
+      </li>
+    </ul>
+  </nav>
 </div>
 <ng-template #load>
   <shared-spinner-load></shared-spinner-load>

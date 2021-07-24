@@ -108,12 +108,9 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" (click)="cleanMap()" class="btn btn-outline-dark" data-bs-dismiss="modal"
-        aria-label="Close">Cerrar</button>
         <button type="button" class="btn btn-cheese" (click)="saveCoords()">Aplicar Cambios</button>
         <button #btnClose (click)="cleanMap()" type="button" class="btn-close close" data-bs-dismiss="modal" aria-label="Close"></button>
-        <button class="d-none" #btnCloseComplete type="hidden" name="button" data-bs-dismiss="modal"
-        aria-label="Close"></button>
+        <button class="d-none" #btnCloseComplete type="hidden" name="button" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <ol-map [readonly]=false lat="-32.9022174" lon="-68.7979539" *ngIf="config$ | async as config; else load">

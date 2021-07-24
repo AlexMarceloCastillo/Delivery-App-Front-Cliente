@@ -22,7 +22,7 @@ export class MenuService {
     return this.http.get<any>(`${this.URL_API}/${id}`);
   }
 
-  public search(query:string,filter:string = ''): Observable<any[]>{
+  public search(query:string, filter:string = ''): Observable<any[]>{
     let params = new HttpParams();
     params = params.append('search', query);
     params = params.append('filter', filter);

@@ -1,28 +1,40 @@
-<div class="container">
-  <div class="row mt-5">
-    <div class="col-12 hscroll">
-      <table class="table">
-        <thead class="table-dark">
-          <tr>
-            <th scope="col">N° de pedido</th>
-            <th scope="col">Esatdo</th>
-            <th scope="col">Progreso</th>
-            <th scope="col">Fecha</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let order of orders">
-            <th>{{order._id}}</th>
-            <td>{{order.estado}}</td>
-            <td>
-              <a [routerLink]="[order._id]">ver</a>
-            </td>
-            <td>
-              {{order.fecha | date}}
-            </td>
-          </tr>
-        </tbody>
-      </table>
+<ng-container *ngIf="false; else empty">
+  <div class="container">
+    <div class="row mt-5">
+      <div class="col-12 hscroll">
+        <table class="table">
+          <thead class="table-dark">
+            <tr>
+              <th scope="col">N° de pedido</th>
+              <th scope="col">Esatdo</th>
+              <th scope="col">Progreso</th>
+              <th scope="col">Fecha</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let order of orders">
+              <th>{{order._id}}</th>
+              <td>{{order.estado}}</td>
+              <td>
+                <a [routerLink]="[order._id]">ver</a>
+              </td>
+              <td>
+                {{order.fecha | date}}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
-</div>
+</ng-container>
+<ng-template #empty>
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center">
+        <img src="../../../assets/img/web/empty_orders.svg" alt="Empty Cart img" id="emptyOrder" class="img-fluid">
+        <h1 class="mt-3">Sin pedidos</h1>
+      </div>
+    </div>
+  </div>
+</ng-template>

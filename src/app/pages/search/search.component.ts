@@ -15,12 +15,16 @@ export class SearchComponent implements OnInit {
 
   public menuSearched: any[] = []
 
+
   constructor(private activatedRoute: ActivatedRoute, private menuSvc: MenuService, private cartSvc: CarritoService) {
-    this.activatedRoute.queryParams.subscribe((e)=>{
+    this.activatedRoute.queryParams.subscribe( e => {
       this.query = e.query;
       this.menuSvc.search(this.query,e.filter).subscribe( e => this.menuSearched = e)
-    })
+    });
   }
+
+  ngOnInit(): void {}
+
 
   public addItemCart(food: any, e: Event): void {
     e.preventDefault();
@@ -29,7 +33,4 @@ export class SearchComponent implements OnInit {
     this.cartSvc.addItem(cartItem);
     e.stopPropagation();
   }
-
-  ngOnInit(): void {}
-
 }
