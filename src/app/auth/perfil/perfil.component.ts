@@ -38,11 +38,11 @@ export class PerfilComponent implements OnInit, OnChanges, OnDestroy {
 
 
   ngOnChanges(): void {
-    
+
   }
 
   ngOnInit(): void {
-    this.clienteSubscription = this.authSvc.getDataClient().subscribe( user => { 
+    this.clienteSubscription = this.authSvc.getDataClient().subscribe( user => {
       this.usuario = user;
       this.fillForm(user);
     }, error => console.error(error) );
@@ -57,7 +57,7 @@ export class PerfilComponent implements OnInit, OnChanges, OnDestroy {
     this.file = e.target.files[0]
     this.authSvc.toastrSvc.success('La imagen se esta cargando','',{
       positionClass: 'toast-center-center',
-      timeOut: 200
+      timeOut:2000
     })
     this.onUpload()
   }
@@ -78,6 +78,7 @@ export class PerfilComponent implements OnInit, OnChanges, OnDestroy {
           timeOut: 800
         })
       })
+      setTimeout(()=>{window.location.reload()},2000)
     }).catch(() => this.authSvc.toastrSvc.error('Hubo un error al cambiar la imagen','',{
       positionClass: 'toast-center-center',
       timeOut: 800
@@ -90,8 +91,8 @@ export class PerfilComponent implements OnInit, OnChanges, OnDestroy {
    * @param user Objeto de Firebase Store (user)
    */
   private fillForm(user: any) {
-    let auxUserObj = { 
-      username: user.nombre, 
+    let auxUserObj = {
+      username: user.nombre,
       telefono: user.telefono
     };
     this.parentUserForm = this.formDataBuildSvc.userProfileForm('profile', auxUserObj);
@@ -102,7 +103,7 @@ export class PerfilComponent implements OnInit, OnChanges, OnDestroy {
   public onUpdateProfile(e: Event): void {
     let { username, telefono } = this.parentUserForm.value;
 
-    let clienteUpdated: Cliente = { 
+    let clienteUpdated: Cliente = {
       ...this.usuario,
       telefono,
       nombre: username,

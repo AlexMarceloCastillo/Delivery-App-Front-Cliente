@@ -54,6 +54,22 @@
       text-align: center;
       vertical-align: bottom;
     }
+    #btnCloseDatalist{
+      display: inline-block;
+      width: 42px;
+      height: 42px;
+      position: absolute;
+      align-self: center;
+      right: 75px;
+      border-radius: 50%;
+      border: none;
+      color: #c71717;
+
+      font-size: 30px;
+      line-height: 30px;
+      text-align: center;
+      vertical-align: bottom;
+    }
     #btnFilter{
       display: inline-block;
       width: 32px;
@@ -106,6 +122,11 @@
         font-size: 11px;
         line-height: 11px;
       }
+      #btnCloseDatalist{
+        right: 90px;
+        font-size: 30px;
+        line-height: 11px;
+      }
       #btnFilter {
         right: 10px;
         font-size: 11px;
@@ -134,6 +155,13 @@
         font-size: 18px;
         line-height: 18px;
         right: 60px;
+      }
+      #btnCloseDatalist{
+        width: 55px;
+        height: 55px;
+        font-size: 45px;
+        line-height: 10px;
+        right: 115px;
       }
       #btnFilter{
         width: 48px;
@@ -165,6 +193,12 @@
         width: 54px;
         height: 54px;
         right: 80px;
+      }
+      #btnCloseDatalist{
+        width: 55px;
+        height: 55px;
+        font-size: 45px;
+        right: 150px;
       }
       #btnFilter{
         width: 54px;

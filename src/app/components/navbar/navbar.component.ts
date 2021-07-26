@@ -25,7 +25,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   public isOpen: boolean = true;
 
   constructor(private authSvc: AuthService, private cartSvc: CarritoService) { }
-  
+
 
   ngOnInit(): void {
     this.clienteSuscription = this.authSvc.getDataClient().subscribe( (data) => this.cliente = data);
@@ -39,7 +39,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.clienteSuscription.unsubscribe();
     this.cartSuscription.unsubscribe();
   }
-  
+
 
   public onLogout(e: Event): void {
     e.preventDefault();

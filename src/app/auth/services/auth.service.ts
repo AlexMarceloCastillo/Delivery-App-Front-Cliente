@@ -6,7 +6,7 @@ import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firest
 import firebase from 'firebase/app';
 
 import { of, Observable } from 'rxjs';
-import { first, map, switchMap } from 'rxjs/operators';
+import { first, map, switchMap, take } from 'rxjs/operators';
 
 import { ToastrService } from 'ngx-toastr';
 import { Cliente } from '@models/cliente.interface';
@@ -115,7 +115,7 @@ export class AuthService {
     return this.afsAuth.authState.pipe(
       switchMap((data)=>{
         if(data){
-          return this.afs.doc<Cliente>(`/clients/${data.uid}`).valueChanges();
+          return this.afs.doc<Cliente>(`/clients/${data.uid}`).valueChanges().pipe(take(1));
         }
         return of(null)
       })

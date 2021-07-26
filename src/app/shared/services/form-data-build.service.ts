@@ -40,7 +40,7 @@ export class FormDataBuildService {
     if(userData) {
       userFormGroup.patchValue(userData);
     }
-    
+
     return userFormGroup;
   }
 
@@ -60,7 +60,6 @@ export class FormDataBuildService {
       longitud: [ 0 ],
       local: [ true ]
     });
-
     if (userData.domicilio) {
       domicilioFormGroup.patchValue(userData.domicilio);
       domicilioFormGroup.patchValue({ local: false })

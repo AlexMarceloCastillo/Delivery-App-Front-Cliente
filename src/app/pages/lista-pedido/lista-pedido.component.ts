@@ -13,8 +13,7 @@ import { Pedido } from "@models/pedido.interface";
 })
 export class ListaPedidoComponent implements OnInit {
 
-  public userId: string = 'DUa0zPcgCjZwzoruJOhhQlNGtLy1';
-  public orders: Pedido[];
+  public orders: Pedido[] = [];
 
 
   constructor(private pedidoSvc: PedidoService, private route: ActivatedRoute) {}
@@ -24,11 +23,4 @@ export class ListaPedidoComponent implements OnInit {
     this.pedidoSvc.getAllPedidoByUser(uid).subscribe( data => this.orders = data, error => console.error(error));
   }
 
-
-  imprimir(id: string, e: Event): void {
-    e.preventDefault();
-    e.stopPropagation();
-
-    alert(`Imprimiendo factura ${id}`);
-  }
 }

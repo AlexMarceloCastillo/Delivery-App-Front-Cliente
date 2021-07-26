@@ -1,6 +1,9 @@
 <div class="search-wrapper">
   <div class="search-bar">
     <input [(ngModel)]="search" (ngModelChange)="searchChange($event)" type="search" class="search shadow" placeholder="Buscar . . ." required>
+    <button *ngIf="search != ''" id="btnCloseDatalist"[disabled]='search == ""' class="btn" type="button" name="button" (click)="cleanSearch()">
+      <i class="fas fa-times-circle"></i>
+    </button>
     <button [disabled]='search == ""' (click)="searchQuery()" class="btn btn-cheese">
       <i class="fas fa-search"></i>
     </button>

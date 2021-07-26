@@ -15,7 +15,7 @@ import { ArtInsumoService } from '@services/artInsumo/art-insumo.service';
   styleUrls: ['./pedido.component.scss']
 })
 export class PedidoComponent implements OnInit {
-  
+
   public pedido: Pedido;
   public articulos: any[] = [];
   public statusClass: string = '';
@@ -115,10 +115,15 @@ export class PedidoComponent implements OnInit {
         this.icon = "fas fa-shipping-fast";
       break;
       case 'cancelado':
-        this.statusClass = "bg-danger"
-        this.statusInfo = 'Su pedido ha sido rechazado.'
-        this.icon = "far fa-times-circle"
+        this.statusClass = "bg-danger";
+        this.statusInfo = 'Su pedido ha sido rechazado.';
+        this.icon = "far fa-times-circle";
       break;
+      case 'demorado':
+        this.statusClass = "bg-warning";
+        this.statusInfo = "Su pedido ha sido demorado 10 minutos mas. Sentimos el tiempo agregado , nuestro cocinero esta haciendo su pedido perfecto";
+        this.icon = "far fa-clock";
+        this.text = "text-dark";
       default:
       break;
     }

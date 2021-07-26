@@ -46,17 +46,18 @@ export class CarritoComponent implements OnInit {
     }, error => { this.subTotal = 0, console.error(error) });
     this.localStorageCart = JSON.parse(sessionStorage.getItem('cart'));
 
-
     this.auth.isAuth().subscribe( data => {
       if(data) {
         this.auth.getDataClient().subscribe( user => {
-          this.cliente = user;
-          this.parentDomicilioForm = this.formDataBuildSvc.userDomicilioForm(user);
-          this.buildSuamryForm();
-  
-          this.parentDomicilioForm.get('local').valueChanges.subscribe( value => {
-            this.updateSumaryForm(value);
-          }, error => console.error(error));
+          if(user){
+            this.cliente = user;
+            this.parentDomicilioForm = this.formDataBuildSvc.userDomicilioForm(user);
+            this.buildSuamryForm();
+
+            this.parentDomicilioForm.get('local').valueChanges.subscribe( value => {
+              this.updateSumaryForm(value);
+            }, error => console.error(error));
+          }
         }, error => console.error(error) );
       }
     }, error => console.error(error) );

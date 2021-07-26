@@ -11,7 +11,6 @@ import { Observable } from 'rxjs';
 })
 export class SearchFormComponent implements OnInit {
 
-
   @ViewChild('btnClose') btnClose : ElementRef;
   @Input() public search: string = '';
 
@@ -51,34 +50,37 @@ export class SearchFormComponent implements OnInit {
   constructor(private menuSvc: MenuService, private router: Router, private rubGralSvc: RubGralService) { }
 
   ngOnInit(): void {
-    this.categoryFood$ = this.rubGralSvc.getAll()
+    this.categoryFood$ = this.rubGralSvc.getAll();
   }
 
-  
+
   public searchQuery(){
-    this.router.navigate(['search'],{queryParams: {query: this.search.trim(),filter: this.category}})
+    this.router.navigate(['search'],{queryParams: {query: this.search.trim(),filter: this.category}});
+    this.datalist$ = new Observable<any[]>();
   }
 
   public searchFilter(){
-    this.btnClose.nativeElement.click()
+    this.btnClose.nativeElement.click();
     this.category != '' ? this.router.navigate(['search'],{queryParams: {query: this.search.trim(),filter: this.category}})
-    : this.router.navigate(['menu'])
+    : this.router.navigate(['menu']);
   }
 
   public searchChange(e: Event){
     if(this.search.trim() == ''){
-      this.cleanSearch()
+      this.cleanSearch();
     }else{
-      this.datalist$ = this.menuSvc.search(this.search.trim())
+      this.datalist$ = this.menuSvc.search(this.search.trim());
+      setTimeout(()=>this.datalist$ = new Observable<any[]>(),6000);
     }
   }
 
   public cleanSearch(){
     this.search = '';
-    this.datalist$ = new Observable<any[]>()
+    this.datalist$ = new Observable<any[]>();
   }
 
   public filterChange(e: Event){
-    this.filterList[this.filter]()
+    this.filterList[this.filter]();
   }
+
 }

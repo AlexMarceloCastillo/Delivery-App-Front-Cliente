@@ -1,4 +1,4 @@
-<div class="container" *ngIf="pedido; else load">
+<div class="container" *ngIf="factura && pedido; else load">
   <div class="info">
     <h2>Factura TIPO 'C'</h2>
     <h4>FECHA DE IMPRESION: {{fecha}}</h4>
@@ -13,7 +13,7 @@
       </div>
       <div class="card">
         <div class="card-body">
-          <h5 class="card-title">FACTURA NRO {{facturaNro}}</h5>
+          <h5 class="card-title">FACTURA NRO {{factura.numero}}</h5>
           <p class="card-text">CUIT NRO*: 20-4328230-3</p>
           <p class="card-text">INGRESOS BRUTOS: 123123-D5</p>
         </div>

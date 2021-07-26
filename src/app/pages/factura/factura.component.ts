@@ -16,12 +16,11 @@ import jsPDF from 'jspdf';
   styleUrls: ['./factura.component.scss']
 })
 export class FacturaComponent implements OnInit {
-  
+
   @ViewChild('factura') htmlData:ElementRef | any;
   public cliente: Cliente;
-  public factura: Observable<any>;
+  public factura: any;
   public pedido: Pedido;
-  public facturaNro: number = 0;
   public articulos: any[] = [];
   public fecha: string = "";
   constructor(private pedidoSvc: PedidoService,
@@ -32,12 +31,11 @@ export class FacturaComponent implements OnInit {
     private authSvc: AuthService) {
 
     this.authSvc.getDataClient().subscribe(e => this.cliente = e)
-    this.pedidoSvc.getOne(this.route.snapshot.paramMap.get('pid')).subscribe((pedido: Pedido) => {
-      this.pedido = pedido;
-      this.facturaNro = Math.floor(Math.random()*1000000);
-      let auxFecha = new Date(pedido.accepted)
+    this.facturaSvc.getOne(this.route.snapshot.paramMap.get('pid')).subscribe((factura: any) => {
+      this.factura = factura;
+      let auxFecha = new Date(factura.fecha)
       this.fecha = auxFecha.getDate() + "/"+(auxFecha.getMonth()+1)+"/"+auxFecha.getFullYear()
-      this.pedido.DetallePedido.forEach(e => {
+      this.factura.DetalleFactura.forEach(e => {
         if(e.ArtManufact){
           this.artManuSvc.getOne(e.ArtManufact).subscribe( artManu => this.articulos.push({denominacion:artManu.denominacion,cantidad:e.cantidad,subTotal:e.subTotal}))
         }
@@ -45,8 +43,8 @@ export class FacturaComponent implements OnInit {
           this.artInSvc.getOne(e.ArticuloInsumo).subscribe( artIn => this.articulos.push({denominacion: artIn.denominacion,cantidad:e.cantidad,subTotal:e.subTotal}))
         }
       })
-      this.factura = this.facturaSvc.getOne(pedido.Factura)
     })
+    this.pedidoSvc.getOne(this.route.snapshot.paramMap.get('pid')).subscribe((pedido: Pedido)=>{this.pedido = pedido;})
   }
 
   ngOnInit(): void {
@@ -54,7 +52,7 @@ export class FacturaComponent implements OnInit {
 
   public downloadPdf(){
     var doc = new jsPDF();
-    doc.addImage("../../../assets/img/web/Delibery The Good Taste.png", "JPEG", 26.25, 0, 25, 25);
+    doc.addImage("../../../assets/img/web/icon-factura.jfif", "JFIF", 26.25, 0, 25, 25);
     doc.setFontSize(12);
     doc.text("Delivery", 5, 30);
     doc.text("2615179908", 5, 35);
@@ -62,7 +60,7 @@ export class FacturaComponent implements OnInit {
     doc.text(", Departamento Guaymallén", 5, 45);
     //INFO FACTURA
     doc.setFontSize(16);
-    doc.text(`NRO* ${this.facturaNro}`,145,5);
+    doc.text(`NRO*: ${this.factura.numero}`,145,5);
     doc.setFontSize(24);
     doc.text(`FECHA: ${this.fecha}`,120,15);
     doc.setFontSize(12);
@@ -77,9 +75,11 @@ export class FacturaComponent implements OnInit {
     doc.text('C',96,22)
     //ASOCIACION
     doc.setFontSize(14)
-    doc.text(`SEÑOR(ES):${this.cliente.nombre}`,5,60)
-    doc.text(`DOMICILIO:${this.pedido.Cliente.Domicilio.calle}`,5,70)
-    doc.text('LOCALIDAD: GUAYMALLEN',5,80)
+    doc.text(`SEÑOR(ES): ${this.cliente.nombre}`,5,60)
+    let calle = this.pedido.Cliente.Domicilio.calle != '' ? this.pedido.Cliente.Domicilio.calle : 'RETIRO EN LOCAL';
+    let localidad = this.pedido.Cliente.Domicilio.localidad != '' ? this.pedido.Cliente.Domicilio.localidad : 'RETIRO EN LOCAL';
+    doc.text(`DOMICILIO: ${calle}`,5,70)
+    doc.text(`LOCALIDAD: ${localidad}`,5,80)
     doc.line(0, 85,210,85)
     //IVA
     doc.setFontSize(14)
