@@ -14,7 +14,7 @@ import { ItemCarrito } from '@models/itemCarrito.interface';
 export class CardComponent implements OnInit {
   public btnDisabled: boolean = true;
 
-  @Input() element: ItemCarrito[];
+  @Input() element: ItemCarrito;
 
 
   constructor(private cartSvc: CarritoService, private auth: AuthService) { }

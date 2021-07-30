@@ -46,6 +46,27 @@
         <div class="card-body" *ngIf="tipoArt!=='artInsumo'">
           <p class="card-text" > Tiempo en cocina: {{tiempoEstimado}}</p>
         </div>
+        <div class="card-body" *ngIf="tipoArt=='artManufact'">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Ingredientes</th>
+                <th></th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of food.ArtManufactDet">
+                <td>Insumo</td>
+                <td>{{item.cantidad}}</td>
+                <td>{{item.unidadMedida}}</td>
+              </tr>
+            </tbody>
+          </table>
+          <!-- <pre>
+            {{food | json}}
+          </pre> -->
+        </div>
         <div class="card-body d-grid">
           <button type="button" class="btn btn-outline-burger" (click)="addItemCart(food,$event)" [disabled]="btnDisabled || !food.stock">Agregar al carrito</button>
         </div>

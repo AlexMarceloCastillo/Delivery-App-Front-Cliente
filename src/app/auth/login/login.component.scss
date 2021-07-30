@@ -21,7 +21,7 @@ div.login-wrap {
 
     p.error {
       color: #dc3545; //danger color from Bootstrap
-      padding: 0px 5px;
+      padding: 0px 10px;
       margin: none;
     }
 
@@ -30,6 +30,10 @@ div.login-wrap {
       flex-flow: column wrap;
     }
 
+    a.btn.btn-link {
+      text-decoration: none;
+    }
+    
     button#btn-google {
       background-color: $google;
       color: whitesmoke;
@@ -64,8 +68,8 @@ div.login-wrap {
 @media (min-width: 992px) {
   div.login-wrap {
     width: 60vw;
-    height: 65vh;
-    margin: 5% auto;
+    height: 70vh;
+    margin: 5% auto 10% auto;
     position: relative;
 
     div.card {

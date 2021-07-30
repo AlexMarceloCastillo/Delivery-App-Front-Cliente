@@ -20,7 +20,6 @@ import { MdopagoService } from '@services/mdopago/mdopago.service';
 export class CarritoComponent implements OnInit {
 
   public itemsCart: ItemCarrito[];
-  public localStorageCart: ItemCarrito[];
   public cliente: any;
 
   // <Form>
@@ -40,12 +39,21 @@ export class CarritoComponent implements OnInit {
 
 
   ngOnInit(): void {
+
     this.carritoSvc.cart$.subscribe( cart => {
       this.itemsCart = cart;
       this.subTotal = cart.reduce( (sum, current) => sum + (current.precioVenta*current.cantidad),0);
-    }, error => { this.subTotal = 0, console.error(error) });
-    this.localStorageCart = JSON.parse(sessionStorage.getItem('cart'));
 
+      this.formBuildandUpdate();
+    }, error => { this.subTotal = 0; console.error(error); });
+
+  }
+
+
+  /**
+   * Crea y actualiza los formularios de domicilio y checkout simpre y cuando este logueado
+   */
+  private formBuildandUpdate(){
     this.auth.isAuth().subscribe( data => {
       if(data) {
         this.auth.getDataClient().subscribe( user => {
@@ -62,8 +70,6 @@ export class CarritoComponent implements OnInit {
       }
     }, error => console.error(error) );
   }
-
-
   /**
   * Elimina un item del carrito permanentemente
   * @param id: Id de un elemento
@@ -105,6 +111,10 @@ export class CarritoComponent implements OnInit {
     this.carritoSvc.emptyCart();
   }
 
+  /**
+   * Actualiza el formulario del checkout
+   * @param local
+   */
   private updateSumaryForm(local: boolean): void {
     let desc: number = 0;
     let total:number = this.subTotal;
@@ -115,6 +125,9 @@ export class CarritoComponent implements OnInit {
     this.sumaryForm.patchValue({desc , total, subTotal: this.subTotal });
   }
 
+  /**
+   * Construye el formulario de checkout
+   */
   private buildSuamryForm(): void {
 
     let descuento: number = 0;
@@ -133,6 +146,11 @@ export class CarritoComponent implements OnInit {
     });
   }
 
+
+  /**
+   * Parseo y envio de los datos del formulario al backend
+   * @param event 
+   */
   public onSubmitPedido(e: Event): void {
     e.preventDefault();
     let horaEstimadaFin = this.itemsCart.reduce((sum,item)=> item.tiempoEstimado ? sum + (item.tiempoEstimado)*item.cantidad : 0,0);

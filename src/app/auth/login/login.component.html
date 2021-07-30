@@ -78,27 +78,22 @@
             </div>
           </div>
           <div class="row">
-            <div class="col-12 col-md-6">
+            <div class="col-12 d-grid">
+              <button type="submit" class="btn btn-primary my-3" [disabled]="loginForm.invalid">Iniciar Sesión</button>
               <a [routerLink]="[ '/auth/olvido-clave', ]" class="btn btn-link">¿Olvido su contraseña?</a>
-            </div>
-            <div class="col-12 col-md-6 d-grid">
-              <button type="submit" class="btn btn-primary" [disabled]="loginForm.invalid">Iniciar Sesión</button>
             </div>
           </div>
         </form>
       </div>
-
       <hr>
-
-      <div class="card-body text-center mt-3">
+      <div class="card-body d-grid mt-1">
         <button type="button" class="btn" id="btn-google" (click)="GoogleLogin()">
           <i class="fab fa-google"></i>
           Inicia Sesión con Google
         </button>
       </div>
-
       <div class="card-footer text-center">
-        <p class="mb-0 mt-3">No tiene una cuenta, registrate <a routerLink="/auth/register">aquí</a></p>
+        <p class="mt-2">No tiene una cuenta, registrate <a routerLink="/auth/register">aquí</a></p>
       </div>
     </div>
   </div>

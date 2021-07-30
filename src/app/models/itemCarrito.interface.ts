@@ -4,5 +4,6 @@ export interface ItemCarrito {
     tiempoEstimado?: number,
     denominacion: string,
     precioVenta: number,
-    cantidad?: number
+    cantidad?: number,
+    stock?:boolean
 }

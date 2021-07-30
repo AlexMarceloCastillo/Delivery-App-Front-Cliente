@@ -3,8 +3,10 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { AuthService } from '@auth/services/auth.service';
+import { CarritoService } from '@services/carrito/carrito.service';
 
 import { Cliente } from '@models/cliente.interface';
+
 
 
 @Component({
@@ -18,14 +20,15 @@ export class SidebarComponent implements OnInit, OnDestroy {
   private clienteSuscription: Subscription;
 
 
-  constructor (private authSvc: AuthService) { 
+  constructor (private authSvc: AuthService, private cartSvc: CarritoService) { }
+
+  
+  ngOnInit(): void { 
     this.clienteSuscription = this.authSvc.getDataClient().subscribe( 
       data => this.cliente = data, 
       error => console.error(error) 
     );
   }
-
-  ngOnInit(): void { }
 
   ngOnDestroy(): void {
     this.clienteSuscription.unsubscribe();
@@ -33,6 +36,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
 
   public onLogout(): void {
+    this.cartSvc.emptyCart();
     this.authSvc.logOut();
   }
 }

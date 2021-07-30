@@ -31,7 +31,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.clienteSuscription = this.authSvc.getDataClient().subscribe( (data) => this.cliente = data);
     this.cartSuscription = this.cartSvc.cart$.subscribe( cart => {
         this.cartLength = cart.reduce((sum,current)=> sum + current.cantidad,0);
-    }, error => this.cartLength = 0);
+    }, error =>  console.error(error) );
     this.isOpen = this.authSvc.openDelivery;
   }
 

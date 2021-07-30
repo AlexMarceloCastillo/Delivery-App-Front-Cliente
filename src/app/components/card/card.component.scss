@@ -1,11 +1,20 @@
 div.card {
-  width: 80%;
-  margin: 5%;
+  img {
+    width: fit-content;
+    height: min(40vh,250px);
+    margin: auto;
+  }
 
-  div.card-body>button.btn,
-  a.btn {
+  margin: 2.5% 5%;
+
+  div.card-body > button.btn, a.btn {
     width: 95%;
     margin: 2.5%;
+  }
+
+  &:hover{
+    transform: translateY(-10px);
+    box-shadow: 0 15px 20px rgba(0, 0, 0, 1);
   }
 }
 

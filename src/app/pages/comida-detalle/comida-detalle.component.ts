@@ -38,6 +38,7 @@ export class ComidaDetalleComponent implements OnInit {
     this.menuSvc.getOneMenu(menuId).subscribe( item => {
       this.tipoArt = item.tipo;
       this.food = item.data;
+      
       this.calcTiempo(item.data.tiempoEstimado);
 
       if(this.tipoArt==='artInsumo') {
@@ -58,7 +59,7 @@ export class ComidaDetalleComponent implements OnInit {
   }
 
 
-  private calcTiempo(tiempo) {
+  private calcTiempo(tiempo: number) {
     let num = tiempo;
 
     let hours = (num / 60);

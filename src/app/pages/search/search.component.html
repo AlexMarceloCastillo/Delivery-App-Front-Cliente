@@ -1,13 +1,13 @@
 <shared-search-form [search]="query"></shared-search-form>
-<div class="container-fluid">
+<div class="container">
   <div class="row">
     <ng-container *ngIf="menuSearched && menuSearched.length >0; else notFound">
-      <div class="card mt-4"  *ngFor="let item of menuSearched">
-        <img class="card-img-top img-fluid" [src]="item.img">
-        <h6>{{item.denominacion}}</h6>
-        <p>{{item.precioVenta}}$</p>
-        <a [routerLink]="[ '/comida', item._id ]" class="btn btn-outline-cheese">Ver detalle</a>
-        <button class="btn btn-cheese mt-2" (click)="addItemCart(item,$event)">Añadir</button>
+      <div class="row">
+        <div class="card-wrapper-grid">
+          <ng-container *ngFor="let item of menuSearched">
+            <app-card [element]="item"></app-card>
+          </ng-container>
+        </div>
       </div>
     </ng-container>
     <ng-template #notFound>

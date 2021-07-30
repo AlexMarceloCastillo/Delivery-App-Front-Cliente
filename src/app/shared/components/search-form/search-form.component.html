@@ -1,7 +1,7 @@
 <div class="search-wrapper">
   <div class="search-bar">
     <input [(ngModel)]="search" (ngModelChange)="searchChange($event)" type="search" class="search shadow" placeholder="Buscar . . ." required>
-    <button *ngIf="search != ''" id="btnCloseDatalist"[disabled]='search == ""' class="btn" type="button" name="button" (click)="cleanSearch()">
+    <button *ngIf="search != ''" id="btnCloseDatalist" [disabled]='search == ""' class="btn" type="button" name="button" (click)="cleanSearch()">
       <i class="fas fa-times-circle"></i>
     </button>
     <button [disabled]='search == ""' (click)="searchQuery()" class="btn btn-cheese">
@@ -41,7 +41,7 @@
       <div class="modal-body">
         <div class="input-group mb-3">
           <label class="input-group-text" for="inputGroupSelect01">Filtrar por</label>
-          <select class="form-select" id="inputGroupSelect01"  [(ngModel)]="filter" (ngModelChange)="filterChange($event)">
+          <select class="form-select" id="inputGroupSelect01" [(ngModel)]="filter" (ngModelChange)="filterChange($event)">
             <option [value]="'drinkfood'">Comida/Bebida</option>
             <option [value]="'food'">Solo Comida</option>
             <option [value]="'drink'">Solo Bebida</option>
@@ -55,45 +55,45 @@
               TODO
             </label>
           </div>
-          <div class="form-check" *ngFor="let comida of categoryFood$ | async" >
+          <div class="form-check" *ngFor="let comida of categoryFood$ | async">
             <input [value]="comida._id" [(ngModel)]="category" class="form-check-input" type="radio" name="flexRadioDefault" id="radioFood">
             <label class="form-check-label" for="radioFood">
               {{comida.denominacion}}
             </label>
           </div>
-    </div>
+        </div>
 
-    <div class="drink" *ngIf="drinkCheck">
-      <h5>Bebidas: </h5>
-      <div class="form-check">
-        <input [value]="'BEBIDA'" [(ngModel)]="category" class="form-check-input" type="radio" name="flexRadioDefault" id="drinkFood">
-        <label class="form-check-label" for="drinkFood">
-          TODO
-        </label>
+        <div class="drink" *ngIf="drinkCheck">
+          <h5>Bebidas: </h5>
+          <div class="form-check">
+            <input [value]="'BEBIDA'" [(ngModel)]="category" class="form-check-input" type="radio"name="flexRadioDefault" id="drinkFood">
+            <label class="form-check-label" for="drinkFood">
+              TODO
+            </label>
+          </div>
+          <hr>
+          <h6>Bebidas Sin Alcohol</h6>
+          <div class="form-check" *ngFor="let bebida of noAlcoholDrink">
+            <input [value]="bebida.id" [(ngModel)]="category" class="form-check-input" type="radio" name="flexRadioDefault" id="drinkFood">
+            <label class="form-check-label" for="radioFood">
+              {{bebida.denominacion}}
+            </label>
+          </div>
+          <hr>
+          <h6>Bebidas Con Alcohol</h6>
+          <div class="form-check" *ngFor="let bebida of alcoholDrink">
+            <input [value]="bebida.id" [(ngModel)]="category" class="form-check-input" type="radio" name="flexRadioDefault" id="drinkFood">
+            <label class="form-check-label" for="radioFood">
+              {{bebida.denominacion}}
+            </label>
+          </div>
+        </div>
+
       </div>
-      <hr>
-      <h6>Bebidas Sin Alcohol</h6>
-      <div class="form-check" *ngFor="let bebida of noAlcoholDrink" >
-        <input [value]="bebida.id" [(ngModel)]="category" class="form-check-input" type="radio" name="flexRadioDefault" id="drinkFood">
-        <label class="form-check-label" for="radioFood">
-          {{bebida.denominacion}}
-        </label>
-      </div>
-      <hr>
-      <h6>Bebidas Con Alcohol</h6>
-      <div class="form-check" *ngFor="let bebida of alcoholDrink" >
-        <input [value]="bebida.id" [(ngModel)]="category" class="form-check-input" type="radio" name="flexRadioDefault" id="drinkFood">
-        <label class="form-check-label" for="radioFood">
-          {{bebida.denominacion}}
-        </label>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" (click)="searchFilter()">Aplicar</button>
       </div>
     </div>
-
   </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-    <button type="button" class="btn btn-primary" (click)="searchFilter()">Aplicar</button>
-  </div>
-</div>
-</div>
 </div>

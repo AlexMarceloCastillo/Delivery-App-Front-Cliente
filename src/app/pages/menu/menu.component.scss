@@ -13,6 +13,13 @@
   }
 }
 
+.card-wrapper-grid {
+  display: grid;
+  gap: 1rem;
+  grid-auto-rows: 1fr;
+  grid-template-columns: repeat(auto-fill, minmax(min(90%,20rem),1fr));
+}
+
 // Small devices (landscape phones, 576px and up)
 @media (min-width: 576px) {}
 
