@@ -61,6 +61,8 @@ export class SearchFormComponent implements OnInit {
 
   public searchFilter(){
     this.btnClose.nativeElement.click();
+    console.log(this.category)
+    //this.category != '' ? console.log("no es vacio") : console.log("es vacio")
     this.category != '' ? this.router.navigate(['search'],{queryParams: {query: this.search.trim(),filter: this.category}})
     : this.router.navigate(['menu']);
   }
@@ -70,7 +72,7 @@ export class SearchFormComponent implements OnInit {
       this.cleanSearch();
     }else{
       this.datalist$ = this.menuSvc.search(this.search.trim());
-      setTimeout(()=>this.datalist$ = new Observable<any[]>(),6000);
+      setTimeout(()=>this.datalist$ = new Observable<any[]>(),8000);
     }
   }
 

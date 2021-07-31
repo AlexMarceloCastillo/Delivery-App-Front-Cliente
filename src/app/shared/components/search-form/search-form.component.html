@@ -7,7 +7,7 @@
     <button [disabled]='search == ""' (click)="searchQuery()" class="btn btn-cheese">
       <i class="fas fa-search"></i>
     </button>
-    <button id="btnFilter" class="btn btn-cheese" data-bs-toggle="modal" data-bs-target="#modalFilter">
+    <button [disabled]='search == ""' id="btnFilter" class="btn btn-cheese" data-bs-toggle="modal" data-bs-target="#modalFilter">
       <i class="fas fa-sliders-h"></i>
     </button>
   </div>

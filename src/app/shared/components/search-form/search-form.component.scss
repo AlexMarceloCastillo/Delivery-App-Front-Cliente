@@ -1,5 +1,5 @@
 .search-wrapper {
-  background: url('../../../../assets/img/web/search_bgd.jpg') no-repeat;
+  background:linear-gradient(rgba(255,255,255,.6), rgba(255,255,255,.6)),url('../../../../assets/img/web/search_bgd.jpg') no-repeat;
   background-size: cover;
   width: 100%;
   height: 25vh;
@@ -92,7 +92,7 @@
     z-index: 1050;
     width: 100%;
     position: absolute;
-    top: 125px;
+    top: 105px;
   }
   .card{
     width: 70%;
@@ -101,15 +101,18 @@
 }
 
 // Small devices (landscape phones, 576px and up)
-@media (min-width: 576px) {}
+@media (min-width: 576px) {
+  .list-sample {
+    top: 125px;
+  }
+}
 
 // Medium devices (tablets, 768px and up)
 @media (min-width: 768px) {
   .search-wrapper {
-    height: 40vh;
-
+    margin-bottom: 15px;
     div.search-bar {
-      margin: 15% auto;
+      margin: 5% auto;
       height: 50px;
 
       input.search {
@@ -135,7 +138,7 @@
     }
     // Data list
     .list-sample {
-      top: 165px;
+      top: 90px;
     }
   }
 }
@@ -143,8 +146,8 @@
 // Large devices (desktops, 992px and up)
 @media (min-width: 992px) {
   .search-wrapper {
-    height: 40vh;
-
+    height: 30vh;
+    margin-bottom: 10px;
     div.search-bar {
       max-width: 65%;
       height: 60px;
@@ -172,7 +175,7 @@
     }
     // Data list
     .list-sample {
-      top: 215px;
+      top: 115px;
     }
     .card{
       width: 65%;
@@ -184,8 +187,6 @@
 // Extra large devices (large desktops, 1200px and up)
 @media (min-width: 1200px) {
   .search-wrapper {
-    height: 50vh;
-
     div.search-bar {
       height: 70px;
 
@@ -210,7 +211,7 @@
 
     // Data list
     .list-sample {
-      top: 287px;
+      top: 120px;
     }
   }
 }
@@ -219,7 +220,7 @@
   .search-wrapper {
     // Data list
     .list-sample {
-      top: 332px;
+      top: 150px;
     }
   }
 }
