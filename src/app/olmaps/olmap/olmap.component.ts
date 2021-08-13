@@ -64,7 +64,7 @@ export class OlmapComponent implements AfterViewInit {
     this.map.on('click', (evt: any) => {
       if(!this.readonly){
         this.userCoords = Proj.toLonLat([evt.coordinate[0],evt.coordinate[1]]);
-        this.clickMarker(this.userCoords[1],this.userCoords[0],"https://pics.freeicons.io/uploads/icons/png/20846546501582634781-512.png")
+        this.clickMarker(this.userCoords[1],this.userCoords[0],"../../../assets/img/web/click-home.png")
         if(this.map.getLayers().getLength() > 4){
           this.map.getLayers().removeAt(3)
         }

@@ -116,7 +116,7 @@
         <ol-map [readonly]=false lat="-32.9022174" lon="-68.7979539" *ngIf="config$ | async as config; else load">
           <ol-radio [lat]="config.lat" [lon]="config.lng" radio="2500"></ol-radio>
           <ol-marker [lat]="config.lat" [lon]="config.lng"
-          iconsrc="https://pics.freeicons.io/uploads/icons/png/3762277491606004682-512.png">
+          iconsrc="../../../assets/img/web/icon-delivery-pizza.png">
         </ol-marker>
       </ol-map>
       <ng-template #load>
