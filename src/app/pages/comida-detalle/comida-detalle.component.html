@@ -57,7 +57,7 @@
             </thead>
             <tbody>
               <tr *ngFor="let item of food.ArtManufactDet">
-                <td>Insumo</td>
+                <td>{{item.ArtInsumo.denominacion}}</td>
                 <td>{{item.cantidad}}</td>
                 <td>{{item.unidadMedida}}</td>
               </tr>
