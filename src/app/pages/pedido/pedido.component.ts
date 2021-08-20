@@ -114,6 +114,11 @@ export class PedidoComponent implements OnInit {
         this.statusInfo = 'Su pedido se ha entregado con exito.';
         this.icon = "fas fa-shipping-fast";
       break;
+      case 'facturado':
+        this.statusClass = "bg-success";
+        this.statusInfo = 'Su pedido ha sido facturado con exito.';
+        this.icon = "fas fa-money-check-alt";
+      break;
       case 'cancelado':
         this.statusClass = "bg-danger";
         this.statusInfo = 'Su pedido ha sido rechazado.';

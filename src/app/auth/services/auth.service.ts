@@ -6,11 +6,14 @@ import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firest
 import firebase from 'firebase/app';
 
 import { of, Observable } from 'rxjs';
-import { first, map, switchMap, take } from 'rxjs/operators';
+import { first, switchMap, take } from 'rxjs/operators';
 
 import { ToastrService } from 'ngx-toastr';
+
 import { Cliente } from '@models/cliente.interface';
+import { Role } from '@models/role.interface';
 import { Domicilio } from '@models/domicilio.interface';
+
 
 @Injectable({
   providedIn: 'root'
@@ -149,7 +152,7 @@ export class AuthService {
         photoURL: cliente.photoURL,
         estado: 1,
         domicilio: domicilio,
-        role: 3,
+        role: Role.Cliente,
         online: true,
         provider: cliente.providerData[0].providerId
       }

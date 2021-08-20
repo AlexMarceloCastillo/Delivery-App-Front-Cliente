@@ -17,35 +17,35 @@ export class FacturaGuard implements CanActivate {
     if(id){
       this.pedido.getOne(id).subscribe(e => {
         this.authSvc.getDataClient()
-        .subscribe(cliente => {
-          if(e.Cliente.firebase_id != cliente.uid){
-            this.router.navigate(['inicio'])
-            this.toastSvc.error('No tiene un pedido con ese ID ','',{
-              positionClass: 'toast-center-center',
-              timeOut: 2500
-            })
-          }
-        })
-        if(e && e.estado == "entregado"){
+          .subscribe(cliente => {
+            if(e.Cliente.firebase_id != cliente.uid){
+              this.router.navigate(['inicio']);
+              this.toastSvc.error('No tiene un pedido con ese ID ','',{
+                positionClass: 'toast-center-center',
+                timeOut: 2500
+              })
+            }
+          });
+
+        if(e && e.estado == "facturado") {
           return true;
-        }else if (e.estado != 'entregado'){
-          this.router.navigate(['inicio'])
+        }else if (e.estado != 'facturado'){
+          this.router.navigate(['inicio']);
           this.toastSvc.error('Su pedido no se encuentra disponible para ver la factura','',{
             positionClass: 'toast-center-center',
             timeOut: 2500
-          })
+          });
         }else{
-          this.router.navigate(['inicio'])
+          this.router.navigate(['inicio']);
           this.toastSvc.error('Su pedido no existe','',{
             positionClass: 'toast-center-center',
             timeOut: 2500
-          })
+          });
         }
-      })
+      });
       return true;
     }else{
       return false;
     }
   }
-
 }

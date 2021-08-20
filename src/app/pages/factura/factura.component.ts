@@ -18,23 +18,32 @@ import jsPDF from 'jspdf';
 export class FacturaComponent implements OnInit {
 
   @ViewChild('factura') htmlData:ElementRef | any;
+
   public cliente: Cliente;
   public factura: any;
   public pedido: Pedido;
   public articulos: any[] = [];
   public fecha: string = "";
-  constructor(private pedidoSvc: PedidoService,
+
+
+  constructor( 
+    private pedidoSvc: PedidoService,
     private facturaSvc: FacturaService,
     private route: ActivatedRoute,
     private artManuSvc: ArtmanufactService,
     private artInSvc: ArtInsumoService,
-    private authSvc: AuthService) {
+    private authSvc: AuthService
+  ) {
 
-    this.authSvc.getDataClient().subscribe(e => this.cliente = e)
-    this.facturaSvc.getOne(this.route.snapshot.paramMap.get('pid')).subscribe((factura: any) => {
+    let pid = this.route.snapshot.paramMap.get('pid');
+    
+    this.authSvc.getDataClient().subscribe(e => this.cliente = e);
+
+    this.facturaSvc.getOne(pid).subscribe((factura: any) => {
       this.factura = factura;
-      let auxFecha = new Date(factura.fecha)
-      this.fecha = auxFecha.getDate() + "/"+(auxFecha.getMonth()+1)+"/"+auxFecha.getFullYear()
+      let auxFecha = new Date(factura.fecha);
+      this.fecha = auxFecha.getDate() + "/"+(auxFecha.getMonth()+1)+"/"+auxFecha.getFullYear();
+
       this.factura.DetalleFactura.forEach(e => {
         if(e.ArtManufact){
           this.artManuSvc.getOne(e.ArtManufact).subscribe( artManu => this.articulos.push({denominacion:artManu.denominacion,cantidad:e.cantidad,subTotal:e.subTotal}))
@@ -42,13 +51,15 @@ export class FacturaComponent implements OnInit {
         if(e.ArticuloInsumo){
           this.artInSvc.getOne(e.ArticuloInsumo).subscribe( artIn => this.articulos.push({denominacion: artIn.denominacion,cantidad:e.cantidad,subTotal:e.subTotal}))
         }
-      })
-    })
-    this.pedidoSvc.getOne(this.route.snapshot.paramMap.get('pid')).subscribe((pedido: Pedido)=>{this.pedido = pedido;})
+      });
+    });
+    this.pedidoSvc.getOne(pid).subscribe((pedido: Pedido)=> this.pedido = pedido);
   }
+
 
   ngOnInit(): void {
   }
+
 
   public downloadPdf(){
     var doc = new jsPDF();

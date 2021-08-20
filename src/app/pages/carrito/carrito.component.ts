@@ -153,7 +153,7 @@ export class CarritoComponent implements OnInit {
    */
   public onSubmitPedido(e: Event): void {
     e.preventDefault();
-    let horaEstimadaFin = this.itemsCart.reduce((sum,item)=> item.tiempoEstimado ? sum + (item.tiempoEstimado)*item.cantidad : 0,0);
+    let horaEstimadaFin = this.itemsCart.reduce((sum,item)=> item.tiempoEstimado? sum+(item.tiempoEstimado)*item.cantidad : 0+sum,0);
     let itemsPedido: any = [];
     let descripcion: any = [];
     this.itemsCart.forEach( item => {
@@ -174,7 +174,7 @@ export class CarritoComponent implements OnInit {
         firebase_id: this.cliente.uid,
         Domicilio: this.parentDomicilioForm.value
       },
-      horaEstimadaFin: this.parentDomicilioForm.value.local ? horaEstimadaFin : horaEstimadaFin +10,
+      horaEstimadaFin: this.parentDomicilioForm.value.local ? horaEstimadaFin : horaEstimadaFin+10,
       estado: 'en espera',
       total: this.sumaryForm.value.total ,
       fecha: new Date(),
