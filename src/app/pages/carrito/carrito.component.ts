@@ -153,7 +153,7 @@ export class CarritoComponent implements OnInit {
    */
   public onSubmitPedido(e: Event): void {
     e.preventDefault();
-    let horaEstimadaFin = this.itemsCart.reduce((sum,item)=> item.tiempoEstimado? sum+(item.tiempoEstimado)*item.cantidad : 0+sum,0);
+    let horaEstimadaFin = this.itemsCart.reduce((sum,item)=> item.tiempoEstimado? sum+(item.tiempoEstimado)*item.cantidad : 5+sum,0);
     let itemsPedido: any = [];
     let descripcion: any = [];
     this.itemsCart.forEach( item => {

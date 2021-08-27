@@ -121,7 +121,7 @@ export class PedidoComponent implements OnInit {
       break;
       case 'cancelado':
         this.statusClass = "bg-danger";
-        this.statusInfo = 'Su pedido ha sido rechazado.';
+        this.statusInfo = 'Su pedido ha sido rechazado. Por la siguiente razon '+this.pedido.canceled.motivo;
         this.icon = "far fa-times-circle";
       break;
       case 'demorado':

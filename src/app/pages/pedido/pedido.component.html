@@ -1,8 +1,10 @@
 <div class="container">
   <div class="row my-5" *ngIf="pedido; else load">
-    <div class="col-12" >
+    <div class="col-12">
       <h4>Pedido: {{pedido._id}}</h4>
       <h4>Detalle del Pedido: </h4>
+    </div>
+    <div class="col-12">
       <table class="table table-bordered">
         <thead>
           <tr class="d-flex table-secondary">
@@ -39,7 +41,7 @@
         <div class="card-body">
           <h5 class="card-title">{{statusInfo}}</h5>
           <h5 *ngIf="pedido.estado == 'facturado'"><a class="btn btn-outline-light" [routerLink]="[ '/'+pedido.Cliente.firebase_id+'/factura', pedido._id ]">VER FACTURA</a></h5>
-          <h5 *ngIf="pedido.estado == 'cancelado'">Su pedido ha sido cancelado por la siguiente razon: {{pedido.canceled.motivo}}</h5>
+          <!-- <h5 *ngIf="pedido.estado == 'cancelado'">Su pedido ha sido cancelado por la siguiente razon: {{pedido.canceled.motivo}}</h5> -->
         </div>
       </div>
       <hr>

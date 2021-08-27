@@ -178,15 +178,17 @@ export class AuthService {
       );
   }
 
-  setStatus(online: boolean){
-    this.isAuth()
-    .subscribe(user =>{
-      if(user){
-        const userRef: AngularFirestoreDocument<Cliente> = this.afs.doc(`clients/${user.uid}`);
-        const data: any = { online };
-        userRef.update(data);
-      }
-    });
+  setStatus(online: boolean): void {
+    this.isAuth().subscribe(
+      user => {
+        if( user ){
+          const userRef: AngularFirestoreDocument<Cliente> = this.afs.doc(`clients/${user.uid}`);
+          const data: any = { online };
+          userRef.update(data);
+        }
+      },
+      e => console.error(e)
+    );
   }
 
   isOpen(){
